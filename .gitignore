@@ -1,0 +1,11 @@
+node_modules/
+dist/
+target/
+.DS_Store
+.env*
+!.env.example
+*.log
+artifacts/
+fixtures/generated/
+docs/THREADS.json
+vendor/duckdb/libduckdb.dylib

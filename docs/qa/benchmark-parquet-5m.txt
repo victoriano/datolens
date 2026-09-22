@@ -1,0 +1,19 @@
+{"bytes":39033081,"conditions":"fresh_project_source_previously_generated_OS_cache_not_flushed","distributions_ms":225,"filter_sort_ms":164,"first_page_including_open_ms":65,"open_ms":44,"path":"fixtures/generated/benchmark-5000000.parquet","rows":5000000}
+        0.49 real         0.71 user         0.04 sys
+            50708480  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                3593  page reclaims
+                  44  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 145  voluntary context switches
+                3417  involuntary context switches
+          9822947821  instructions retired
+          2390480732  cycles elapsed
+            26264056  peak memory footprint

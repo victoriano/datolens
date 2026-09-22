@@ -1,0 +1,33 @@
+   Compiling datolens-data v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-data)
+    Finished `test` profile [unoptimized] target(s) in 4.67s
+     Running unittests src/lib.rs (src-tauri/target/debug/deps/datolens_data-1dc375d7b7860daa)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/data.rs (src-tauri/target/debug/deps/data-d1c9be15797fe876)
+
+running 13 tests
+test csv_types_precision_global_sort_and_stable_ids ... ok
+test million_row_benchmark ... ignored, Run explicitly with --ignored --nocapture; writes a local 1M-row fixture
+test crossfilters_table_count_and_all_distributions_agree ... ok
+test invalid_batches_do_not_destroy_saved_rows_and_stale_sources_are_rejected ... ok
+test malformed_project_is_not_silently_restored_and_export_never_overwrites_source ... ok
+test native_lists_null_and_duplicate_elements ... ok
+test reference_text_date_list_and_escaping_semantics ... ok
+test xlsx_sheets_types_and_empty_header_names ... ok
+test negative_histogram_ranges_and_project_definition_mirror ... ok
+test csv_out_of_bigint_tokens_and_mixed_decimals_survive_export_reopen ... ok
+test csv_late_text_outlier_is_preserved_after_default_sniff_window ... ok
+test csv_precision_upgrade_preserves_rows_results_view_and_recovers_json_migration ... ok
+test durable_results_follow_identity_and_export_roundtrip ... ok
+
+test result: ok. 12 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.43s
+
+   Doc-tests datolens_data
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

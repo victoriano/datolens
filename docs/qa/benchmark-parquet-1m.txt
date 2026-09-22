@@ -1,0 +1,25 @@
+
+running 1 test
+test million_row_benchmark ... BENCH rows=1000000 bytes=8031890 open_ms=46 first_page_including_open_ms=57 filter_sort_ms=33 distributions_ms=51 conditions=generated_then_opened_warm_os_cache
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 10 filtered out; finished in 0.32s
+
+        0.35 real         0.24 user         0.03 sys
+            48431104  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2234  page reclaims
+                1339  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  84  voluntary context switches
+                1208  involuntary context switches
+          3606207601  instructions retired
+           927332936  cycles elapsed
+            22692392  peak memory footprint

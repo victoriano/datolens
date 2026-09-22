@@ -1,0 +1,6 @@
+[env]
+DUCKDB_LIB_DIR = { value = "vendor/duckdb", relative = true }
+DUCKDB_INCLUDE_DIR = { value = "vendor/duckdb", relative = true }
+
+[build]
+jobs = 2

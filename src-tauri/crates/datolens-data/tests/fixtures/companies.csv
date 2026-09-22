@@ -1,0 +1,6 @@
+company,sector,revenue,employees,founded,identifier,notes,tags
+Beta,Tech,20,5,2020-01-02,9007199254740993,Hello WORLD,"[A, B]"
+Alpha,Tech,10,5,2021-05-03,9007199254740995,world again,"[B, C]"
+Gamma,Energy,30,7,2019-07-01,9007199254740997,Other,"[A, A]"
+Delta,Tech,20,5,2022-01-01,9007199254740999,HELLO,"[D]"
+Empty,Energy,,9,,9007199254741001,,

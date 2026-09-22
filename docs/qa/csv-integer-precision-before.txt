@@ -1,0 +1,4 @@
+{'input': '9223372036854775808', 'inferred_type': 'DOUBLE', 'observed': '9.223372036854776e+18', 'exact': False}
+{'input': '9223372036854775809', 'inferred_type': 'DOUBLE', 'observed': '9.223372036854776e+18', 'exact': False}
+{'input': '18446744073709551615', 'inferred_type': 'DOUBLE', 'observed': '1.8446744073709552e+19', 'exact': False}
+{'input': '123456789012345678901234567890', 'inferred_type': 'DOUBLE', 'observed': '1.2345678901234568e+29', 'exact': False}

@@ -1,0 +1,46 @@
+   Compiling objc2-exception-helper v0.1.1
+   Compiling ring v0.17.14
+   Compiling objc2 v0.6.4
+   Compiling objc2-core-foundation v0.3.2
+   Compiling block2 v0.6.2
+   Compiling dispatch2 v0.3.1
+   Compiling ureq v3.4.2
+   Compiling objc2-foundation v0.3.2
+   Compiling rustls v0.23.45
+   Compiling rustls-webpki v0.103.15
+   Compiling libduckdb-sys v1.10505.0
+   Compiling objc2-app-kit v0.3.2
+   Compiling objc2-web-kit v0.3.2
+   Compiling tao v0.35.3
+   Compiling wry v0.55.1
+   Compiling tauri-runtime v2.11.3
+   Compiling muda v0.19.3
+   Compiling tauri-runtime-wry v2.11.4
+   Compiling libsqlite3-sys v0.30.1
+   Compiling window-vibrancy v0.6.0
+   Compiling tokio-rustls v0.26.5
+   Compiling tauri v2.11.6
+   Compiling hyper-rustls v0.27.10
+   Compiling duckdb v1.10505.0
+   Compiling reqwest v0.12.28
+   Compiling tauri-plugin-fs v2.5.2
+   Compiling rusqlite v0.32.1
+   Compiling rfd v0.16.0
+   Compiling datolens-enrichment v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-enrichment)
+   Compiling tauri-plugin-dialog v2.7.3
+   Compiling datolens-data v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-data)
+   Compiling datolens v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri)
+warning: linker stderr: ld: duplicate -rpath '@executable_path/../Frameworks' ignored
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `datolens` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 22.76s
+     Running unittests src/lib.rs (src-tauri/target/debug/deps/datolens_lib-7774765a2954805b)
+
+running 2 tests
+test service::tests::most_recent_source_updates_when_reopening_cached_dataset ... ok
+test service::tests::native_data_scheduler_persistence_export_roundtrip ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.91s
+
