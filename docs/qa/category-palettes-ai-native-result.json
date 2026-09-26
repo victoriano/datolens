@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-24",
+  "mainBundle": "/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/target/debug/bundle/macos/Datolens.app",
+  "mainSha256": "54c4292a576e0346ca78b01b91b59dc705e0f146461b617c0661b8fec8777d9d",
+  "mainPid": 27680,
+  "mainNativeUI": "five palettes and AI controls visible in agency_name; NYC311 and churn tabs restored; closed without applying",
+  "qaBundle": "/tmp/datolens-chart-qa-target/debug/bundle/macos/Datolens Colors QA.app",
+  "fixture": "/tmp/datolens-semantic-colors-qa.csv",
+  "palettePersistence": "pastel and Coca-Cola #e60000 restored after quitting and relaunching native QA",
+  "liveGemini": {
+    "status": "PASS",
+    "model": "gemini-2.5-flash",
+    "requestedValues": 5,
+    "acceptedColors": {
+      "Coca-Cola": "#e60000",
+      "Greenpeace": "#008000",
+      "Partido Popular": "#0066cc",
+      "Spotify": "#1db954"
+    },
+    "unknown": "Zyxqv 482 kept palette; no explicit assignment",
+    "review": "visible reasons, blue Partido Popular preserved when switching Earth to Pastel",
+    "savedPalettes": {
+      "Entidad": "pastel"
+    },
+    "source": "native UI using Keychain; synthetic fixture only"
+  },
+  "frontendTests": 86,
+  "nativeTests": 7,
+  "providerTests": 4,
+  "qaClosed": true
+}

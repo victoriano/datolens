@@ -1,0 +1,157 @@
+bun test v1.2.8 (adab0f64)
+
+src/features/explorer/histogram-data.test.ts:
+(pass) numeric crossfilters update Vega tuples without replacing bars [38.92ms]
+(pass) date crossfilters update Vega tuples without replacing bars [17.38ms]
+
+src/features/explorer/sampling.test.ts:
+(pass) sampling preferences survive view reconciliation; malformed values fall back to auto [1.18ms]
+(pass) queued obsolete calls are skipped and a failure does not poison the next query [0.49ms]
+(pass) wide panel publishes batches promptly, requests only visible statistics and keeps one sample [1.47ms]
+
+src/features/explorer/distribution-sharing.test.ts:
+(pass) equal IPC distributions preserve chart, bin array, bars and statistics [0.86ms]
+(pass) only the changed category gets a new object; equal bars survive sorting [0.16ms]
+(pass) relative counts, bounds, labels, added/removed bins and metadata are not hidden by memoization [0.16ms]
+(pass) statistics-only changes preserve bins, and removed statistics stay removed [0.20ms]
+
+src/features/explorer/distributions.test.ts:
+(pass) remote auto deferral stops after one batch for 4911 columns [1.25ms]
+(pass) ordinary distributions still process all batches [0.15ms]
+(pass) viewport revisits hit cache; filters, statistics and revision invalidate independently [0.84ms]
+(pass) a superseded batch does not publish but its revision-scoped cache remains reusable [0.58ms]
+(pass) client cache stays bounded after visiting hundreds of variables [3.18ms]
+(pass) scrolling during a slow batch reuses its result before issuing overlapping IPC [0.23ms]
+(pass) a fully cached viewport publishes synchronously without Updating or native work [0.33ms]
+(pass) partial viewport results preserve loaded charts and object identities without growing unbounded [20.26ms]
+
+src/features/explorer/semantic-queue.test.ts:
+(pass) a failed variable retains other results and obeys the exact call budget without retries [0.27ms]
+(pass) stop waits for the active request and preserves it without starting the next one [0.01ms]
+(pass) closing the dialog invalidates late results as well as queued calls
+
+src/features/explorer/distribution-frame.test.ts:
+(pass) crossfilter batches retain the entire old frame until the requested viewport is ready [0.19ms]
+(pass) first load remains progressive, while scrolling preserves valid same-filter cards [0.01ms]
+(pass) old charts never cross an API, dataset, revision, or sample boundary [0.03ms]
+(pass) empty selections and deliberate analysis deferral replace the prior frame [0.04ms]
+(pass) equal charts survive a new filter context without retaining old offscreen populations [0.01ms]
+
+src/features/explorer/VariableAnalysisControls.test.tsx:
+(pass) statistics remain mounted while refreshing and quantile actions wait for fresh results [26.21ms]
+
+src/features/explorer/category-colors.test.ts:
+(pass) category colors > offers distinct valid palettes while classic keeps existing assignments [0.79ms]
+(pass) category colors > reconciles palette settings by column ID and survives a JSON view [0.74ms]
+(pass) category colors > uses a finite distinct palette keyed by raw values [0.07ms]
+(pass) category colors > spreads sequential category IDs over the full palette while staying deterministic [0.99ms]
+(pass) category colors > assigns palette slots by background frequency with deterministic ties and explicit overrides [0.17ms]
+(pass) category colors > cycles the palette for more ranked values than available colors [0.06ms]
+(pass) category colors > normalizes only hex RGB forms [0.03ms]
+(pass) category colors > reconciles saved raw-value overrides without stale columns or inherited keys [0.23ms]
+(pass) category colors > sets and resets choices immutably, then survives JSON view restoration [0.20ms]
+(pass) category colors > preserves special and empty raw keys as own properties through set, reset, and JSON [0.14ms]
+
+src/features/explorer/variable-window.test.ts:
+(pass) 4911 variables only mount and request the viewport with bounded neighbours [1.37ms]
+(pass) pixel scrolling within the same card window needs no React update [0.75ms]
+(pass) loading an overscan chart above the viewport preserves the visible row and pixel offset [0.15ms]
+(pass) grid, measured heights, collapsed groups and searched results retain the right variables [0.15ms]
+
+src/features/explorer/statistic-format.test.ts:
+(pass) DuckDB date statistics keep their UTC day in Madrid winter and summer [4.34ms]
+(pass) explicit timestamp offsets are preserved when displaying statistics in UTC [0.91ms]
+(pass) missing and invalid date statistics retain their fallback display
+(pass) DuckDB mean timestamps with hour-only offsets use localized UTC dates [1.44ms]
+
+src/features/explorer/table-window.test.ts:
+(pass) wide table projection > 4911 columns open with a bounded projection and retain full scroll extent [0.81ms]
+(pass) wide table projection > middle and last columns remain reachable [1.95ms]
+(pass) wide table projection > resizing, hiding and reordering preserve viewport coverage [0.13ms]
+(pass) horizontal pixels inside the same projected window do not trigger another render [0.65ms]
+
+src/features/explorer/model.test.js:
+(pass) stable selection and exact clipboard data > reverse rectangular drag snapshots row and column IDs [0.30ms]
+(pass) stable selection and exact clipboard data > anchor on an unloaded page cannot accidentally span a new page [0.02ms]
+(pass) stable selection and exact clipboard data > copy preserves 64-bit identifiers and quotes tabs/newlines/nulls [0.03ms]
+(pass) stable selection and exact clipboard data > composite IDs do not collide when IDs contain delimiters [0.03ms]
+(pass) persisted views > reconciles schema changes, order, hidden IDs and invalid widths [0.10ms]
+(pass) persisted views > unknown view version restores defaults
+(pass) persisted views > variable display name and description survive a saved view without changing column IDs [0.08ms]
+(pass) persisted views > editing variable text leaves an unclassified analytical role untouched [0.09ms]
+(pass) persisted views > priority drag reorders without mutating saved view [0.07ms]
+(pass) full workspace and variable reordering > old views receive presentation defaults; saved presentation survives schema reconciliation [0.09ms]
+(pass) full workspace and variable reordering > drops across pinned boundary move visibly and preserve hidden variables [0.23ms]
+(pass) full workspace and variable reordering > wide files request every distribution without exceeding native limits, and abandon superseded work [2.00ms]
+(pass) full workspace and variable reordering > dropping a formerly last pinned card lands in the visible preview position [0.07ms]
+(pass) category sorting preserves null bucket and supports uplift [0.18ms]
+
+src/features/explorer/SampleControl.test.tsx:
+(pass) loading more cards does not remove sample text or change the sampling controls layout [1.67ms]
+
+src/features/explorer/significant-variables.test.ts:
+(pass) significant variables > ranks the largest selection versus whole-dataset difference first [0.50ms]
+(pass) significant variables > includes omitted categorical values as one residual bucket
+(pass) significant variables > normalizes multi-valued incidences and avoids incomplete rankings
+
+src/features/explorer/table-category-colors.test.tsx:
+(pass) categorical table colors > keeps the default table plain even when saved overrides exist [0.79ms]
+(pass) categorical table colors > colors raw values consistently, including booleans and individual list entries [0.64ms]
+(pass) categorical table colors > display colors do not alter clipboard data or SPSS codes [0.34ms]
+(pass) categorical table colors > uses the chosen palette for unassigned values while explicit colors win [1.43ms]
+(pass) categorical table colors > uses the same frequency rank as the chart for uncustomized table values [0.32ms]
+
+src/features/explorer/analysis-model.test.ts:
+(pass) classification only changes the selected variables and preserves panel preferences [0.36ms]
+(pass) classification and regrouping retain manual variable text [0.06ms]
+(pass) pinned variables stay first and hidden/search preferences compose with groups
+(pass) AI filters replace only affected columns and preserve unrelated filters
+(pass) dropping across thematic groups adopts the target group without changing analytical role [0.15ms]
+
+src/features/explorer/table-page.test.ts:
+(pass) unchanged filter results preserve both the page and rows; surviving rows are matched by ID [0.26ms]
+(pass) changing one value keeps other cells, including nested values and exact integers, shared [0.03ms]
+(pass) horizontal projections retain earlier columns and accurately track complete coverage [0.16ms]
+(pass) projections never cross a dataset, API or revision boundary [0.07ms]
+(pass) wide horizontal scrolling keeps at most 64 projected columns per page [18.16ms]
+(pass) an empty filtered page is final and does not require more horizontal queries [0.36ms]
+(pass) cache eviction preserves the whole viewport when scrolling into older cached columns [0.21ms]
+
+src/features/explorer/category-order.test.ts:
+(pass) manual category order > persists by raw ID, retains new categories, and keeps null last across selections [0.37ms]
+(pass) manual category order > keeps unseen saved categories without duplicating values or conflating null with strings [0.07ms]
+(pass) semantic scopes and review > excludes SPSS missing, empty and protected colors; never silently treats a subset as a full ordinal scale [1.50ms]
+(pass) semantic scopes and review > rejects late revisions, partial scales, invented values and duplicate assignments [0.37ms]
+(pass) semantic scopes and review > applies only reviewed changes to the latest view without overwriting protected edits [0.17ms]
+
+src/features/explorer/statistic-filters.test.ts:
+(pass) quantile controls use fixed unfiltered quarters and replace the range for this column
+(pass) date statistics from DuckDB become UTC inclusive filter endpoints [0.09ms]
+(pass) missing or unsafe statistics cannot create a rounded filter
+
+src/features/plots/model.test.js:
+(pass) row count offers only count, relative count and cumulative sum and computes both views [4.04ms]
+(pass) quick axis changes keep query settings valid and swaps preserve dimension options [0.16ms]
+(pass) all twenty chart definitions compile and run with native-shaped data [127.24ms]
+(pass) date formats render in band and continuous axes without numeric-format errors [41.84ms]
+(pass) numeric bin axes abbreviate by default and honor a manual format without changing filter bounds [28.67ms]
+(pass) numeric bin axis can label the start or end at the corresponding bar edge [11.19ms]
+(pass) dense exact numeric bars stay legible without thousands of grid lines [15.51ms]
+(pass) bin clicks include the last boundary and handle quantile ties [0.60ms]
+(pass) date bucket clicks keep UTC boundaries in Europe/Madrid [0.14ms]
+(pass) query sends structured aggregates only and keeps filters [0.14ms]
+(pass) calendar gaps are explicit and decomposition preserves additive identity [1.65ms]
+(pass) seasonal gaps have no point marks and tooltips use the component value [18.75ms]
+(pass) CSV retains exact integer strings, quotes and multiline values [0.20ms]
+(pass) image composition keeps the complete axis viewport and escapes titles [5.22ms]
+
+src/features/plots/plot-update.test.ts:
+(pass) unchanged plot results keep identity while metadata and revisions remain accurate
+(pass) plot shape excludes only values, retaining axis and regression changes
+(pass) measure updates preserve Vega tuples, skip equal values and keep the latest queued update [1.45ms]
+(pass) retained categorical scales follow the current row order after removing and restoring groups [5.07ms]
+
+ 109 pass
+ 0 fail
+ 743 expect() calls
+Ran 109 tests across 21 files. [1286.00ms]

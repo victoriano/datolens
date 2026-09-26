@@ -13,11 +13,23 @@ struct NoKeys;
 impl CredentialStore for NoKeys {fn key(&self,_:&str)->Result<String>{Err("No test credentials".into())}}
 #[derive(Default)]struct Counting{calls:AtomicUsize, failing:BTreeSet<String>}
 impl Provider for Counting{fn generate(&self,r:&ProviderRequest,c:&dyn CredentialStore)->Result<Value>{self.calls.fetch_add(1,Ordering::SeqCst);assert!(!r.inputs.contains_key("secret"));assert!(!r.prompt.contains("private"));MockProvider{failing_rows:self.failing.clone()}.generate(r,c)}}
-fn dbpath()->PathBuf{std::env::temp_dir().join(format!("datolens-enrichment-test-{}-{}.sqlite",std::process::id(),SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos()))}
+static NEXT_DATABASE:AtomicUsize=AtomicUsize::new(0);
+fn dbpath()->PathBuf{std::env::temp_dir().join(format!("datolens-enrichment-test-{}-{}-{}.sqlite",std::process::id(),NEXT_DATABASE.fetch_add(1,Ordering::SeqCst),SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos()))}
 fn open(path:&PathBuf,data:Arc<Data>,p:Arc<dyn Provider>)->Engine{Engine::open(path,data,Arc::new(NoKeys),p).unwrap()}
-fn definition(id:&str,input:&str,dep:Option<&str>)->Definition{Definition{id:id.into(),name:id.into(),provider:"gemini".into(),model:"test-model".into(),prompt:format!("Use {{{{{input}}}}}"),input_columns:vec![input.into()],output_column:id.into(),output_kind:"numeric".into(),depends_on:dep.into_iter().map(str::to_string).collect(),revision:1}}
+fn definition(id:&str,input:&str,dep:Option<&str>)->Definition{Definition{id:id.into(),name:id.into(),provider:"gemini".into(),model:"test-model".into(),prompt:format!("Use {{{{{input}}}}}"),input_columns:vec![input.into()],output_column:id.into(),output_kind:"numeric".into(),depends_on:dep.into_iter().map(str::to_string).collect(),revision:1,options:Default::default()}}
 fn key(row:&str,def:&str)->CellKey{CellKey{row_id:row.into(),enrichment_id:def.into()}}
 fn chain(e:&Engine){e.save_definition(definition("A","x",None)).unwrap();e.save_definition(definition("B","A",Some("A"))).unwrap();e.save_definition(definition("C","B",Some("B"))).unwrap()}
+#[test]fn shared_definitions_restore_revisions_and_invalidate_downstream(){
+    let e=open(&dbpath(),Arc::new(Data::new()),Arc::new(Counting::default()));
+    chain(&e);run(&e,vec![key("r1","C")],RunMode::Pending,true);
+    let mut imported=e.list_definitions().unwrap();
+    imported.iter_mut().find(|d|d.id=="A").unwrap().prompt="New shared prompt {{x}}".into();
+    imported.iter_mut().find(|d|d.id=="A").unwrap().revision=7;
+    e.restore_definitions(imported.clone()).unwrap();
+    assert_eq!(e.list_definitions().unwrap(),imported);
+    assert_eq!(e.cell(&key("r1","C")).unwrap().state,CellState::Stale);
+    assert_eq!(e.cell(&key("r1","A")).unwrap().value,Some(json!(2.0)));
+}
 fn run(e:&Engine,cells:Vec<CellKey>,mode:RunMode,pre:bool)->RunStatus{let plan=e.plan(cells,mode,pre,false,3,100).unwrap();e.start(&plan.id).unwrap();drain(e,&plan.id)}
 fn drain(e:&Engine,id:&str)->RunStatus{for _ in 0..20{let s=e.tick(id).unwrap();if s.state!=RunState::Running{return s;}}panic!("scheduler failed to terminate")}
 #[test]fn chain_waits_and_pending_never_repeats_successes(){let d=Arc::new(Data::new());let p=Arc::new(Counting::default());let e=open(&dbpath(),d,p.clone());chain(&e);let s=run(&e,vec![key("r1","C")],RunMode::Pending,true);assert_eq!(s.state,RunState::Completed);assert_eq!(s.succeeded,3);assert_eq!(e.cell(&key("r1","C")).unwrap().value,Some(json!(4.0)));assert_eq!(p.calls.load(Ordering::SeqCst),3);run(&e,vec![key("r1","C")],RunMode::Pending,true);assert_eq!(p.calls.load(Ordering::SeqCst),3);}

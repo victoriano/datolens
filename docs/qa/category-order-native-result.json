@@ -1,0 +1,42 @@
+{
+  "orders": {
+    "Acuerdo": [
+      "Muy en desacuerdo",
+      "En desacuerdo",
+      "Ni de acuerdo ni en desacuerdo",
+      "De acuerdo",
+      "Muy de acuerdo"
+    ],
+    "Frecuencia": [
+      "Nunca",
+      "A veces",
+      "A menudo",
+      "Siempre"
+    ]
+  },
+  "colors": {
+    "Acuerdo": {
+      "De acuerdo": "#4d9c86",
+      "En desacuerdo": "#b77c4d",
+      "Muy de acuerdo": "#009e73",
+      "Muy en desacuerdo": "#d55e00",
+      "Ni de acuerdo ni en desacuerdo": "#999999"
+    },
+    "Frecuencia": {
+      "A menudo": "#4169e1",
+      "A veces": "#87cefa",
+      "Nunca": "#c6e2ff",
+      "Siempre": "#191970"
+    },
+    "Marca": {
+      "Coca-Cola": "#ff0000",
+      "Greenpeace": "#009900",
+      "Spotify": "#1db954"
+    }
+  },
+  "sortModes": {
+    "Acuerdo": "manual",
+    "Frecuencia": "manual"
+  },
+  "filters": []
+}

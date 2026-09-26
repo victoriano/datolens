@@ -1,0 +1,41 @@
+bun test v1.2.8 (adab0f64)
+
+src/features/explorer/distributions.test.ts:
+(pass) remote auto deferral stops after one batch for 4911 columns [10.47ms]
+(pass) ordinary distributions still process all batches [4.88ms]
+(pass) viewport revisits hit cache; filters, statistics and revision invalidate independently [2.45ms]
+(pass) a superseded batch does not publish but its revision-scoped cache remains reusable [2.15ms]
+(pass) client cache stays bounded after visiting hundreds of variables [10.34ms]
+(pass) scrolling during a slow batch reuses its result before issuing overlapping IPC [1.58ms]
+(pass) a fully cached viewport publishes synchronously without Updating or native work [0.16ms]
+(pass) partial viewport results preserve loaded charts and object identities without growing unbounded [13.87ms]
+
+src/features/explorer/variable-window.test.ts:
+(pass) 4911 variables only mount and request the viewport with bounded neighbours [3.03ms]
+(pass) pixel scrolling within the same card window needs no React update [0.66ms]
+(pass) loading an overscan chart above the viewport preserves the visible row and pixel offset [0.11ms]
+(pass) grid, measured heights, collapsed groups and searched results retain the right variables [0.11ms]
+
+src/features/explorer/model.test.js:
+(pass) stable selection and exact clipboard data > reverse rectangular drag snapshots row and column IDs [2.30ms]
+(pass) stable selection and exact clipboard data > anchor on an unloaded page cannot accidentally span a new page
+(pass) stable selection and exact clipboard data > copy preserves 64-bit identifiers and quotes tabs/newlines/nulls
+(pass) stable selection and exact clipboard data > composite IDs do not collide when IDs contain delimiters
+(pass) persisted views > reconciles schema changes, order, hidden IDs and invalid widths [0.54ms]
+(pass) persisted views > unknown view version restores defaults
+(pass) persisted views > variable display name and description survive a saved view without changing column IDs [0.98ms]
+(pass) persisted views > editing variable text leaves an unclassified analytical role untouched [0.20ms]
+(pass) persisted views > priority drag reorders without mutating saved view [0.20ms]
+(pass) full workspace and variable reordering > old views receive presentation defaults; saved presentation survives schema reconciliation [0.09ms]
+(pass) full workspace and variable reordering > drops across pinned boundary move visibly and preserve hidden variables [0.20ms]
+(pass) full workspace and variable reordering > wide files request every distribution without exceeding native limits, and abandon superseded work [1.72ms]
+(pass) full workspace and variable reordering > dropping a formerly last pinned card lands in the visible preview position [0.12ms]
+(pass) category sorting preserves null bucket and supports uplift [0.27ms]
+
+src/features/explorer/SampleControl.test.tsx:
+(pass) loading more cards does not remove sample text or change the sampling controls layout [22.36ms]
+
+ 27 pass
+ 0 fail
+ 225 expect() calls
+Ran 27 tests across 4 files. [785.00ms]

@@ -1,10 +1,81 @@
 # Datolens — verificación del MVP macOS
 
+## CLI y documentos — 25 de septiembre de 2026
+
+El bundle instalado en `/Applications/Datolens.app` abrió desde `datolens` un
+CSV y un Parquet en pestañas separadas; el Parquet mostró 1.200 filas. La app
+aislada con App Sandbox abrió un CSV externo de 1.200 filas, persistió el
+bookmark con modo 0600 y lo reabrió tras reiniciar sin selector. Suites del
+corte: Rust 46 PASS, frontend 121 PASS / 2332 aserciones, CLI 2 PASS y guardas
+de bundle 4 PASS. El PKG directo y el Cask están preparados, no publicados; el
+binario exacto de TestFlight/App Store sigue pendiente. Evidencia y límite del
+sidecar hermano: [estado CLI](status/cli-file-opening.md).
+
+## SAV del CIS — 23 de septiembre de 2026
+
+La nueva importación SPSS se comprobó con un fixture `.sav` creado para pruebas y con `66091222.sav`, un microdato real del CIS encontrado en el Mac. El motor devolvió 15.242 filas, 155 columnas y 148 variables con etiquetas. Se verificaron página, distribución, filtro por código y conservación byte a byte del original. En `Datolens SAV QA.app` se abrió mediante el selector nativo y se vieron las 15.242 filas, las 155 columnas y valores como `1 · Andalucía` y `2 · Mujer`. La compilación de QA consta en [sav-build.txt](qa/sav-build.txt) y la del bundle principal firmado en [sav-main-build.txt](qa/sav-main-build.txt).
+
+Los códigos perdidos definidos en SPSS permanecen como códigos etiquetados y participan en agregados; los perdidos del sistema aparecen como nulos. Algunas etiquetas del archivo real muestran `â?¬` en lugar de `€`: la secuencia dañada `E2 3F AC` está en el `.sav` original.
+
 Fecha: 22 de septiembre de 2026. Bundle real compilado, arrancado y probado mediante
 accesibilidad y capturas de su ventana macOS. No se considera un build web como
 sustituto de esta comprobación.
 
+## Ampliación del 23 de septiembre — verificada
+
+- Workspace: pestañas por archivo/hoja, consultas locales y resultados Parquet
+  persistentes. QA nativa de archivos, dos hojas Excel, join y reinicio PASS:
+  [recibo workspace](qa/workspace-native.md).
+- Derivadas: expresiones escalares validadas, preview de tres filas y creación
+  explícita como columnas vivas. Dos fórmulas independientes y reapertura nativas
+  PASS sin API ni credenciales: [recibo enriquecimientos](status/enrichment.md).
+- Datos: 43 PASS, 2 ignoradas; enriquecimientos: 24 PASS; root/IPC: 7 PASS;
+  frontend: 45 PASS / 1640 aserciones. Total: 119 pruebas pasadas.
+  Logs `qa/workspace-derived-{root,frontend}-tests.txt` y recibos de módulos.
+- Bundle principal conjunto compilado y firmado; `qa/workspace-derived-main-build.txt`.
+  Se cerró la instancia anterior y se abrió la ruta exacta del bundle actualizado.
+- Pase final nativo PASS: edición de alias sin asignar rol, cuartiles globales,
+  edición decimal exacta, fechas UTC/offset corto, búsqueda y scroll de Columnas,
+  persistencia tras reinicio. [Recibo final](qa/workspace-derived-final-native.md).
+- La app queda abierta en el archivo previo del usuario, 338 filas × 10 columnas.
+  Se cerraron el fixture y la instancia Integration QA.
+- Gemini/Jev reales conservan las pruebas CLI del corte anterior; la ruta IA
+  nativa sigue pendiente de autorización de lectura del Llavero de macOS.
+
 ## Entorno y bundle
+
+### Corte anterior del 22 de septiembre
+
+La entrega base descrita debajo precede a las funciones de análisis, gráficos,
+Jev, idioma y temas. Su integración se validó en un bundle separado:
+`Datolens Integration QA.app` (`com.victoriano.datolens.integrationqa`).
+El bundle principal actualizado ya se ha generado y firmado: 166 MiB,
+`src-tauri/target/debug/bundle/macos/Datolens.app`; compilación y firma PASS en
+`qa/features-build-macos.txt`. Se cerró la instancia principal anterior con ⌘Q
+y se abrió la ruta exacta del bundle final. Recuperó Idealista 94.815 × 41,
+su vista y siete variables ocultas, con los controles nuevos visibles. Inspección
+AX y captura macOS PASS. La instancia QA quedó cerrada.
+
+| Área | Evidencia actual |
+| --- | --- |
+| Root/IPC | 6 pruebas Rust PASS, `qa/features-root-tests.txt` |
+| Datos, casts y gráficos | 28 pruebas PASS, 1 benchmark ignorado; `qa/features-data-tests.txt` y `qa/features-plot-totals-tests.txt` |
+| Enriquecimiento | 22 pruebas PASS y llamadas reales CLI Gemini/Jev/web; `status/enrichment.md` |
+| Modelos frontend e idiomas | 30 pruebas PASS / 1546 aserciones, `qa/features-frontend-tests.txt` |
+| Archivo/Finder/selector | Recorrido nativo PASS, `qa/file-actions-native.txt` |
+| Estadísticas/casts/grupos | Recorrido nativo local PASS, `qa/variable-analysis-native.md` |
+| Gráficos | Barras, filtro 60/240, pivot con totales, correlación/regresión, exportación SVG/PNG/CSV y persistencia de cuatro gráficos PASS; QA4 confirma huecos sin puntos falsos, tooltip derivado y CSV EN; `status/plots.md` |
+| Idiomas/temas | ES/EN × claro/oscuro, menús nativos, reinicio y Oscuro→Sistema PASS; `status/ui-preferences.md` |
+| IA desde la app | QA4 muestra Connected; único intento explícito bloqueado en lectura protegida del Llavero antes de HTTP, 0 llamadas nuevas. Preview/lote/clasificación/filtro IA nativos pendientes; `qa/features-keychain-pending.txt` |
+
+Se corrigió la consulta de existencia de claves: ahora solicita solo atributos,
+sin descifrar el secreto al abrir un dataset. La lectura del secreto sigue ligada
+a una acción explícita que usa el proveedor. No se alteraron ACL del Llavero.
+El rechazo al intentar inspeccionar el diálogo fue una restricción de Computer
+Use, no una denegación del usuario: `Computer Use is not allowed to use the app
+'com.apple.SecurityAgent' for safety reasons.`
+
+### Entrega base
 
 - Mac14,2, Apple Silicon arm64, 16 GiB RAM; macOS 27.0 (26A428).
 - Rust 1.98.1; Bun 1.2.8; Tauri 2.11.6; React 19.3.0; DuckDB 1.5.5.

@@ -1,0 +1,19 @@
+{
+  "productName": "Datolens Store QA",
+  "identifier": "com.victoriano.datolens.storeqa",
+  "build": {
+    "beforeBuildCommand": "python3 scripts/build-cli.py && python3 scripts/build-credential-helper.py && bunx vite build --outDir artifacts/distribution/store-candidate-frontend",
+    "frontendDist": "../artifacts/distribution/store-candidate-frontend"
+  },
+  "bundle": {
+    "resources": [],
+    "macOS": {
+      "frameworks": ["../artifacts/distribution/duckdb-build/src/libduckdb.dylib"],
+      "signingIdentity": "Datolens Local Development Signing",
+      "hardenedRuntime": true,
+      "entitlements": "../distribution/macos/SandboxQA.entitlements",
+      "bundleVersion": "2",
+      "minimumSystemVersion": "12.0"
+    }
+  }
+}

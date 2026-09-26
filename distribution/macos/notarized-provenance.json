@@ -1,0 +1,19 @@
+{
+  "verifiedAt": "2026-09-23T19:04:15.998660+00:00",
+  "bundleIdentifier": "com.victoriano.datolens",
+  "binarySha256": "88f98091964cd91daba0b5eea81cc35873d82531f2b70ab4f0bdc5be9e9da91b",
+  "signature": "Executable=/private/var/folders/9c/x8r9j82s2cz7x82nzbzdwldh0000gn/T/datolens-publish-8dzv0tgs/Datolens.app/Contents/MacOS/datolens\nIdentifier=com.victoriano.datolens\nFormat=app bundle with Mach-O thin (arm64)\nCodeDirectory v=20500 size=33923 flags=0x10000(runtime) hashes=1049+7 location=embedded\nVersionPlatform=1\nVersionMin=786432\nVersionSDK=1769472\nHash type=sha256 size=32\nCandidateCDHash sha256=1f9ca44c72f302da83e3ace78a8de59036b40d5c\nCandidateCDHashFull sha256=1f9ca44c72f302da83e3ace78a8de59036b40d5cb1309fc705e0f9190faaca18\nHash choices=sha256\nCMSDigest=1f9ca44c72f302da83e3ace78a8de59036b40d5cb1309fc705e0f9190faaca18\nCMSDigestType=2\nExecutable Segment base=0\nExecutable Segment limit=16482304\nExecutable Segment flags=0x1\nPage size=16384\nCDHash=1f9ca44c72f302da83e3ace78a8de59036b40d5c\nSignature size=8942\nAuthority=Developer ID Application: Victoriano Izquierdo (CW546NZ5HC)\nAuthority=Developer ID Certification Authority\nAuthority=Apple Root CA\nTimestamp=23 Sep 2026 at 20:55:22\nNotarization Ticket=stapled\nInfo.plist entries=16\nTeamIdentifier=CW546NZ5HC\nRuntime Version=27.0.0\nSealed Resources version=2 rules=13 files=3\nInternal requirements count=1 size=216\nTotal signatures=1\nChosen signature=1\n",
+  "stapler": "Processing: /var/folders/9c/x8r9j82s2cz7x82nzbzdwldh0000gn/T/datolens-publish-8dzv0tgs/Datolens.app\nThe validate action worked!\n",
+  "gatekeeper": "/var/folders/9c/x8r9j82s2cz7x82nzbzdwldh0000gn/T/datolens-publish-8dzv0tgs/Datolens.app: accepted\nsource=Notarized Developer ID\norigin=Developer ID Application: Victoriano Izquierdo (CW546NZ5HC)\n",
+  "release": {
+    "version": "0.1.0 beta",
+    "url": "/downloads/Datolens-0.1.0-2-apple-silicon.zip",
+    "sizeLabel": "25.1 MB",
+    "notarized": true,
+    "appStoreUrl": null,
+    "bytes": 26283944,
+    "sha256": "ef359e6dd4046cf6fcb1cfdbf15a5d9d179d8bbe245339db45b12362ad3d3f5d",
+    "build": "2",
+    "format": "ZIP"
+  }
+}

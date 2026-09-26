@@ -1,0 +1,44 @@
+   Compiling datolens-data v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-data)
+    Finished `test` profile [unoptimized] target(s) in 8.92s
+     Running unittests src/lib.rs (src-tauri/target/debug/deps/datolens_data-ba242db39068e3a9)
+
+running 6 tests
+test workspace::tests::even_existing_snapshot_paths_are_inaccessible_to_user_sql ... ok
+test workspace::tests::sheets_and_derived_values_can_be_joined_without_carrying_formulas ... ok
+test workspace::tests::query_cannot_read_files_mutate_config_or_execute_extra_statements ... ok
+test workspace::tests::joins_are_durable_independent_datasets_with_exact_ids ... ok
+test workspace::tests::failure_and_empty_results_preserve_inputs ... ok
+test workspace::tests::timed_out_query_is_joined_and_publishes_nothing ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
+
+     Running tests/analysis.rs (src-tauri/target/debug/deps/analysis-52098b677c4d94c3)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.00s
+
+     Running tests/data.rs (src-tauri/target/debug/deps/data-29fcda82460f7b91)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 19 filtered out; finished in 0.00s
+
+     Running tests/derived.rs (src-tauri/target/debug/deps/derived-44a02e66fe18612a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.00s
+
+     Running tests/plots.rs (src-tauri/target/debug/deps/plots-3057b60ce6fdea5e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+
+     Running tests/sav.rs (src-tauri/target/debug/deps/sav-c79fd390462d0dba)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+

@@ -15,9 +15,18 @@ tauri = { version = "2", features = [] }
 tauri-plugin-dialog = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+base64 = "0.22"
 security-framework = "3"
+zeroize = "1"
+reqwest = { version = "0.12", features = ["blocking", "json", "rustls-tls"], default-features = false }
+tempfile = "3"
 datolens-data = { path = "crates/datolens-data" }
 datolens-enrichment = { path = "crates/datolens-enrichment" }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+core-foundation = "0.10"
+objc2 = "0.6"
+objc2-foundation = { version = "0.3", default-features = false, features = ["std", "NSFileManager", "NSPathUtilities", "NSURL", "NSString", "NSError"] }
 
 [workspace]
 exclude = ["crates/datolens-data", "crates/datolens-enrichment"]
@@ -30,6 +39,3 @@ incremental = false
 strip = true
 lto = "thin"
 codegen-units = 16
-
-[dev-dependencies]
-tempfile = "3"

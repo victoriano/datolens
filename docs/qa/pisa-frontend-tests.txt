@@ -1,0 +1,59 @@
+bun test v1.2.8 (adab0f64)
+
+src/features/explorer/sampling.test.ts:
+(pass) sampling preferences survive view reconciliation; malformed values fall back to auto [9.67ms]
+(pass) queued obsolete calls are skipped and a failure does not poison the next query [8.54ms]
+(pass) wide panel publishes batches promptly, requests only visible statistics and keeps one sample [4.28ms]
+
+src/features/explorer/distributions.test.ts:
+(pass) remote auto deferral stops after one batch for 4911 columns [1.36ms]
+(pass) ordinary distributions still process all batches [0.06ms]
+
+src/features/explorer/statistic-format.test.ts:
+(pass) DuckDB date statistics keep their UTC day in Madrid winter and summer [26.30ms]
+(pass) explicit timestamp offsets are preserved when displaying statistics in UTC [0.97ms]
+(pass) missing and invalid date statistics retain their fallback display
+(pass) DuckDB mean timestamps with hour-only offsets use localized UTC dates [1.44ms]
+
+src/features/explorer/table-window.test.ts:
+(pass) wide table projection > 4911 columns open with a bounded projection and retain full scroll extent [0.94ms]
+(pass) wide table projection > middle and last columns remain reachable [4.83ms]
+(pass) wide table projection > resizing, hiding and reordering preserve viewport coverage [0.42ms]
+
+src/features/explorer/model.test.js:
+(pass) stable selection and exact clipboard data > reverse rectangular drag snapshots row and column IDs [0.60ms]
+(pass) stable selection and exact clipboard data > anchor on an unloaded page cannot accidentally span a new page
+(pass) stable selection and exact clipboard data > copy preserves 64-bit identifiers and quotes tabs/newlines/nulls
+(pass) stable selection and exact clipboard data > composite IDs do not collide when IDs contain delimiters
+(pass) persisted views > reconciles schema changes, order, hidden IDs and invalid widths [0.35ms]
+(pass) persisted views > unknown view version restores defaults [0.01ms]
+(pass) persisted views > variable display name and description survive a saved view without changing column IDs [1.13ms]
+(pass) persisted views > editing variable text leaves an unclassified analytical role untouched [0.05ms]
+(pass) persisted views > priority drag reorders without mutating saved view [0.31ms]
+(pass) full workspace and variable reordering > old views receive presentation defaults; saved presentation survives schema reconciliation
+(pass) full workspace and variable reordering > drops across pinned boundary move visibly and preserve hidden variables [1.11ms]
+(pass) full workspace and variable reordering > wide files request every distribution without exceeding native limits, and abandon superseded work [0.41ms]
+(pass) full workspace and variable reordering > dropping a formerly last pinned card lands in the visible preview position [0.07ms]
+(pass) category sorting preserves null bucket and supports uplift [0.02ms]
+
+src/features/explorer/significant-variables.test.ts:
+(pass) significant variables > ranks the largest selection versus whole-dataset difference first [0.84ms]
+(pass) significant variables > includes omitted categorical values as one residual bucket [0.02ms]
+(pass) significant variables > normalizes multi-valued incidences and avoids incomplete rankings [0.04ms]
+
+src/features/explorer/analysis-model.test.ts:
+(pass) classification only changes the selected variables and preserves panel preferences [0.29ms]
+(pass) classification and regrouping retain manual variable text [0.05ms]
+(pass) pinned variables stay first and hidden/search preferences compose with groups [0.09ms]
+(pass) AI filters replace only affected columns and preserve unrelated filters [0.03ms]
+(pass) dropping across thematic groups adopts the target group without changing analytical role [0.08ms]
+
+src/features/explorer/statistic-filters.test.ts:
+(pass) quantile controls use fixed unfiltered quarters and replace the range for this column
+(pass) date statistics from DuckDB become UTC inclusive filter endpoints [0.84ms]
+(pass) missing or unsafe statistics cannot create a rounded filter
+
+ 37 pass
+ 0 fail
+ 157 expect() calls
+Ran 37 tests across 8 files. [481.00ms]

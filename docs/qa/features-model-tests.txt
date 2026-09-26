@@ -1,0 +1,25 @@
+bun test v1.2.8 (adab0f64)
+
+src/features/explorer/model.test.js:
+(pass) stable selection and exact clipboard data > reverse rectangular drag snapshots row and column IDs [8.28ms]
+(pass) stable selection and exact clipboard data > anchor on an unloaded page cannot accidentally span a new page [0.07ms]
+(pass) stable selection and exact clipboard data > copy preserves 64-bit identifiers and quotes tabs/newlines/nulls
+(pass) stable selection and exact clipboard data > composite IDs do not collide when IDs contain delimiters
+(pass) persisted views > reconciles schema changes, order, hidden IDs and invalid widths [1.00ms]
+(pass) persisted views > unknown view version restores defaults [0.11ms]
+(pass) persisted views > priority drag reorders without mutating saved view [0.08ms]
+(pass) full workspace and variable reordering > old views receive presentation defaults; saved presentation survives schema reconciliation [1.68ms]
+(pass) full workspace and variable reordering > drops across pinned boundary move visibly and preserve hidden variables [0.54ms]
+(pass) full workspace and variable reordering > wide files request every distribution without exceeding native limits, and abandon superseded work [2.24ms]
+(pass) full workspace and variable reordering > dropping a formerly last pinned card lands in the visible preview position [0.31ms]
+(pass) category sorting preserves null bucket and supports uplift [0.17ms]
+
+src/features/explorer/analysis-model.test.ts:
+(pass) classification only changes the selected variables and preserves panel preferences [1.27ms]
+(pass) pinned variables stay first and hidden/search preferences compose with groups [0.18ms]
+(pass) AI filters replace only affected columns and preserve unrelated filters [0.14ms]
+
+ 15 pass
+ 0 fail
+ 55 expect() calls
+Ran 15 tests across 2 files. [183.00ms]

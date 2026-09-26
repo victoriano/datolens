@@ -1,0 +1,67 @@
+bun test v1.2.8 (adab0f64)
+
+src/ui/preferences.test.js:
+(pass) appearance preferences > first launch follows a supported system language; corrupt storage recovers [5.70ms]
+(pass) appearance preferences > explicit choices survive a conflicting OS language and appearance [0.42ms]
+(pass) appearance preferences > stores only language/appearance, updates without storage, and does not require a dataset [0.79ms]
+(pass) localization boundaries > translates controls while preserving filenames, precise identifiers and braces in values [3.81ms]
+(pass) localization boundaries > every English translation preserves all interpolation fields [7.21ms]
+
+src/features/workspace/model.test.ts:
+(pass) each worksheet has a distinct stable tab; reopening does not duplicate tabs [1.26ms]
+(pass) join example quotes real column IDs including punctuation [0.78ms]
+
+src/features/explorer/statistic-format.test.ts:
+(pass) DuckDB date statistics keep their UTC day in Madrid winter and summer [21.49ms]
+(pass) explicit timestamp offsets are preserved when displaying statistics in UTC [0.99ms]
+(pass) missing and invalid date statistics retain their fallback display
+(pass) DuckDB mean timestamps with hour-only offsets use localized UTC dates [1.59ms]
+
+src/features/explorer/model.test.js:
+(pass) stable selection and exact clipboard data > reverse rectangular drag snapshots row and column IDs [0.50ms]
+(pass) stable selection and exact clipboard data > anchor on an unloaded page cannot accidentally span a new page [0.04ms]
+(pass) stable selection and exact clipboard data > copy preserves 64-bit identifiers and quotes tabs/newlines/nulls [0.03ms]
+(pass) stable selection and exact clipboard data > composite IDs do not collide when IDs contain delimiters
+(pass) persisted views > reconciles schema changes, order, hidden IDs and invalid widths [0.67ms]
+(pass) persisted views > unknown view version restores defaults
+(pass) persisted views > variable display name and description survive a saved view without changing column IDs [0.65ms]
+(pass) persisted views > editing variable text leaves an unclassified analytical role untouched [0.32ms]
+(pass) persisted views > priority drag reorders without mutating saved view [0.05ms]
+(pass) full workspace and variable reordering > old views receive presentation defaults; saved presentation survives schema reconciliation [0.10ms]
+(pass) full workspace and variable reordering > drops across pinned boundary move visibly and preserve hidden variables [0.20ms]
+(pass) full workspace and variable reordering > wide files request every distribution without exceeding native limits, and abandon superseded work [1.44ms]
+(pass) full workspace and variable reordering > dropping a formerly last pinned card lands in the visible preview position [0.07ms]
+(pass) category sorting preserves null bucket and supports uplift
+
+src/features/explorer/significant-variables.test.ts:
+(pass) significant variables > ranks the largest selection versus whole-dataset difference first [0.34ms]
+(pass) significant variables > includes omitted categorical values as one residual bucket
+(pass) significant variables > normalizes multi-valued incidences and avoids incomplete rankings
+
+src/features/explorer/analysis-model.test.ts:
+(pass) classification only changes the selected variables and preserves panel preferences [0.34ms]
+(pass) classification and regrouping retain manual variable text
+(pass) pinned variables stay first and hidden/search preferences compose with groups [0.14ms]
+(pass) AI filters replace only affected columns and preserve unrelated filters [0.04ms]
+(pass) dropping across thematic groups adopts the target group without changing analytical role [0.10ms]
+
+src/features/explorer/statistic-filters.test.ts:
+(pass) quantile controls use fixed unfiltered quarters and replace the range for this column [0.13ms]
+(pass) date statistics from DuckDB become UTC inclusive filter endpoints [0.07ms]
+(pass) missing or unsafe statistics cannot create a rounded filter [0.04ms]
+
+src/features/plots/model.test.js:
+(pass) all twenty chart definitions compile and run with native-shaped data [169.80ms]
+(pass) date formats render in band and continuous axes without numeric-format errors [26.11ms]
+(pass) bin clicks include the last boundary and handle quantile ties [0.40ms]
+(pass) date bucket clicks keep UTC boundaries in Europe/Madrid [0.09ms]
+(pass) query sends structured aggregates only and keeps filters [0.19ms]
+(pass) calendar gaps are explicit and decomposition preserves additive identity [1.43ms]
+(pass) seasonal gaps have no point marks and tooltips use the component value [7.88ms]
+(pass) CSV retains exact integer strings, quotes and multiline values
+(pass) image composition keeps the complete axis viewport and escapes titles [5.51ms]
+
+ 45 pass
+ 0 fail
+ 1640 expect() calls
+Ran 45 tests across 8 files. [600.00ms]

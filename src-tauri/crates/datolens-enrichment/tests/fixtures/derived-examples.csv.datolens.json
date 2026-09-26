@@ -1,0 +1,95 @@
+{
+  "columnTypes": {},
+  "columns": [
+    {
+      "dataType": "BIGINT",
+      "id": "price",
+      "kind": "numeric",
+      "name": "price"
+    },
+    {
+      "dataType": "BIGINT",
+      "id": "area",
+      "kind": "numeric",
+      "name": "area"
+    },
+    {
+      "dataType": "VARCHAR",
+      "id": "city",
+      "kind": "categorical",
+      "name": "city"
+    },
+    {
+      "dataType": "DATE",
+      "id": "date",
+      "kind": "date",
+      "name": "date"
+    }
+  ],
+  "datasetId": "ds_2bb66d9f05aaa914757bf6e7",
+  "derivedColumns": [
+    {
+      "expression": "price / NULLIF(area, 0)",
+      "id": "formula_1790147669489053000",
+      "name": "Columna calculada"
+    },
+    {
+      "expression": "area * 2",
+      "id": "formula_1790147945315906000",
+      "name": "Columna calculada 2"
+    }
+  ],
+  "enrichments": [],
+  "formatVersion": 1,
+  "resultColumns": [],
+  "savedAtNs": 1790147999650517000,
+  "source": {
+    "bytes": 131,
+    "modified_ns": 1790146930807804335,
+    "path": "/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-enrichment/tests/fixtures/derived-examples.csv",
+    "sample_hash": "d249fe6540ba0a85377d837deed44712e003bf57ab354fe66e4e7078f3e8f1a8",
+    "sheet": null
+  },
+  "typeRevision": 0,
+  "view": {
+    "columns": {
+      "hidden": [],
+      "order": [
+        "price",
+        "area",
+        "city",
+        "date",
+        "formula_1790147669489053000",
+        "formula_1790147945315906000"
+      ],
+      "widths": {}
+    },
+    "filters": [],
+    "formatVersion": 1,
+    "sorting": [],
+    "variablePanel": {
+      "expanded": [],
+      "hidden": [],
+      "metadata": {},
+      "order": [
+        "price",
+        "area",
+        "city",
+        "date",
+        "formula_1790147669489053000",
+        "formula_1790147945315906000"
+      ],
+      "pinned": [],
+      "relative": false,
+      "search": "",
+      "sortModeByColumn": {},
+      "statistics": []
+    },
+    "workspace": {
+      "enrichmentsVisible": false,
+      "mode": "table",
+      "pageOffset": 0,
+      "variablesVisible": false
+    }
+  }
+}

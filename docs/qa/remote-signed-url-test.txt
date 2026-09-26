@@ -1,0 +1,14 @@
+   Compiling datolens v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri)
+warning: linker stderr: ld: duplicate -rpath '@executable_path/../Frameworks' ignored
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `datolens` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 7.81s
+     Running unittests src/lib.rs (src-tauri/target/debug/deps/datolens_lib-7971a65d47d9cb9c)
+
+running 1 test
+test remote_sources::tests::parquet_without_range_support_downloads_and_opens_a_local_snapshot ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 13 filtered out; finished in 0.16s
+

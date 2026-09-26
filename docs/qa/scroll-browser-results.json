@@ -1,0 +1,37 @@
+{
+  "environment": "Codex in-app Chromium, local Vite development build; generated fixture, not native IPC timings",
+  "table": {
+    "fixtureColumns": 246,
+    "warmRequests": 0,
+    "placeholderFrames": 0,
+    "changedSampleHeight": 0,
+    "maxMountedCards": 6,
+    "idleRenders": 0,
+    "idleRequests": 0,
+    "nativeMaxConcurrency": 1,
+    "queriedColumns": 42,
+    "duplicateColumnQueries": 0,
+    "warmFrames": 302,
+    "frameP95Ms": 17,
+    "reactCommitP95Ms": 11.3,
+    "lastVariableReached": true
+  },
+  "explore": {
+    "fixtureColumns": 4911,
+    "warmRequests": 0,
+    "placeholderFrames": 0,
+    "changedSampleHeight": 0,
+    "maxMountedCards": 15,
+    "idleRenders": 0,
+    "idleRequests": 0,
+    "nativeMaxConcurrency": 1,
+    "queriedColumns": 80,
+    "duplicateColumnQueries": 0,
+    "lastVariableReached": true,
+    "warmFrames": 302,
+    "frameP95Ms": 17.6,
+    "reactCommitP95Ms": 20.3
+  },
+  "errors": [],
+  "limitations": "One run per mode with concurrent desktop activity. Frame timings are development-browser observations, not native FPS guarantees or a controlled before/after speed benchmark. Native remote PISA was checked separately."
+}

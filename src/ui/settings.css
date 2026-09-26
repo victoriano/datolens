@@ -1,0 +1,38 @@
+.dl-settings-dialog { width:min(520px,calc(100vw - 32px)); max-height:min(700px,calc(100vh - 32px)); overflow:auto; padding:0; border:1px solid var(--dl-line,#7776); border-radius:12px; background:var(--dl-surface,#fff); color:var(--dl-text,#222); box-shadow:0 18px 50px #0005; font:13px -apple-system,BlinkMacSystemFont,sans-serif; }
+.dl-settings-dialog::backdrop { background:#0007; }
+.dl-settings-dialog header { display:flex; align-items:center; justify-content:space-between; padding:18px 22px 10px; }
+.dl-settings-dialog h2 { font-size:20px; margin:0; }
+.dl-settings-dialog h3 { font-size:13px; margin:0 0 14px; }
+.dl-settings-dialog section { padding:18px 22px; border-top:1px solid var(--dl-line,#ddd); }
+.dl-settings-dialog section>label { display:flex; align-items:center; justify-content:space-between; gap:16px; margin:10px 0; }
+.dl-settings-dialog section>label select { min-width:150px; }
+.dl-settings-palette { display:grid; gap:8px; margin:14px 0; }
+.dl-settings-palette>span { display:flex; flex-direction:column; gap:4px; }
+.dl-settings-palette small { color:var(--dl-subtle,#777); font-size:12px; }
+.dl-settings-palette>div { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:5px; }
+.dl-settings-palette button { display:grid; gap:4px; min-width:0; padding:5px; font-size:10px; }
+.dl-settings-palette button[aria-pressed=true] { border-color:var(--dl-accent,#246bdf); box-shadow:inset 0 0 0 1px var(--dl-accent,#246bdf); }
+.dl-settings-palette-swatches { display:flex; height:8px; overflow:hidden; border-radius:2px; }
+.dl-settings-palette-swatches i { flex:1; }
+.dl-settings-dialog section>label.dl-settings-checkbox { align-items:center; }
+.dl-settings-dialog .dl-settings-checkbox>span { display:flex; flex-direction:column; gap:4px; }
+.dl-settings-dialog .dl-settings-checkbox small { color:var(--dl-subtle,#777); font-size:12px; }
+.dl-settings-dialog .dl-settings-checkbox input { width:16px; height:16px; accent-color:var(--dl-accent,#246bdf); }
+.dl-settings-dialog p { color:var(--dl-subtle,#777); margin:0 0 12px; }
+.dl-settings-dialog button,.dl-settings-dialog select,.dl-settings-dialog input { font:inherit; color:inherit; background:var(--mac-control,var(--dl-surface,#fff)); border:1px solid var(--dl-line,#ccc); border-radius:6px; padding:6px 9px; }
+.dl-settings-dialog button:disabled { opacity:.5; }
+.dl-settings-dialog header button { border:0; font-size:20px; background:transparent; }
+.dl-settings-dialog form { padding:13px 0; border-top:1px solid var(--dl-line,#ddd); }
+.dl-settings-provider { display:flex; align-items:center; justify-content:space-between; margin-bottom:9px; }
+.dl-settings-provider span { color:var(--dl-subtle,#777); font-size:12px; }
+.dl-settings-key { display:flex; gap:8px; }
+.dl-settings-key input { min-width:0; flex:1; }
+.dl-settings-dialog .dl-settings-check { margin-top:8px; border:0; padding-left:0; color:var(--dl-accent,#246bdf); background:transparent; }
+.dl-settings-dialog .dl-settings-error { color:#c33; }
+.dl-settings-dialog .dl-settings-success { color:#287b48; }
+.dl-settings-dialog footer { display:flex; justify-content:flex-end; padding:14px 22px; border-top:1px solid var(--dl-line,#ddd); }
+.dl-settings-cli { display:grid; gap:9px; }
+.dl-settings-cli>div:first-child { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+.dl-settings-cli>div:first-child span,.dl-settings-cli small { color:var(--dl-subtle,#777); font-size:11px; overflow-wrap:anywhere; }
+.dl-settings-cli>div:nth-child(2) { display:flex; gap:8px; }
+.dl-settings-cli input { min-width:0; flex:1; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px; }

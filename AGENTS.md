@@ -30,6 +30,12 @@ pero solo después de que los threads hayan quedado vinculados al proyecto.
   de su crate independiente y comunicar requisitos al coordinador.
 - No compilar simultáneamente en el mismo target de Cargo ni instalar dependencias
   sobre el mismo lockfile. Coordinar verificaciones o usar targets separados.
+- App para el usuario y el Dock: `/Applications/Datolens.app`. Mantener esta ruta
+  en todas las actualizaciones; no abrir ni anclar copias dentro de `target`.
+- Bundle local: usar `scripts/build-macos.sh`. Empaqueta aparte y, si la app está
+  abierta, deja la actualización pendiente. Salir de la app antes de ejecutar
+  `scripts/build-macos.sh --install-pending`. Nunca copiar ni volver a firmar el
+  bundle abierto: invalida su identidad en ejecución y bloquea las credenciales.
 - El código de datos corre en nativo y en trabajos que no bloqueen la interfaz.
   No cargar el dataset entero en JavaScript. Paginar y proyectar columnas.
 - API keys en Keychain; no en JSON, logs, prompts guardados ni fixtures.

@@ -1,0 +1,19 @@
+button.dl-variable-picker-trigger { display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-width:0;min-height:30px;padding:5px 8px;text-align:left;background:var(--ui-control);color:var(--ui-text);border:1px solid var(--ui-line);border-radius:5px;font:inherit; }
+.dl-variable-picker-trigger>span:first-child { overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.dl-variable-picker-popup { position:fixed;z-index:10000;box-sizing:border-box;padding:8px;background:var(--ui-menu);color:var(--ui-text);border:1px solid var(--ui-line);border-radius:8px;box-shadow:0 6px 22px #0002;font:12px system-ui;max-height:calc(100vh - 16px);overflow:auto; }
+.dl-variable-picker-popup>input,.dl-variable-checklist>input { box-sizing:border-box;width:100%;min-width:0;padding:7px 8px;border:1px solid var(--ui-line);border-radius:5px;background:var(--ui-control);color:var(--ui-text);font:inherit; }
+.dl-variable-picker-popup input:focus,.dl-variable-picker-trigger:focus-visible { outline:2px solid var(--ui-accent);outline-offset:1px; }
+.dl-variable-picker-options { max-height:192px;overflow:auto;overscroll-behavior:contain;margin:6px 0; }
+.dl-variable-picker-options>[role=option] { display:flex;justify-content:space-between;gap:8px;align-items:center;min-height:32px;box-sizing:border-box;padding:6px 8px;cursor:pointer;border-radius:4px; }
+.dl-variable-picker-options>[role=option]>span:first-child { overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
+.dl-variable-picker-options>[role=option]:hover,.dl-variable-picker-options>[data-active=true] { background:var(--ui-selected); }
+.dl-variable-picker-popup>small,.dl-variable-checklist>small { display:block;color:var(--ui-subtle);font-size:11px; }
+.dl-variable-checklist { min-width:0;width:100%; }
+.dl-variable-checklist .dl-variable-checklist-options { max-height:180px;overflow:auto;overscroll-behavior:contain;display:block;margin:6px 0; }
+.dl-variable-checklist-options>label { display:flex!important;align-items:center;gap:6px;min-height:28px;margin:0!important; }
+.dl-variable-checklist-options>label>span { overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
+.dl-variable-checklist-options input[type=checkbox] { flex:none;width:auto; }
+.dl-plot-staging label:has(.dl-variable-picker-trigger) { min-width:220px;max-width:360px; }
+.dl-plot-multi > .dl-variable-checklist { max-height:none;overflow:visible;box-sizing:border-box; }
+.dl-column-menu { max-height:240px!important;overscroll-behavior:contain; }
+.dl-column-menu>.dl-column-menu-search { position:sticky;top:0;z-index:1;width:100%;box-sizing:border-box;flex:none;background:var(--ui-control);color:var(--ui-text);margin-bottom:6px; }

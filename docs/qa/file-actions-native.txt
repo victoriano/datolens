@@ -1,0 +1,69 @@
+Datolens file actions — native QA, 2026-09-22
+
+App: Datolens Integration QA.app
+Bundle ID: com.victoriano.datolens.integrationqa
+Build log: docs/qa/features-qa-build.txt
+Interface exercised through cua_repl. No web fixture substituted for native UI.
+Test data: /tmp/datolens-file-actions-fixtures/
+
+PASS — Native picker opened from the document name.
+Observed NSOpenPanel at datolens-file-actions-fixtures, with
+datos á con espacios #1.csv selected in the screenshot, matching preview text,
+and an enabled Open button. This filename covers spaces, an accent and #.
+
+PASS — Finder opened from the separate document icon.
+Observed Finder window datolens-file-actions-fixtures:
+image (selected) datos á con espacios #1.csv
+Path bar: Macintosh HD private tmp datolens-file-actions-fixtures datos á con espacios #1.csv
+Screenshot confirmed the highlighted CSV in its containing folder.
+
+PASS — Accept current file.
+Clicked Open in the name-triggered native picker. App returned to the same
+document and displayed 3 de 3 filas.
+
+PASS — Choose another file.
+From the name-triggered picker, chose segundo archivo.csv.
+App title and both button paths changed to segundo archivo.csv; 1 de 1 filas.
+Clicking that title opened the native picker with segundo archivo.csv selected.
+
+PASS — Cancel preserves cell selection.
+Before: cell (selected) Segundo; 1 celdas; 1 de 1 filas.
+After clicking document name and Cancel:
+button Abrir selector de archivos: segundo archivo.csv
+text 1 de 1 filas
+cell (selected) Segundo
+text 1 celdas
+
+PASS — Missing source and retry.
+Renamed only the generated segundo archivo.csv fixture temporarily.
+Clicking its icon produced:
+No se encuentra el archivo original. Puede haberse movido o eliminado.
+Restored the fixture and clicked Reintentar. Error disappeared; Finder showed:
+image (selected) segundo archivo.csv
+Path bar: Macintosh HD private tmp datolens-file-actions-fixtures segundo archivo.csv
+
+Inconclusive initial observation:
+The first Finder inspection showed the other fixture selected and the app later
+showed an unexpected focus/order change in the variable rail. No PASS was inferred
+from that attempt. Integration coordinated a pause of competing CUA use; fresh
+observations and screenshots confirmed the successful actions above.
+The initial CUA typing of an accented path and one clipboard paste also failed;
+setting the native Go To field to the exact path succeeded. These were automation
+input failures, not failures of the app's title defaultPath.
+
+Handoff:
+Released exclusive QA back to integration. Test app remains open on
+segundo archivo.csv, one selected cell, no dialog or error. Both CSV fixtures exist.
+Main user Datolens session and Datolens Drag QA were not operated during QA.
+No claim that the user's already-running main app has been replaced or restarted.
+
+Post-QA shutdown requested by integration before rebuild:
+Quit only Datolens Integration QA via its CUA binding (CmdQ).
+CUA returned App quit. App inventory verified integrationqa isRunning=false,
+main com.victoriano.datolens isRunning=true, dragqa isRunning=false.
+
+Main bundle delivery confirmed by integration:
+src-tauri/target/debug/bundle/macos/Datolens.app updated and signature verified.
+Log: docs/qa/features-build-macos.txt. Includes the frozen QA4 sources.
+The main app process still runs the prior version; integration will coordinate
+its restart after pending CUA turns. This receipt does not claim that restart.

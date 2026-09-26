@@ -1,0 +1,23 @@
+Muchos datos. Todo más claro.
+
+Datolens es una herramienta para explorar archivos de datos en tu Mac. Abre ese CSV que acaba de llegar, entiende las variables y encuentra una perspectiva que puedas convertir en un gráfico.
+
+TUS FICHEROS, EN UN MISMO ESPACIO
+Abre CSV, Excel (.xlsx), Parquet y SPSS (.sav). Trabaja con varias tablas y hojas. Consulta distribuciones, valores vacíos y estadísticas para orientarte antes de empezar un análisis.
+
+SIGUE UNA PISTA
+Combina filtros, selecciona rangos y compara grupos. Explora una muestra cuando el conjunto es grande o trabaja con todas las filas cuando necesitas profundizar. El tiempo de apertura depende del formato, del tamaño y de tu Mac; CSV y Excel requieren una importación inicial.
+
+HAZLO VISIBLE
+Crea barras, diagramas de dispersión, series temporales y tablas dinámicas. Elige las variables de los ejes y exporta gráficos en PNG o SVG y resultados en CSV.
+
+HECHO PARA PERSONAS CURIOSAS
+Analistas, periodistas de datos, investigadores y equipos de producto y operaciones: empieza con los archivos que ya tienes. No necesitas programar para explorar y crear gráficos. Las consultas y fórmulas SQL están disponibles para ir más allá.
+
+EXPLORA EN LOCAL
+La exploración de archivos locales se ejecuta en tu Mac sin crear una cuenta. Tus vistas y resultados se guardan localmente. Al abrir fuentes remotas, Datolens se conecta a su servidor de origen.
+
+IA OPCIONAL, CON ALCANCE EXPLÍCITO
+Las funciones de IA requieren tu propia clave, pueden generar costes en el proveedor y envían el contexto seleccionado para la operación. Abrir un fichero no activa la IA. Las claves se guardan en el Llavero de macOS.
+
+Compatible con Mac con Apple Silicon y macOS 12 o posterior.

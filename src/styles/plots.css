@@ -1,0 +1,155 @@
+.dl-plots { flex: 1; display: flex; flex-direction: column; min-width: 0; min-height: 0; color: var(--dl-text); background: var(--dl-surface); }
+.dl-plots button,.dl-plots input,.dl-plots select { font: inherit; }
+.dl-plots button { border: 1px solid var(--dl-line); background: var(--dl-surface); color: var(--dl-text); border-radius: 5px; padding: 4px 9px; }
+.dl-plots button:hover:not(:disabled) { background: var(--dl-hover); }
+.dl-plots input,.dl-plots select { color: var(--dl-text); background: var(--dl-surface); border: 1px solid var(--dl-line); border-radius: 5px; padding: 5px 7px; min-width: 0; }
+.dl-plots-toolbar { min-height: 46px; padding: 8px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; border-bottom:1px solid var(--dl-line); }
+.dl-plots-toolbar > div {display:flex;align-items:center;gap:8px;min-width:0;}
+.dl-plots-toolbar > div > span {color:var(--dl-subtle);}
+.dl-plots-toolbar select {max-width:220px;}
+.dl-plots-toolbar button,.dl-plots-toolbar summary {font-size:12px;white-space:nowrap;}
+.dl-plot-axis-bar {display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--dl-line);background:var(--dl-surface);min-width:0;}
+.dl-plot-axis-pill {display:flex;align-items:center;min-width:0;flex:1;border:1px solid var(--dl-line);border-radius:7px;background:var(--dl-muted);}
+.dl-plot-axis-letter {flex:none;padding:0 11px;color:var(--dl-subtle);font-size:12px;font-weight:600;}
+.dl-plot-axis-pill .dl-variable-picker-trigger {flex:1;border:0;border-left:1px solid var(--dl-line);border-radius:0;background:transparent;min-height:34px;font-size:12px;}
+.dl-plot-axis-static {flex:1;min-width:0;padding:8px;color:var(--dl-subtle);font-size:12px;}
+.dl-plot-axis-actions {display:flex;align-items:center;gap:3px;flex:none;}
+.dl-plot-axis-swap {flex:none;width:30px;height:30px;padding:0!important;border-radius:50%!important;font-size:17px!important;color:var(--dl-accent)!important;}
+.dl-plot-axis-swap:disabled {color:var(--dl-subtle)!important;opacity:.45;}
+.dl-plot-axis-swap[aria-pressed=true] {background:var(--dl-selected)!important;}
+.dl-plot-axis-detail {position:relative;flex:none;border-left:1px solid var(--dl-line);max-width:42%;font-size:11px;}
+.dl-plot-axis-detail summary {list-style:none;cursor:pointer;padding:9px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dl-plot-axis-detail summary::-webkit-details-marker {display:none;}
+.dl-plot-axis-detail summary::after {content:'⌄';margin-left:7px;color:var(--dl-subtle);}
+.dl-plot-axis-detail[open] summary {color:var(--dl-accent);}
+.dl-plot-axis-menu {position:absolute;right:0;top:calc(100% + 5px);z-index:40;min-width:210px;padding:10px;display:grid;gap:10px;border:1px solid var(--dl-line);border-radius:8px;background:var(--dl-surface);box-shadow:0 8px 20px #0002;}
+.dl-plot-axis-menu label {display:grid;gap:5px;font-size:11px;}
+.dl-plot-axis-menu input,.dl-plot-axis-menu select {width:100%;box-sizing:border-box;}
+.dl-plot-axis-options {display:grid;gap:2px;margin:-5px;}
+.dl-plot-axis-options button {display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;padding:7px 9px;border:0;border-radius:5px;background:transparent;color:var(--dl-text);font:inherit;text-align:left;cursor:pointer;}
+.dl-plot-axis-options button:hover,.dl-plot-axis-options button:focus-visible {background:var(--dl-muted);outline:none;}
+.dl-plot-axis-options button[aria-pressed="true"] {color:var(--dl-accent);}
+.dl-plot-export {position:relative;}
+.dl-plot-export summary {cursor:pointer;padding:4px 9px;list-style:none;border:1px solid var(--dl-line);border-radius:5px;}
+.dl-plot-export > div {position:absolute;right:0;top:30px;z-index:30;min-width:170px;padding:5px;background:var(--dl-surface);border:1px solid var(--dl-line);box-shadow:0 6px 18px #0002;border-radius:7px;display:grid;gap:3px;}
+.dl-plot-export > div button {text-align:left;border:0;}
+.dl-plot-gallery {overflow:auto;padding:26px 24px 40px;}
+.dl-plot-staging h2,.dl-plot-saved h2 {margin:0 0 15px;font-size:14px;font-weight:600;}
+.dl-plot-staging > div {display:flex;gap:8px;flex-wrap:wrap;}
+.dl-plot-staging label {display:flex;flex:1;min-width:200px;gap:4px;max-width:480px;}
+.dl-plot-staging select {width:100%;height:34px;}
+.dl-plot-staging p {font-size:12px;color:var(--dl-subtle);margin:12px 0 20px;}
+.dl-plot-gallery-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;}
+.dl-plot-gallery-card {border:1px solid var(--dl-line);border-radius:8px;background:var(--dl-surface);overflow:hidden;display:flex;flex-direction:column;align-self:start;}
+.dl-plot-gallery-card:hover {border-color:var(--dl-accent);}
+.dl-plot-gallery-primary {border:0!important;padding:17px 16px 18px!important;border-radius:0!important;display:flex;flex-direction:column;align-items:flex-start;text-align:left;position:relative;min-height:184px;width:100%;}
+.dl-plot-gallery-primary svg {width:100%;height:87px;color:var(--dl-accent);fill:currentColor;display:block;margin-bottom:18px;}
+.dl-plot-icon-grid {stroke:currentColor;fill:none;stroke-width:.5;opacity:.13;}
+.dl-plot-gallery-primary strong {font-size:13px;font-weight:600;}
+.dl-plot-gallery-primary > span {color:var(--dl-subtle);font-size:11px;margin-top:5px;}
+.dl-plot-gallery-primary > small {position:absolute;right:10px;top:9px;font-size:9px;color:var(--dl-accent);background:var(--dl-surface);padding:2px 4px;border-radius:3px;}
+.dl-plot-gallery-card details {border-top:1px solid var(--dl-line);font-size:11px;}
+.dl-plot-gallery-card details summary {padding:8px 15px;color:var(--dl-subtle);cursor:pointer;}
+.dl-plot-gallery-card details button {border:0;border-radius:0;display:block;width:100%;text-align:left;padding:8px 16px;}
+.dl-plot-saved {margin-top:30px;border-top:1px solid var(--dl-line);padding-top:22px;}
+.dl-plot-saved h2 small {color:var(--dl-subtle);font-weight:400;}
+.dl-plot-saved > div {display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
+.dl-plot-saved article {border:1px solid var(--dl-line);border-radius:7px;padding:9px;}
+.dl-plot-saved-open {display:flex;flex-direction:column;align-items:flex-start;width:100%;border:0!important;gap:6px;}
+.dl-plot-saved-open svg {width:100%;height:76px;color:var(--dl-accent);fill:currentColor;}
+.dl-plot-saved-open small {color:var(--dl-subtle);font-size:11px;}
+.dl-plot-saved article > label {display:block;margin:8px 0;}
+.dl-plot-saved article input {width:100%;font-size:12px;}
+.dl-plot-saved article > button:not(.dl-plot-saved-open) {font-size:11px;margin-right:5px;}
+.dl-plot-editor {display:grid;grid-template-columns:minmax(0,1fr) 265px;flex:1;min-height:0;}
+.dl-plot-editor-wide {grid-template-columns:minmax(0,1fr);}
+.dl-plot-canvas-region {overflow:auto;min-width:0;position:relative;padding:20px 18px 30px;background:var(--dl-surface);display:flex;flex-direction:column;}
+.dl-plot-renderer {min-width:300px;border-radius:3px;max-width:none;}
+.dl-plot-vega {width:100%;min-width:300px;line-height:0;}
+.dl-plot-vega canvas {max-width:none;}
+.dl-plot-chart-heading {padding:8px 16px 14px;}
+.dl-plot-chart-heading h2 {font-size:20px;letter-spacing:-.3px;margin:0 0 6px;font-weight:600;}
+.dl-plot-chart-heading p {font-size:13px;margin:0 0 8px;opacity:.75;}
+.dl-plot-chart-heading small {font-size:12px;opacity:.75;}
+.dl-plot-facets {display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;}
+.dl-plot-facets h3 {font-size:12px;margin:10px 16px;font-weight:600;}
+.dl-plot-renderer footer {font-size:11px;opacity:.8;padding:14px 16px;display:flex;gap:10px;align-items:center;}
+.dl-plot-result-info {display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:11px;color:var(--dl-subtle);padding:12px 4px 4px;}
+.dl-plot-warning {font-size:11px;line-height:1.6;color:var(--dl-subtle);border-left:2px solid var(--dl-accent);padding:6px 10px;margin:10px 4px;}
+.dl-plot-hint {color:var(--dl-subtle);font-size:11px;margin:12px 4px;}
+.dl-plot-settings {min-width:0;border-left:1px solid var(--dl-line);display:flex;flex-direction:column;min-height:0;background:var(--dl-muted);}
+.dl-plot-settings > header {padding:13px 14px 10px;font-size:12px;}
+.dl-plot-settings-tabs {display:flex;padding:0 10px 12px;gap:2px;}
+.dl-plot-settings-tabs button {flex:1;font-size:11px;padding:4px 5px;border-color:transparent;background:transparent;}
+.dl-plot-settings-tabs button[aria-selected=true] {background:var(--dl-surface);border-color:var(--dl-line);box-shadow:0 1px 2px #00000007;}
+.dl-plot-settings-scroll {overflow:auto;flex:1;min-height:0;padding:0 14px 20px;}
+.dl-plot-settings-scroll section {border-top:1px solid var(--dl-line);padding:14px 0 16px;}
+.dl-plot-settings-scroll h4 {margin:0 0 12px;text-transform:uppercase;color:var(--dl-subtle);font-size:10px;letter-spacing:.5px;font-weight:600;}
+.dl-plot-settings-scroll p,.dl-plot-settings-scroll small {font-size:11px;line-height:1.5;color:var(--dl-subtle);}
+.dl-plot-settings-scroll small {display:block;margin-top:7px;}
+.dl-plot-control-group + .dl-plot-control-group {margin-top:17px;}
+.dl-plot-field {display:flex;flex-direction:column;align-items:stretch;gap:6px;margin-bottom:12px;font-size:11px;min-width:0;}
+.dl-plot-field > span {overflow:hidden;text-overflow:ellipsis;}
+.dl-plot-field input,.dl-plot-field select {width:100%;height:29px;font-size:12px;}
+.dl-plot-field input[type=color] {width:100%;padding:3px;}
+.dl-plot-toggle {display:flex;gap:7px;align-items:center;font-size:11px;line-height:1.5;margin:9px 0;}
+.dl-plot-toggle input {accent-color:var(--dl-accent);margin:0;}
+.dl-plot-pair {display:flex;gap:8px;margin:10px 0;}
+.dl-plot-pair label {display:flex;flex-direction:column;gap:6px;min-width:0;flex:1;font-size:11px;}
+.dl-plot-pair input {width:100%;height:29px;}
+.dl-plot-multi {margin:0 0 13px;padding:0;border:0;min-width:0;}
+.dl-plot-multi legend {font-size:11px;margin-bottom:6px;}
+.dl-plot-multi > div {max-height:160px;overflow:auto;background:var(--dl-surface);border:1px solid var(--dl-line);border-radius:5px;padding:5px;}
+.dl-plot-multi label {font-size:11px;display:flex;align-items:center;gap:6px;padding:4px;overflow:hidden;word-break:break-word;}
+.dl-plot-multi input {accent-color:var(--dl-accent);margin:0;}
+.dl-plot-multi small {margin:0 0 0 auto;}
+.dl-plot-annotation-actions {display:flex;gap:4px;}
+.dl-plot-annotation-actions button {font-size:11px;padding:4px 6px;}
+.dl-plot-annotation header {display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:11px;}
+.dl-plot-empty {min-height:360px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:var(--dl-subtle);padding:30px;}
+.dl-plot-empty h2,.dl-plot-empty strong {font-size:15px;color:var(--dl-text);font-weight:600;margin:10px 0;}
+.dl-plot-empty p {font-size:12px;line-height:1.6;max-width:400px;margin:7px 0;}
+.dl-plot-empty svg {width:160px;color:var(--dl-accent);fill:currentColor;margin-bottom:15px;}
+.dl-plot-spinner {height:20px;width:20px;border-radius:50%;border:2px solid var(--dl-line);border-top-color:var(--dl-accent);animation:dl-plot-spin .8s linear infinite;}
+@keyframes dl-plot-spin {to{transform:rotate(360deg);}}
+.dl-plot-message {display:flex;gap:12px;align-items:center;justify-content:space-between;padding:9px 16px;border-bottom:1px solid var(--dl-line);font-size:12px;background:var(--dl-muted);}
+.dl-plot-error {color:var(--dl-danger,#bd343b);}
+.dl-plot-message button {font-size:11px;flex-shrink:0;}
+.dl-plot-save-form {padding:12px 16px;border-bottom:1px solid var(--dl-line);display:flex;gap:8px;align-items:flex-end;background:var(--dl-muted);}
+.dl-plot-save-form label {display:flex;flex-direction:column;gap:5px;flex:1;max-width:440px;font-size:11px;}
+.dl-plot-tooltip {position:fixed;z-index:80;pointer-events:none;background:var(--dl-surface);border:1px solid var(--dl-line);border-radius:6px;padding:10px 12px;box-shadow:0 4px 16px #0002;min-width:150px;max-width:300px;color:var(--dl-text);font-size:11px;}
+.dl-plot-tooltip > div {display:flex;justify-content:space-between;gap:14px;padding:3px 0;overflow-wrap:anywhere;}
+.dl-plot-tooltip span {color:var(--dl-subtle);}
+.dl-plot-tooltip strong {font-weight:500;user-select:text;}
+.dl-pivot-scroll {overflow:auto;max-height:65vh;border:1px solid var(--dl-line);border-radius:5px;}
+.dl-pivot table {border-collapse:separate;border-spacing:0;min-width:100%;font-size:11px;font-variant-numeric:tabular-nums;}
+.dl-pivot th,.dl-pivot td {border-bottom:1px solid var(--dl-line);border-right:1px solid var(--dl-line);white-space:nowrap;text-align:right;min-width:80px;padding:0;}
+.dl-pivot th {text-align:left;font-weight:500;padding:8px;}
+.dl-pivot th button {border:0;background:transparent;min-height:20px;padding:0;font-size:11px;text-align:left;}
+.dl-pivot td button {display:block;width:100%;min-height:30px;text-align:right;font-size:11px;border:0;background:transparent;border-radius:0;position:relative;padding:6px 9px;}
+.dl-pivot td button:disabled {opacity:1;}
+.dl-pivot td button > span:last-child {position:relative;z-index:1;}
+.dl-pivot .dl-pivot-index {color:var(--dl-subtle);min-width:30px;padding:6px 8px;}
+.dl-pivot thead th {background:var(--dl-muted);position:sticky;top:0;z-index:2;}
+.dl-pivot tfoot {font-weight:600;background:var(--dl-muted);}
+.dl-pivot footer {display:flex;justify-content:space-between;gap:14px;align-items:center;font-size:11px;color:var(--dl-subtle);padding:12px 0;flex-wrap:wrap;}
+.dl-pivot footer div {display:flex;align-items:center;gap:8px;}
+.dl-pivot footer button {font-size:11px;}
+.dl-pivot > small {font-size:11px;color:var(--dl-subtle);}
+.dl-pivot-bar {position:absolute;left:0;top:5px;bottom:5px;background:var(--dl-selected);border-radius:2px;}
+.dl-visually-hidden {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+@media(max-width:1100px){.dl-plot-editor{grid-template-columns:minmax(0,1fr) 230px;}.dl-plot-editor-wide{grid-template-columns:minmax(0,1fr);}.dl-plots-toolbar{flex-wrap:wrap;padding:8px 12px;}.dl-plot-gallery{padding:20px 16px;}.dl-plot-gallery-grid{grid-template-columns:repeat(auto-fit,minmax(185px,1fr));}}
+@media(max-width:680px){.dl-plot-axis-bar{flex-direction:column;align-items:stretch;padding:8px 12px;}.dl-plot-axis-pill{width:100%;box-sizing:border-box;}.dl-plot-axis-actions{align-self:center;}}
+@media(prefers-reduced-motion:reduce){.dl-plot-spinner{animation:none;}}
+
+.dl-plot-resizable {position:relative;min-width:300px;padding-bottom:28px;margin:auto;flex:none;}
+.dl-plot-resize-handle {position:absolute;right:0;bottom:0;border:0!important;padding:1px 5px!important;cursor:nwse-resize!important;color:var(--dl-subtle)!important;background:transparent!important;}
+.dl-plot-zoom {position:absolute;right:30px;bottom:0;display:flex;gap:4px;}
+.dl-plot-zoom button {min-width:24px;padding:1px 5px!important;font-size:14px;line-height:20px;}
+.dl-plot-resizing::after {content:'';position:absolute;pointer-events:none;inset:0 0 auto;height:var(--plot-resize-height,430px);border:1px dashed var(--dl-accent);background:color-mix(in srgb,var(--dl-accent) 3%,transparent);}
+
+.dl-plot-saved-open img {width:100%;height:110px;object-fit:contain;background:var(--dl-surface);border:1px solid var(--dl-line);border-radius:4px;}
+
+/* Keep a retained plot in its layout while a crossfilter query runs. */
+.dl-plot-canvas-region{position:relative}
+.dl-plot-update-status{position:absolute;right:14px;top:12px;z-index:3;pointer-events:none;padding:4px 8px;border-radius:5px;background:var(--dl-surface);color:var(--dl-subtle);font-size:11px}

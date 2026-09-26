@@ -1,6 +1,6 @@
 {
   "name": "datolens", "version": "0.1.0", "private": true, "type": "module",
-  "scripts": {"dev":"vite --host 127.0.0.1", "build":"tsc --noEmit && vite build", "preview":"vite preview", "tauri":"tauri", "app:dev":"tauri dev", "app:build":"tauri build --bundles app", "check":"tsc --noEmit"},
+  "scripts": {"dev":"vite --host 127.0.0.1", "build":"tsc --noEmit && vite build", "preview":"vite preview", "tauri":"tauri", "app:dev":"tauri dev", "app:build":"./scripts/build-macos.sh", "check":"tsc --noEmit"},
   "dependencies": {"@tauri-apps/api":"^2.8.0", "@tauri-apps/plugin-dialog":"^2.4.0", "react":"^19.1.0", "react-dom":"^19.1.0", "vega":"^6.2.0"},
   "devDependencies": {"@tauri-apps/cli":"^2.8.0", "@types/react":"^19.1.0", "@types/react-dom":"^19.1.0", "@vitejs/plugin-react":"^5.0.0", "typescript":"^5.9.0", "vite":"^7.1.0"}
 }

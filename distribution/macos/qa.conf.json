@@ -1,0 +1,9 @@
+{
+  "identifier": "com.victoriano.datolens.marketingqa",
+  "build": {
+    "beforeBuildCommand": "python3 scripts/build-cli.py && python3 scripts/build-credential-helper.py && bunx vite build --outDir artifacts/distribution/frontend",
+    "frontendDist": "../artifacts/distribution/frontend"
+  },
+  "app": {"windows": [{"title":"Datolens","width":1440,"height":900,"minWidth":1000,"minHeight":640}]},
+  "bundle": {"macOS": {"signingIdentity":"Datolens Local Development Signing","hardenedRuntime":false}}
+}

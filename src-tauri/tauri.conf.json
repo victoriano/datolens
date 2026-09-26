@@ -6,13 +6,20 @@
   "build": {
     "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "bun run build",
+    "beforeBuildCommand": "python3 scripts/build-cli.py && python3 scripts/build-credential-helper.py && bun run build",
+    "beforeBundleCommand": "python3 scripts/macos-bundle.py guard",
     "frontendDist": "../dist"
   },
   "app": {
     "windows": [
       {
         "title": "Datolens",
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "trafficLightPosition": {
+          "x": 16,
+          "y": 26
+        },
         "width": 1440,
         "height": 900,
         "minWidth": 1000,
@@ -25,6 +32,48 @@
   },
   "bundle": {
     "active": true,
+    "externalBin": [
+      "../native/credential-helper/bin/datolens-credentials",
+      "../native/cli/bin/datolens-cli"
+    ],
+    "fileAssociations": [
+      {
+        "ext": ["csv"],
+        "contentTypes": ["public.comma-separated-values-text"],
+        "name": "CSV data",
+        "role": "Viewer",
+        "rank": "Alternate"
+      },
+      {
+        "ext": ["xlsx"],
+        "contentTypes": ["org.openxmlformats.spreadsheetml.sheet"],
+        "name": "Excel workbook",
+        "role": "Viewer",
+        "rank": "Alternate"
+      },
+      {
+        "ext": ["parquet"],
+        "name": "Apache Parquet data",
+        "mimeType": "application/vnd.apache.parquet",
+        "role": "Viewer",
+        "rank": "Alternate",
+        "exportedType": {
+          "identifier": "com.victoriano.datolens.parquet",
+          "conformsTo": ["public.data"]
+        }
+      },
+      {
+        "ext": ["sav"],
+        "name": "SPSS data",
+        "mimeType": "application/x-spss-sav",
+        "role": "Viewer",
+        "rank": "Alternate",
+        "exportedType": {
+          "identifier": "com.victoriano.datolens.spss-sav",
+          "conformsTo": ["public.data"]
+        }
+      }
+    ],
     "targets": [
       "app"
     ],
@@ -32,6 +81,9 @@
     "shortDescription": "Exploraci\u00f3n y enriquecimiento local de datos",
     "macOS": {
       "minimumSystemVersion": "12.0",
+      "signingIdentity": "Datolens Local Development Signing",
+      "hardenedRuntime": true,
+      "entitlements": "../native/credential-helper/Datolens.entitlements",
       "frameworks": [
         "../vendor/duckdb/libduckdb.dylib"
       ]
@@ -41,6 +93,9 @@
       "icons/128x128.png",
       "icons/128x128@2x.png",
       "icons/icon.icns"
-    ]
+    ],
+    "resources": {
+      "../vendor/httpfs/osx_arm64/httpfs.duckdb_extension": "httpfs/osx_arm64/httpfs.duckdb_extension"
+    }
   }
 }

@@ -1,0 +1,10 @@
+bun test v1.2.8 (adab0f64)
+
+src/features/workspace/model.test.ts:
+(pass) each worksheet has a distinct stable tab; reopening does not duplicate tabs [7.84ms]
+(pass) join example quotes real column IDs including punctuation [0.95ms]
+
+ 2 pass
+ 0 fail
+ 7 expect() calls
+Ran 2 tests across 1 files. [206.00ms]

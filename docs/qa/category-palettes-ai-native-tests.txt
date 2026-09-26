@@ -1,0 +1,20 @@
+   Compiling datolens v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri)
+warning: linker stderr: ld: duplicate -rpath '@executable_path/../Frameworks' ignored
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `datolens` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 7.08s
+     Running unittests src/lib.rs (/tmp/datolens-chart-qa-target/debug/deps/datolens_lib-62a8ce05d8a25b1a)
+
+running 7 tests
+test category_colors::tests::stale_revision_rejected ... ok
+test category_colors::tests::response_shape_diagnostics_never_echo_values ... ok
+test category_colors::tests::context_limits_spss_label_text ... ok
+test category_colors::tests::context_contains_only_selected_values_and_matching_labels ... ok
+test category_colors::tests::response_accepts_partial_and_unknown_with_normalized_hex ... ok
+test category_colors::tests::response_rejects_unknown_duplicates_invalid_hex_and_extra_fields ... ok
+test category_colors::tests::request_bounds_reject_duplicate_oversized_values_context_and_model ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 25 filtered out; finished in 0.00s
+

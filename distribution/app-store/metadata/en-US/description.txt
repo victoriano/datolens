@@ -1,0 +1,23 @@
+Big files. Clear thinking.
+
+Datolens helps you explore data files on your Mac. Open that fresh export, understand its variables and find an angle you can turn into a chart.
+
+YOUR FILES, IN ONE WORKSPACE
+Open CSV, Excel (.xlsx), Parquet and SPSS (.sav). Work with multiple tables and sheets. Inspect distributions, missing values and statistics to get your bearings before an analysis.
+
+FOLLOW A CLUE
+Combine filters, select ranges and compare groups. Explore a sample of a large dataset or work with every row when you need to dig deeper. Opening time depends on the format, size and your Mac; CSV and Excel require an initial import.
+
+MAKE IT VISIBLE
+Build bar charts, scatter plots, time series and pivot tables. Choose your axis variables and export charts as PNG or SVG and results as CSV.
+
+MADE FOR CURIOUS PEOPLE
+Data analysts, journalists, researchers and product and operations teams: start with the files you already have. You do not need to code to explore and create charts. SQL queries and formulas are available when you want to go further.
+
+EXPLORE LOCALLY
+Local file exploration runs on your Mac without an account. Views and results are saved locally. When opening remote sources, Datolens connects to their origin server.
+
+OPTIONAL AI, WITH AN EXPLICIT SCOPE
+AI features require your own API key, may incur provider charges and send the selected context for the operation. Opening a file does not turn AI on. Keys are stored in macOS Keychain.
+
+For Apple Silicon Macs running macOS 12 or later.

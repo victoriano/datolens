@@ -1,0 +1,1 @@
+csv,excel,parquet,spss,datos,análisis,gráficos,encuestas,estadística,visualización

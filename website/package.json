@@ -1,0 +1,10 @@
+{
+  "name": "datolens-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun scripts/build.mjs",
+    "dev": "bun scripts/serve.mjs",
+    "check": "bun scripts/check.mjs"
+  }
+}

@@ -1,0 +1,10 @@
+   Compiling datolens-data v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-data)
+    Finished `dev` profile [unoptimized] target(s) in 2.90s
+     Running `src-tauri/target/debug/examples/progressive_crossfilters`
+{"columns":4911,"ms":4638,"rows":191254,"stage":"open"}
+{"analyzed":1000,"bins":[2,256],"columns":["COUNTRY","SCHOOLID"],"deferred":null,"ms":3932,"selected":1000,"stage":"first_2"}
+{"analyzed":1000,"bins":[256,36],"columns":["STIDSTD","SUBNATIO"],"deferred":null,"ms":3161,"selected":1000,"stage":"next_2"}
+{"analyzed":1000,"bins":[9,2],"columns":["ST01Q02","ST01Q03"],"deferred":null,"ms":3909,"selected":1000,"stage":"next_2"}
+{"analyzed":1000,"bins":[33,33],"columns":["PV9CPRO","PV10CPRO"],"deferred":null,"ms":2596,"selected":1000,"stage":"far_columns"}
+{"analyzed":1000,"bins":[2,256],"columns":["COUNTRY","SCHOOLID"],"deferred":null,"ms":194,"selected":1000,"stage":"cached_first_2"}
+{"analyzed":1000,"bins":[2,256],"columns":["COUNTRY","SCHOOLID"],"deferred":null,"ms":297,"selected":80,"stage":"filtered_first_2"}

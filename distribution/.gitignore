@@ -1,0 +1,10 @@
+*.mobileprovision
+*.provisionprofile
+*.p12
+*.p8
+*.key
+generated/
+.env*
+__pycache__/
+*.pyc
+*.datolens.json

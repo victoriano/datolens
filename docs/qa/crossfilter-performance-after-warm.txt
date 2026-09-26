@@ -1,0 +1,23 @@
+{"columns":59,"open_ms":176,"page_ms":47,"returned":100,"rows":1123454,"stage":"open"}
+{"analyzed":23000,"ms":4183,"sampled":true,"selected":23000,"stage":"initial"}
+{"ms":59,"selected":1123454,"stage":"initial_page"}
+{"analyzed":23000,"ms":270,"sampled":true,"selected":6539,"stage":"filtered"}
+{"ms":267,"selected":317766,"stage":"filtered_page"}
+        5.64 real         2.41 user         0.32 sys
+           284672000  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               28994  page reclaims
+                1206  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 809  voluntary context switches
+               16086  involuntary context switches
+         12181811411  instructions retired
+          4926306378  cycles elapsed
+           341132032  peak memory footprint

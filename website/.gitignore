@@ -1,0 +1,7 @@
+dist/
+.vercel/
+public/downloads/*.dmg
+public/downloads/*.zip
+public/downloads/*.pkg
+.env*
+.vercel

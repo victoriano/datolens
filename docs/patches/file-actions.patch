@@ -1,0 +1,127 @@
+--- a/src/contracts/desktop-api.ts
++++ b/src/contracts/desktop-api.ts
+@@ -48,7 +48,8 @@
+   listRuns(datasetId: string): Promise<RunStatus[]>;
+   getCells(datasetId: string, cells: CellKey[]): Promise<EnrichmentCell[]>;
+   getCellHistory(datasetId: string, cell: CellKey): Promise<EnrichmentCell[]>;
+-  selectDatasetPath?(): Promise<string | null>;
++  selectDatasetPath?(defaultPath?: string): Promise<string | null>;
++  revealDatasetSource?(datasetId: string): Promise<void>;
+   onFileDrop?(handler: (path: string) => void): Promise<() => void>;
+   openDataset(request?: { path?: string; sheet?: string }): Promise<Dataset | null>;
+   listSheets(path: string): Promise<string[]>;
+--- a/src/platform/desktop.ts
++++ b/src/platform/desktop.ts
+@@ -6,12 +6,13 @@
+   if (!isTauri()) return Promise.reject(new Error('Abre Datolens.app para trabajar con archivos locales.'));
+   return invoke<T>(command, args);
+ };
+-const selectDatasetPath = async () => {
+-  const result = await open({multiple:false, directory:false, filters:[{name:'Tablas de datos',extensions:['csv','xlsx','parquet']}]});
++const selectDatasetPath = async (defaultPath?: string) => {
++  const result = await open({defaultPath, multiple:false, directory:false, filters:[{name:'Tablas de datos',extensions:['csv','xlsx','parquet']}]});
+   return typeof result === 'string' ? result : null;
+ };
+ export const desktopApi: DesktopApi = {
+   selectDatasetPath,
++  revealDatasetSource: datasetId => call('reveal_dataset_source',{datasetId}),
+   getLastSource: () => call('get_last_source'),
+   getDataset: datasetId => call('get_dataset',{datasetId}),
+   listRuns: datasetId => call('list_runs',{datasetId}),
+--- a/src-tauri/src/lib.rs
++++ b/src-tauri/src/lib.rs
+@@ -1,5 +1,6 @@
+ mod service;
+ mod commands;
++mod source_file;
+ use tauri::Manager;
+ use std::sync::Arc;
+ #[cfg_attr(mobile, tauri::mobile_entry_point)]
+@@ -13,6 +14,7 @@
+             Ok(())
+         })
+         .invoke_handler(tauri::generate_handler![
++            source_file::reveal_dataset_source,
+             commands::open_dataset,commands::list_sheets,commands::get_dataset,commands::get_last_source,
+             commands::query_page,commands::get_distributions,commands::load_view,commands::save_view,commands::export_dataset,
+             commands::list_enrichments,commands::save_enrichment,commands::delete_enrichment,
+--- a/src/features/explorer/ExplorerApp.tsx
++++ b/src/features/explorer/ExplorerApp.tsx
+@@ -18,6 +18,7 @@
+ 
+   const [selection, setSelection] = useState<ExplorerSelection>(EMPTY_SELECTION);
+   const [opening, setOpening] = useState(false);
++  const [revealing, setRevealing] = useState(false);
+   const [busy, setBusy] = useState(false);
+   const [chartsBusy, setChartsBusy] = useState(false);
+   const [error, setError] = useState<ExplorerError | null>(null);
+@@ -36,12 +37,12 @@
+   const savedView = useRef('');
+   const pendingViews = useRef(new Map<string, string>());
+   const activeDatasetId = useRef<string | null>(null); activeDatasetId.current = dataset?.id ?? null;
+-  const open = useCallback(async function openSource(path?: string, sheet?: string): Promise<void> {
++  const open = useCallback(async function openSource(path?: string, sheet?: string, defaultPath?: string): Promise<void> {
+     const sequence = ++openSequence.current;
+     setOpening(true); setError(null); setNotice('');
+     let retryPath = path;
+     try {
+-      const chosen = path ?? (api.selectDatasetPath ? await api.selectDatasetPath() : undefined);
++      const chosen = path ?? (api.selectDatasetPath ? await api.selectDatasetPath(defaultPath) : undefined);
+       if (chosen === null || sequence !== openSequence.current) return;
+       retryPath = chosen;
+       if (chosen && /\.xlsx$/i.test(chosen) && !sheet) {
+@@ -61,7 +62,7 @@
+       // Save even the first/default view, migrating old internal projects beside the source.
+       savedView.current = '';
+       setDataset(next); setView(nextView); setPage(null); setDistributions(null); setSelection(EMPTY_SELECTION); setSheets(null); setSaveState('Vista guardada'); setSaveLocation(''); setSaveWarning(''); setRevision(r => r + 1);
+-    } catch (e) { if (sequence === openSequence.current) setError({ message: message(e), retry: () => { void openSource(retryPath, sheet); } }); }
++    } catch (e) { if (sequence === openSequence.current) setError({ message: message(e), retry: () => { void openSource(retryPath, sheet, defaultPath); } }); }
+     finally { if (sequence === openSequence.current) setOpening(false); }
+   }, [api]);
+   useEffect(() => {
+@@ -148,8 +149,19 @@
+     if (!dataset || !view) return;
+     try { setNotice('Exportando…'); const path = await api.exportDataset({ datasetId: dataset.id, format, filters: view.filters, sorting: view.sorting, columns: visibleColumns.map(c => c.id) }); setNotice(path ? `Exportado: ${path}` : 'Exportación cancelada.'); } catch (e) { setError({ message: message(e), retry: () => { void exportFile(format); } }); setNotice(''); }
+   };
++  const revealSource = async (): Promise<void> => {
++    if (!dataset || !api.revealDatasetSource || revealing) return;
++    const id = dataset.id;
++    setRevealing(true);
++    try { await api.revealDatasetSource(id); }
++    catch (e) { if (activeDatasetId.current === id) setError({ message: message(e), retry: () => { void revealSource(); } }); }
++    finally { setRevealing(false); }
++  };
+   const count = page?.filteredCount;
+-  return <main className="dl-explorer" onDragOver={e => { e.preventDefault(); }}><header className="dl-app-header"><div className="dl-brand"><span className="dl-brand-mark">▥</span><strong>datolens</strong><span className="dl-local-badge">LOCAL</span></div>{dataset && <div className="dl-file-title" title={dataset.sourcePath}>{dataset.name}{dataset.sheet && <small> / {dataset.sheet}</small>}</div>}<div className="dl-header-actions">{dataset && <small className="dl-save-state" role="status" title={saveLocation || 'Los ajustes se guardan automáticamente en un .datolens.json junto al archivo original.'}>{saveState}</small>}<button disabled={opening} onClick={() => void open()}>{opening ? 'Abriendo…' : 'Abrir archivo'}</button></div></header>
++  return <main className="dl-explorer" onDragOver={e => { e.preventDefault(); }}><header className="dl-app-header"><div className="dl-brand"><span className="dl-brand-mark">▥</span><strong>datolens</strong><span className="dl-local-badge">LOCAL</span></div>{dataset && <div className="dl-file-title">
++      <button className="dl-file-reveal" type="button" aria-label="Mostrar archivo en Finder" title={`Mostrar en Finder: ${dataset.sourcePath}`} disabled={opening || revealing || !api.revealDatasetSource} onClick={() => void revealSource()}><span className="dl-document-icon" aria-hidden="true">▥</span></button>
++      <button className="dl-file-name" type="button" aria-label={`Abrir selector de archivos: ${dataset.name}`} title={`Seleccionar archivo: ${dataset.sourcePath}`} disabled={opening} onClick={() => void open(undefined, undefined, dataset.sourcePath)}>{dataset.name}{dataset.sheet && <small> / {dataset.sheet}</small>}</button>
++    </div>}<div className="dl-header-actions">{dataset && <small className="dl-save-state" role="status" title={saveLocation || 'Los ajustes se guardan automáticamente en un .datolens.json junto al archivo original.'}>{saveState}</small>}<button disabled={opening} onClick={() => void open()}>{opening ? 'Abriendo…' : 'Abrir archivo'}</button></div></header>
+     {error && <div className="dl-banner dl-error" role="alert"><span>{error.message}</span>{error.retry && <button disabled={opening} onClick={() => { setError(null); error.retry?.(); }}>Reintentar</button>}<button aria-label="Cerrar error" onClick={() => setError(null)}>×</button></div>}{notice && <div className="dl-banner" role="status"><span>{notice}</span><button aria-label="Cerrar aviso" onClick={() => setNotice('')}>×</button></div>}
+     {saveWarning && <div className="dl-banner" role="status"><span>{saveWarning}</span><button disabled={opening || saveState === 'Guardando vista…'} onClick={() => { savedView.current = ''; setView(v => v ? { ...v } : null); }}>Guardar junto al original</button></div>}
+     {sheets && <div className="dl-dialog-backdrop"><section className="dl-sheet-dialog" role="dialog" aria-modal="true" aria-labelledby="dl-sheet-title"><h2 id="dl-sheet-title">Selecciona una hoja</h2><p>Cada hoja se abre como una tabla independiente.</p>{sheets.names.map(name => <button key={name} disabled={opening} onClick={() => void open(sheets.path, name)}>{name}<span>→</span></button>)}<button onClick={() => setSheets(null)}>Cancelar</button></section></div>}
+--- a/src/styles/native.css
++++ b/src/styles/native.css
+@@ -32,14 +32,16 @@
+ .dl-native-shell .dl-app-header:not(:has(.dl-file-title)) .dl-brand { display: flex; }
+ .dl-native-shell .dl-brand strong { font-size: 14px; letter-spacing: -.2px; }
+ .dl-native-shell .dl-brand-mark, .dl-native-shell .dl-local-badge { display: none; }
+-.dl-native-shell .dl-file-title { font-size: 14px; font-weight: 600; letter-spacing: -.15px; }
+-.dl-native-shell .dl-file-title::before {
+-  content: '';
+-  display: inline-block;
++.dl-native-shell .dl-file-title { display: flex; align-items: center; gap: 2px; min-width: 0; font-size: 14px; font-weight: 600; letter-spacing: -.15px; }
++.dl-native-shell .dl-file-title button { font: inherit; padding: 4px; min-width: 0; }
++.dl-native-shell .dl-file-reveal { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 26px; height: 28px; }
++.dl-native-shell .dl-file-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
++.dl-native-shell .dl-file-title button:focus-visible { outline: 2px solid var(--dl-accent); outline-offset: -2px; }
++.dl-native-shell .dl-document-icon {
++  display: block;
++  font-size: 0;
+   width: 12px;
+   height: 15px;
+-  margin-right: 9px;
+-  vertical-align: -3px;
+   border: 1px solid #999895;
+   border-radius: 2px;
+   background: linear-gradient(#d0cecb, #d0cecb) 3px 5px / 6px 1px no-repeat,

@@ -1,0 +1,101 @@
+bun test v1.2.8 (adab0f64)
+
+src/ui/preferences.test.js:
+(pass) appearance preferences > first launch follows a supported system language; corrupt storage recovers [2.60ms]
+(pass) appearance preferences > explicit choices survive a conflicting OS language and appearance [1.54ms]
+(pass) appearance preferences > stores only language/appearance, updates without storage, and does not require a dataset [2.25ms]
+(pass) localization boundaries > translates controls while preserving filenames, precise identifiers and braces in values [6.45ms]
+(pass) localization boundaries > every English translation preserves all interpolation fields [6.94ms]
+
+src/features/workspace/model.test.ts:
+(pass) each worksheet has a distinct stable tab; reopening does not duplicate tabs [1.07ms]
+(pass) join example quotes real column IDs including punctuation [0.28ms]
+
+src/features/explorer/sampling.test.ts:
+(pass) sampling preferences survive view reconciliation; malformed values fall back to auto [0.88ms]
+(pass) queued obsolete calls are skipped and a failure does not poison the next query [0.30ms]
+(pass) wide panel publishes batches promptly, requests only visible statistics and keeps one sample [0.94ms]
+
+src/features/explorer/distributions.test.ts:
+(pass) remote auto deferral stops after one batch for 4911 columns [1.69ms]
+(pass) ordinary distributions still process all batches [0.23ms]
+(pass) viewport revisits hit cache; filters, statistics and revision invalidate independently [0.31ms]
+(pass) a superseded batch does not publish but its revision-scoped cache remains reusable [0.23ms]
+(pass) client cache stays bounded after visiting hundreds of variables [3.43ms]
+(pass) scrolling during a slow batch reuses its result before issuing overlapping IPC [10.35ms]
+(pass) a fully cached viewport publishes synchronously without Updating or native work [0.36ms]
+(pass) partial viewport results preserve loaded charts and object identities without growing unbounded [13.47ms]
+
+src/features/explorer/variable-window.test.ts:
+(pass) 4911 variables only mount and request the viewport with bounded neighbours [1.59ms]
+(pass) pixel scrolling within the same card window needs no React update [0.80ms]
+(pass) loading an overscan chart above the viewport preserves the visible row and pixel offset [0.13ms]
+(pass) grid, measured heights, collapsed groups and searched results retain the right variables [0.09ms]
+
+src/features/explorer/statistic-format.test.ts:
+(pass) DuckDB date statistics keep their UTC day in Madrid winter and summer [20.27ms]
+(pass) explicit timestamp offsets are preserved when displaying statistics in UTC [0.95ms]
+(pass) missing and invalid date statistics retain their fallback display [0.09ms]
+(pass) DuckDB mean timestamps with hour-only offsets use localized UTC dates [2.68ms]
+
+src/features/explorer/table-window.test.ts:
+(pass) wide table projection > 4911 columns open with a bounded projection and retain full scroll extent [0.96ms]
+(pass) wide table projection > middle and last columns remain reachable [2.06ms]
+(pass) wide table projection > resizing, hiding and reordering preserve viewport coverage [0.30ms]
+
+src/features/explorer/model.test.js:
+(pass) stable selection and exact clipboard data > reverse rectangular drag snapshots row and column IDs [0.27ms]
+(pass) stable selection and exact clipboard data > anchor on an unloaded page cannot accidentally span a new page [0.01ms]
+(pass) stable selection and exact clipboard data > copy preserves 64-bit identifiers and quotes tabs/newlines/nulls
+(pass) stable selection and exact clipboard data > composite IDs do not collide when IDs contain delimiters
+(pass) persisted views > reconciles schema changes, order, hidden IDs and invalid widths [0.23ms]
+(pass) persisted views > unknown view version restores defaults [0.01ms]
+(pass) persisted views > variable display name and description survive a saved view without changing column IDs [0.35ms]
+(pass) persisted views > editing variable text leaves an unclassified analytical role untouched [0.22ms]
+(pass) persisted views > priority drag reorders without mutating saved view
+(pass) full workspace and variable reordering > old views receive presentation defaults; saved presentation survives schema reconciliation [0.04ms]
+(pass) full workspace and variable reordering > drops across pinned boundary move visibly and preserve hidden variables [0.21ms]
+(pass) full workspace and variable reordering > wide files request every distribution without exceeding native limits, and abandon superseded work [1.59ms]
+(pass) full workspace and variable reordering > dropping a formerly last pinned card lands in the visible preview position [0.07ms]
+(pass) category sorting preserves null bucket and supports uplift
+
+src/features/explorer/SampleControl.test.tsx:
+(pass) loading more cards does not remove sample text or change the sampling controls layout [9.94ms]
+
+src/features/explorer/significant-variables.test.ts:
+(pass) significant variables > ranks the largest selection versus whole-dataset difference first [0.42ms]
+(pass) significant variables > includes omitted categorical values as one residual bucket [0.07ms]
+(pass) significant variables > normalizes multi-valued incidences and avoids incomplete rankings [0.02ms]
+
+src/features/explorer/analysis-model.test.ts:
+(pass) classification only changes the selected variables and preserves panel preferences [0.35ms]
+(pass) classification and regrouping retain manual variable text [0.07ms]
+(pass) pinned variables stay first and hidden/search preferences compose with groups [0.07ms]
+(pass) AI filters replace only affected columns and preserve unrelated filters [0.01ms]
+(pass) dropping across thematic groups adopts the target group without changing analytical role [0.14ms]
+
+src/features/explorer/statistic-filters.test.ts:
+(pass) quantile controls use fixed unfiltered quarters and replace the range for this column
+(pass) date statistics from DuckDB become UTC inclusive filter endpoints [0.49ms]
+(pass) missing or unsafe statistics cannot create a rounded filter
+
+src/features/plots/model.test.js:
+(pass) row count offers only count, relative count and cumulative sum and computes both views [3.71ms]
+(pass) quick axis changes keep query settings valid and swaps preserve dimension options [0.52ms]
+(pass) all twenty chart definitions compile and run with native-shaped data [112.17ms]
+(pass) date formats render in band and continuous axes without numeric-format errors [14.48ms]
+(pass) numeric bin axes abbreviate by default and honor a manual format without changing filter bounds [20.08ms]
+(pass) numeric bin axis can label the start or end at the corresponding bar edge [8.60ms]
+(pass) dense exact numeric bars stay legible without thousands of grid lines [8.74ms]
+(pass) bin clicks include the last boundary and handle quantile ties [0.38ms]
+(pass) date bucket clicks keep UTC boundaries in Europe/Madrid
+(pass) query sends structured aggregates only and keeps filters [0.24ms]
+(pass) calendar gaps are explicit and decomposition preserves additive identity [1.00ms]
+(pass) seasonal gaps have no point marks and tooltips use the component value [8.66ms]
+(pass) CSV retains exact integer strings, quotes and multiline values [0.17ms]
+(pass) image composition keeps the complete axis viewport and escapes titles [4.48ms]
+
+ 69 pass
+ 0 fail
+ 1978 expect() calls
+Ran 69 tests across 13 files. [1207.00ms]

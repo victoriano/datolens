@@ -1,35 +1,84 @@
 use crate::service::*;
-use datolens_data::{DataStore,Dataset,Distributions,Filter,Page,PageRequest,ExportRequest};
+use datolens_data::{DataStore,Dataset,Distributions,Filter,Page,PageRequest,ExportRequest,ViewSaveResult};
 use datolens_enrichment::{Cell,CellKey,Definition,RunMode,RunPlan,RunStatus};
-use serde::Deserialize;
+use serde::{Deserialize,Serialize};
 use serde_json::Value;
 use std::{path::Path,sync::Arc};
-use tauri::State;
+use tauri::{Emitter,State};
 type S<'a> = State<'a,Arc<AppService>>;
 async fn blocking<T:Send+'static>(f:impl FnOnce()->Result<T>+Send+'static)->Result<T> {tauri::async_runtime::spawn_blocking(f).await.map_err(error)?}
 
 #[tauri::command]
-pub async fn open_dataset(service:S<'_>,path:String,sheet:Option<String>)->Result<Dataset> {let s=service.inner().clone();blocking(move||s.open(Path::new(&path),sheet.as_deref())).await}
+pub async fn open_dataset(service:S<'_>,app:tauri::AppHandle,path:String,sheet:Option<String>,request_id:Option<String>)->Result<Dataset> {
+ let s=service.inner().clone();
+ if crate::remote_sources::is_remote_source(&path) {
+  return blocking(move||crate::remote_sources::import_source(&s,&path,&|progress| {
+   if let Some(id)=&request_id {
+    let mut payload=serde_json::to_value(progress).unwrap_or_default();
+    payload["requestId"]=serde_json::json!(id);
+    let _=app.emit("dataset-open-progress",payload);
+   }
+  })).await;
+ }
+ blocking(move||{
+  let access=s.file_access.acquire(Path::new(&path))?;
+  if let Some(id)=&request_id {let _=app.emit("dataset-open-progress",serde_json::json!({"requestId":id,"phase":"selected","sourceBytes":std::fs::metadata(&access.path).ok().map(|m|m.len())}));}
+  s.open_with_progress(&access.path,sheet.as_deref(),&|phase| {
+   if let Some(id)=&request_id {let _=app.emit("dataset-open-progress",serde_json::json!({"requestId":id,"phase":phase}));}
+  })
+ }).await
+}
+#[derive(Serialize)]
+#[serde(rename_all="camelCase")]
+pub struct DatasetStorage {source_bytes:u64,cache_bytes:u64}
 #[tauri::command]
-pub async fn list_sheets(path:String)->Result<Vec<String>> {blocking(move||DataStore::list_sheets(Path::new(&path)).map_err(error)).await}
+pub async fn dataset_storage(service:S<'_>,dataset_id:String)->Result<DatasetStorage> {
+ let s=service.session(&dataset_id)?;
+ blocking(move||{
+  let data=lock(&s.data)?;
+  let source_bytes=data.source_bytes();
+  let db=data.database_path();
+  let cache_bytes=std::fs::metadata(db).map(|m|m.len()).unwrap_or(0)
+   +std::fs::metadata(format!("{}.wal",db.display())).map(|m|m.len()).unwrap_or(0);
+  Ok(DatasetStorage{source_bytes,cache_bytes})
+ }).await
+}
+#[tauri::command]
+pub async fn list_sheets(service:S<'_>,path:String)->Result<Vec<String>> {
+ let service=service.inner().clone();
+ blocking(move||{let access=service.file_access.acquire(Path::new(&path))?; DataStore::list_sheets(&access.path).map_err(error)}).await
+}
+#[tauri::command]
+pub async fn remember_source_access(service:S<'_>,path:String)->Result<()> {
+ let service=service.inner().clone();
+ blocking(move||service.file_access.remember_selection(Path::new(&path))).await
+}
 #[tauri::command]
 pub async fn get_dataset(service:S<'_>,dataset_id:String)->Result<Dataset> {let s=service.session(&dataset_id)?;blocking(move||Ok(lock(&s.data)?.dataset())).await}
 #[tauri::command]
 pub async fn query_page(service:S<'_>,request:PageRequest)->Result<Page> {let s=service.session(&request.dataset_id)?;blocking(move||lock(&s.data)?.query_page(request).map_err(error)).await}
 #[derive(Deserialize)]
 #[serde(rename_all="camelCase")]
-pub struct DistributionRequest {dataset_id:String,columns:Vec<String>,filters:Vec<Filter>}
+pub struct DistributionRequest {dataset_id:String,columns:Vec<String>,filters:Vec<Filter>,#[serde(default)] sampling:datolens_data::AnalysisSampling,#[serde(default)] statistics:Option<Vec<String>>}
 #[tauri::command]
-pub async fn get_distributions(service:S<'_>,request:DistributionRequest)->Result<Distributions> {let s=service.session(&request.dataset_id)?;blocking(move||lock(&s.data)?.distributions(&request.columns,&request.filters).map_err(error)).await}
+pub async fn get_distributions(service:S<'_>,request:DistributionRequest)->Result<Distributions> {let s=service.session(&request.dataset_id)?;blocking(move||lock(&s.data)?.distributions_with_options(&request.columns,&request.filters,&datolens_data::DistributionOptions{sampling:request.sampling,statistics:request.statistics}).map_err(error)).await}
 #[tauri::command]
 pub async fn load_view(service:S<'_>,dataset_id:String)->Result<Option<Value>> {let s=service.session(&dataset_id)?;blocking(move||lock(&s.data)?.load_view().map_err(error)).await}
 #[tauri::command]
-pub async fn save_view(service:S<'_>,dataset_id:String,view:Value)->Result<()> {let s=service.session(&dataset_id)?;blocking(move||lock(&s.data)?.save_view(view).map_err(error)).await}
+pub async fn save_view(service:S<'_>,dataset_id:String,view:Value)->Result<ViewSaveResult> {let s=service.session(&dataset_id)?;blocking(move||lock(&s.data)?.save_view(view).map_err(error)).await}
+#[tauri::command]
+pub async fn list_shared_revisions(service:S<'_>,dataset_id:String)->Result<Vec<datolens_data::SharedRevision>> {let s=service.session(&dataset_id)?;blocking(move||lock(&s.data)?.shared_revisions().map_err(error)).await}
+#[tauri::command]
+pub async fn select_shared_revision(service:S<'_>,dataset_id:String,revision_id:String)->Result<Dataset> {let s=service.session(&dataset_id)?;blocking(move||crate::service::select_shared_revision(&s,&revision_id)).await}
 #[derive(Deserialize)]
 #[serde(rename_all="camelCase")]
 pub struct ExportEnvelope { dataset_id:String, #[serde(flatten)] request:ExportRequest }
 #[tauri::command]
-pub async fn export_dataset(service:S<'_>,request:ExportEnvelope)->Result<String> {let s=service.session(&request.dataset_id)?;blocking(move||lock(&s.data)?.export(request.request).map_err(error)).await}
+pub async fn export_dataset(service:S<'_>,request:ExportEnvelope)->Result<String> {
+ let s=service.session(&request.dataset_id)?;
+ let storage=service.storage.clone();
+ blocking(move||{let data=lock(&s.data)?; crate::file_export::dataset(&storage,&data,request.request)}).await
+}
 #[tauri::command]
 pub async fn list_enrichments(service:S<'_>,dataset_id:String)->Result<Vec<Definition>> {let s=service.session(&dataset_id)?;blocking(move||s.engine.list_definitions()).await}
 #[tauri::command]
@@ -42,8 +91,9 @@ pub async fn save_enrichment(service:S<'_>,dataset_id:String,definition:Definiti
         if dataset.columns.iter().any(|c|c.id==definition.output_column) && !old.iter().any(|d|d.id==definition.id && d.output_column==definition.output_column) {return Err("Elige un ID de columna nuevo para el enriquecimiento".into());}
         for col in &definition.input_columns {if !dataset.columns.iter().any(|c|&c.id==col) {return Err(format!("Columna de entrada desconocida: {col}"));}}
         if let Some(column)=dataset.columns.iter().find(|c|c.id==definition.output_column) {
-            let kind=serde_json::to_value(&column.kind).map_err(error)?;
-            if column.name!=definition.name || kind.as_str()!=Some(definition.output_kind.as_str()) {return Err("Conserva el nombre y tipo de la columna existente, o crea un enriquecimiento nuevo".into());}
+            // Casts change the query projection, not the provider's physical output type.
+            let existing=old.iter().find(|d|d.id==definition.id && d.output_column==definition.output_column).ok_or("Columna de resultados desconocida")?;
+            if column.name!=definition.name || existing.output_kind!=definition.output_kind {return Err("Conserva el nombre y tipo de la columna existente, o crea un enriquecimiento nuevo".into());}
         }
         let existed=old.iter().any(|d|d.id==definition.id);
         s.engine.save_definition(definition.clone())?;
@@ -62,6 +112,8 @@ pub async fn delete_enrichment(service:S<'_>,dataset_id:String,enrichment_id:Str
 pub async fn save_provider_key(provider:String,key:String)->Result<()> {blocking(move||Keychain::save(&provider,&key)).await}
 #[tauri::command]
 pub async fn has_provider_key(provider:String)->Result<bool> {blocking(move||Keychain::has(&provider)).await}
+#[tauri::command]
+pub async fn check_provider_key_access(provider:String)->Result<()> {blocking(move||Keychain::check_access(&provider)).await}
 #[tauri::command]
 pub async fn remove_provider_key(provider:String)->Result<()> {blocking(move||Keychain::remove(&provider)).await}
 #[derive(Deserialize)]
@@ -105,7 +157,7 @@ pub async fn plan_run(service:S<'_>,request:RunRequest)->Result<RunPlan> {
 #[tauri::command]
 pub async fn start_run(service:S<'_>,plan_id:String)->Result<RunStatus> {let s=service.plan_session(&plan_id)?;blocking(move||{let status=s.engine.start(&plan_id)?;launch(s,plan_id)?;Ok(status)}).await}
 #[tauri::command]
-pub async fn get_run_status(service:S<'_>,run_id:String)->Result<RunStatus> {let s=service.plan_session(&run_id)?;blocking(move||s.engine.status(&run_id)).await}
+pub async fn get_run_status(service:S<'_>,run_id:String)->Result<RunStatus> {let s=service.plan_session(&run_id)?;blocking(move||crate::service::visible_run_status(&s,&run_id)).await}
 #[tauri::command]
 pub async fn pause_run(service:S<'_>,run_id:String)->Result<()> {let s=service.plan_session(&run_id)?;blocking(move||s.engine.pause(&run_id)).await}
 #[tauri::command]

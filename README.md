@@ -22,10 +22,34 @@ biblioteca oficial DuckDB 1.5.5; no se requiere instalar DuckDB en el sistema.
 scripts/build-macos.sh
 ```
 
-Genera `src-tauri/target/debug/bundle/macos/Datolens.app`, con DuckDB incluido en
+Instala siempre `/Applications/Datolens.app`, la ruta que se debe abrir y anclar
+al Dock. Las siguientes actualizaciones conservan esta ruta, fuera del target
+de Cargo y de sus limpiezas. Incluye DuckDB en
 `Contents/Frameworks`. Se usa un perfil local sin símbolos debug para limitar el
 uso de disco; no es distribución notarizada ni una publicación en la App Store.
 Consulta `docs/QA.md` para el estado real de las verificaciones.
+
+El empaquetado se hace en una carpeta independiente. Si Datolens está abierto,
+el build queda preparado sin modificar la app en uso. Después de salir de
+Datolens, `scripts/build-macos.sh --install-pending` instala esa versión ya
+verificada y conserva la anterior. No copiar ni volver a firmar un bundle
+mientras esté abierto: eso invalida la identidad del proceso ante el Llavero.
+
+## Abrir archivos desde Terminal
+
+Datolens registra CSV, XLSX, Parquet y SAV en macOS. Finder, Launch Services y
+Terminal usan el mismo flujo nativo y conservan el permiso del archivo mediante
+un bookmark de seguridad. Sin instalar ningún comando adicional:
+
+```sh
+open -b com.victoriano.datolens mydata.csv
+```
+
+El bundle incluye además `Contents/MacOS/datolens-cli`. En Ajustes → Terminal
+se muestra un comando copiable que crea `~/.local/bin/datolens`, tras lo cual se
+puede usar `datolens mydata.csv` o pasar varios archivos para abrirlos como
+pestañas. Homebrew expone el mismo binario automáticamente. La Mac App Store no
+modifica el `PATH`; en esa distribución la activación sigue siendo voluntaria.
 
 ## Datos y claves
 

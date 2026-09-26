@@ -1,0 +1,32 @@
+$ tauri build --debug --bundles app --config /tmp/datolens-scroll-qa.json
+        Info Looking up installed tauri packages to check mismatched versions...
+     Running beforeBuildCommand `bun run build`
+$ tsc --noEmit && vite build
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 729 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                        0.35 kB │ gzip:   0.26 kB
+dist/assets/index-JbTbwNvC.css        97.20 kB │ gzip:  18.10 kB
+dist/assets/vega.module-DvDWCCcK.js  526.39 kB │ gzip: 186.56 kB
+dist/assets/index-Bkb49qar.js        550.72 kB │ gzip: 171.33 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.58s
+   Compiling datolens v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri)
+warning: linker stderr: ld: duplicate -rpath '@executable_path/../Frameworks' ignored
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `datolens` (lib) generated 1 warning
+warning: `datolens` (bin "datolens") generated 1 warning (1 duplicate)
+    Finished `dev` profile [unoptimized] target(s) in 15.45s
+       Built application at: /Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/target/debug/datolens
+    Bundling Datolens Scroll QA.app (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/target/debug/bundle/macos/Datolens Scroll QA.app)
+    Finished 1 bundle at:
+        /Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/target/debug/bundle/macos/Datolens Scroll QA.app
+

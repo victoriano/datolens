@@ -1,0 +1,166 @@
+{
+  "chat": {
+    "Ok": {
+      "definition": {
+        "dependsOn": [],
+        "id": "enrich_1790093043084389000",
+        "inputColumns": [
+          "description"
+        ],
+        "model": "jev-latest",
+        "name": "TipoVivienda",
+        "options": {
+          "choices": {
+            "Casa": "La vivienda es una casa independiente o adosada.",
+            "Otro": "La vivienda no es un piso ni una casa, o la descripción es ambigua.",
+            "Piso": "La vivienda es un apartamento o piso en un edificio."
+          },
+          "levels": [],
+          "questionType": "choice",
+          "threshold": 0.5,
+          "webSearch": false
+        },
+        "outputColumn": "enrich_1790093043084389000",
+        "outputKind": "categorical",
+        "prompt": "Clasifica la vivienda descrita en {{description}} como 'Piso', 'Casa' u 'Otro'.",
+        "provider": "jev",
+        "revision": 1
+      },
+      "explanation": "Esta columna clasifica el tipo de vivienda basándose en la descripción proporcionada, utilizando Jev para una clasificación precisa de texto en categorías predefinidas."
+    }
+  },
+  "fixture": "synthetic housing descriptions, no private dataset",
+  "geminiExtraction": {
+    "calls": 3,
+    "datasetRevision": "synthetic-live-v1",
+    "definitionFingerprint": "c1dca8e118d017d6d7bfa7cff9a54d96344f64cbd972b89fe06b7f77d571665e",
+    "rows": [
+      {
+        "error": null,
+        "evidence": {
+          "confidence": null,
+          "model": "gemini-2.5-flash",
+          "probability": null,
+          "provider": "gemini",
+          "searchSuggestions": null,
+          "sources": [],
+          "value": 3
+        },
+        "inputs": {
+          "description": "Piso de 3 habitaciones con ascensor en Barcelona."
+        },
+        "rowId": "1",
+        "value": 3
+      },
+      {
+        "error": null,
+        "evidence": {
+          "confidence": null,
+          "model": "gemini-2.5-flash",
+          "probability": null,
+          "provider": "gemini",
+          "searchSuggestions": null,
+          "sources": [],
+          "value": 4
+        },
+        "inputs": {
+          "description": "Casa unifamiliar de 4 habitaciones con jardín en Sevilla."
+        },
+        "rowId": "2",
+        "value": 4
+      },
+      {
+        "error": null,
+        "evidence": {
+          "confidence": null,
+          "model": "gemini-2.5-flash",
+          "probability": null,
+          "provider": "gemini",
+          "searchSuggestions": null,
+          "sources": [],
+          "value": 1
+        },
+        "inputs": {
+          "description": "Estudio de 1 habitación en Madrid."
+        },
+        "rowId": "3",
+        "value": 1
+      }
+    ]
+  },
+  "geminiWeb": {
+    "calls": 1,
+    "datasetRevision": "synthetic-live-v1",
+    "definitionFingerprint": "b20ec5451be07a722788c268eb941ce6430bc58a10880902610fe589b59566d5",
+    "rows": [
+      {
+        "error": "Gemini no aportó fuentes web. La respuesta no se aplicó.",
+        "evidence": null,
+        "inputs": {
+          "place": "Museo del Prado, Madrid, España"
+        },
+        "rowId": "1",
+        "value": null
+      }
+    ]
+  },
+  "jev": {
+    "calls": 3,
+    "datasetRevision": "synthetic-live-v1",
+    "definitionFingerprint": "05de54f2de402a3ed3817f993850817c6256380a4453c870b5bd35bfc3274301",
+    "rows": [
+      {
+        "error": null,
+        "evidence": {
+          "confidence": 1.0,
+          "model": "jev-1.13.0",
+          "probability": null,
+          "provider": "jev",
+          "searchSuggestions": null,
+          "sources": [],
+          "value": "Piso"
+        },
+        "inputs": {
+          "description": "Piso de 3 habitaciones con ascensor en Barcelona."
+        },
+        "rowId": "1",
+        "value": "Piso"
+      },
+      {
+        "error": null,
+        "evidence": {
+          "confidence": 1.0,
+          "model": "jev-1.13.0",
+          "probability": null,
+          "provider": "jev",
+          "searchSuggestions": null,
+          "sources": [],
+          "value": "Casa"
+        },
+        "inputs": {
+          "description": "Casa unifamiliar de 4 habitaciones con jardín en Sevilla."
+        },
+        "rowId": "2",
+        "value": "Casa"
+      },
+      {
+        "error": null,
+        "evidence": {
+          "confidence": 1.0,
+          "model": "jev-1.13.0",
+          "probability": null,
+          "provider": "jev",
+          "searchSuggestions": null,
+          "sources": [],
+          "value": "Otro"
+        },
+        "inputs": {
+          "description": "Estudio de 1 habitación en Madrid."
+        },
+        "rowId": "3",
+        "value": "Otro"
+      }
+    ]
+  },
+  "maxCalls": 8
+}

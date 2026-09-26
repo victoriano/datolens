@@ -1,0 +1,72 @@
+{
+  "columnTypes": {},
+  "columns": [
+    {
+      "dataType": "BIGINT",
+      "id": "id",
+      "kind": "numeric",
+      "name": "id"
+    },
+    {
+      "dataType": "VARCHAR",
+      "id": "description",
+      "kind": "categorical",
+      "name": "description"
+    },
+    {
+      "dataType": "VARCHAR",
+      "id": "place",
+      "kind": "categorical",
+      "name": "place"
+    }
+  ],
+  "datasetId": "ds_7d319f25abfd86cc1103f0c6",
+  "derivedColumns": [],
+  "enrichments": [],
+  "formatVersion": 1,
+  "resultColumns": [],
+  "savedAtNs": 1790147216170643000,
+  "source": {
+    "bytes": 277,
+    "modified_ns": 1790093820691232186,
+    "path": "/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-enrichment/tests/fixtures/enrichment-examples.csv",
+    "sample_hash": "ab399c8a34727a1dc2b92c8a8b10746ed7cbd162d83c6bb27a1392e208b7bde4",
+    "sheet": null
+  },
+  "typeRevision": 0,
+  "view": {
+    "columns": {
+      "hidden": [],
+      "order": [
+        "id",
+        "description",
+        "place"
+      ],
+      "widths": {}
+    },
+    "filters": [],
+    "formatVersion": 1,
+    "sorting": [],
+    "variablePanel": {
+      "expanded": [],
+      "hidden": [],
+      "metadata": {},
+      "order": [
+        "id",
+        "description",
+        "place"
+      ],
+      "pinned": [],
+      "relative": false,
+      "search": "",
+      "sortModeByColumn": {},
+      "statistics": []
+    },
+    "workspace": {
+      "enrichmentsVisible": true,
+      "mode": "table",
+      "pageOffset": 0,
+      "variablesVisible": true
+    }
+  }
+}

@@ -1,0 +1,23 @@
+2026-09-22 — native suite, isolated Cargo target
+Command:
+PATH="$HOME/.cargo/bin:$PATH" DYLD_LIBRARY_PATH="$PWD/vendor/duckdb" cargo test --manifest-path src-tauri/crates/datolens-data/Cargo.toml --locked --target-dir /tmp/datolens-analysis-target
+
+Final verified results (captured from terminal session 78319):
+tests/analysis.rs: 4 passed, 0 failed
+  statistics_are_exact_selected_row_aggregates_not_histogram_estimates
+  result_cast_keeps_original_validation_and_auto_value
+  numeric_cast_preserves_large_integer_ids_and_rejects_lossy_mixed_numbers
+  cast_preview_filter_export_persistence_and_auto_restore_originals
+tests/data.rs: 18 passed, 0 failed, 1 explicitly ignored (million_row_benchmark)
+tests/plots.rs: 5 passed, 0 failed
+  grouping_filters_and_native_statistics
+  empty_and_constant_regression_are_null
+  dates_precision_aliases_and_totals
+  limits_points_and_global_regression
+  quantile_ties_width_missing_and_constants
+Total: 27 passed, 0 failed, 1 ignored.
+
+Corrections before this final run:
+- Initial binary launch omitted DYLD_LIBRARY_PATH and failed to locate bundled libduckdb. No test executed in that launch.
+- Native HUGEINT export used a floating Parquet representation. Integer casts now choose BIGINT or DECIMAL(38,0) and the regression asserts a 30-digit identifier after Parquet export/reopen.
+- No credentials or remote inference were used in this suite.

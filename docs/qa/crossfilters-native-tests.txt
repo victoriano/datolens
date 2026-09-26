@@ -1,0 +1,125 @@
+   Compiling objc2-exception-helper v0.1.1
+   Compiling ring v0.17.14
+   Compiling objc2 v0.6.4
+   Compiling objc2-core-foundation v0.3.2
+   Compiling block2 v0.6.2
+   Compiling rustls v0.23.45
+   Compiling objc2-foundation v0.3.2
+   Compiling rustls-webpki v0.103.15
+   Compiling objc2-app-kit v0.3.2
+   Compiling dispatch2 v0.3.1
+   Compiling ureq v3.4.2
+   Compiling objc2-web-kit v0.3.2
+   Compiling libduckdb-sys v1.10505.0
+   Compiling tao v0.35.3
+   Compiling wry v0.55.1
+   Compiling tauri-runtime v2.11.3
+   Compiling libsqlite3-sys v0.30.1
+   Compiling tauri-runtime-wry v2.11.4
+   Compiling muda v0.19.3
+   Compiling tokio-rustls v0.26.5
+   Compiling window-vibrancy v0.6.0
+   Compiling tauri v2.11.6
+   Compiling hyper-rustls v0.27.10
+   Compiling duckdb v1.10505.0
+   Compiling reqwest v0.12.28
+   Compiling tauri-plugin-fs v2.5.2
+   Compiling rusqlite v0.32.1
+   Compiling rfd v0.16.0
+   Compiling datolens-enrichment v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-enrichment)
+   Compiling tauri-plugin-dialog v2.7.3
+   Compiling datolens-data v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-data)
+   Compiling datolens v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri)
+warning: linker stderr: ld: duplicate -rpath '@executable_path/../Frameworks' ignored
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `datolens` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 21.44s
+     Running unittests src/lib.rs (src-tauri/target/debug/deps/datolens_lib-7774765a2954805b)
+
+running 2 tests
+test service::tests::most_recent_source_updates_when_reopening_cached_dataset ... ok
+test service::tests::native_data_scheduler_persistence_export_roundtrip ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.74s
+
+   Compiling ureq v3.4.2
+   Compiling libduckdb-sys v1.10505.0
+   Compiling duckdb v1.10505.0
+   Compiling datolens-data v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-data)
+    Finished `test` profile [unoptimized] target(s) in 4.22s
+     Running unittests src/lib.rs (src-tauri/target/debug/deps/datolens_data-1dc375d7b7860daa)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/data.rs (src-tauri/target/debug/deps/data-d1c9be15797fe876)
+
+running 19 tests
+test crossfilters_table_count_and_all_distributions_agree ... ok
+test csv_types_precision_global_sort_and_stable_ids ... ok
+test invalid_batches_do_not_destroy_saved_rows_and_stale_sources_are_rejected ... ok
+test million_row_benchmark ... ignored, Run explicitly with --ignored --nocapture; writes a local 1M-row fixture
+test failed_source_and_local_write_keep_previous_saved_view ... ok
+test native_lists_null_and_duplicate_elements ... ok
+test malformed_project_is_not_silently_restored_and_export_never_overwrites_source ... ok
+test negative_histogram_ranges_and_project_definition_mirror ... ok
+test csv_out_of_bigint_tokens_and_mixed_decimals_survive_export_reopen ... ok
+test reference_text_date_list_and_escaping_semantics ... ok
+test legacy_project_is_migrated_without_losing_definitions_or_results ... ok
+test durable_results_follow_identity_and_export_roundtrip ... ok
+test csv_precision_upgrade_preserves_rows_results_view_and_recovers_json_migration ... ok
+test sidecar_restores_view_with_a_fresh_cache_and_preserves_source ... ok
+test xlsx_sheets_types_and_empty_header_names ... ok
+test read_only_source_saves_locally_and_preserves_legacy ... ok
+test xlsx_sheet_sidecars_are_independent_and_safe ... ok
+test newer_local_save_restores_and_returns_to_source_when_writable ... ok
+test csv_late_text_outlier_is_preserved_after_default_sniff_window ... ok
+
+test result: ok. 18 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.42s
+
+   Doc-tests datolens_data
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling rustls v0.23.45
+   Compiling rusqlite v0.32.1
+   Compiling tokio-rustls v0.26.5
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.12.28
+   Compiling datolens-enrichment v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-enrichment)
+    Finished `test` profile [unoptimized] target(s) in 3.85s
+     Running unittests src/lib.rs (src-tauri/target/debug/deps/datolens_enrichment-d29ccd51ca594bc6)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/scheduler.rs (src-tauri/target/debug/deps/scheduler-c0eb8ee7be346921)
+
+running 12 tests
+test cycle_and_undeclared_edges_rejected_atomically ... ok
+test changed_preview_and_call_limit_are_rejected ... ok
+test cancelled_response_is_discarded ... ok
+test missing_prerequisites_do_not_expand_scope_implicitly ... ok
+test materialization_recovery_replays_without_provider ... ok
+test old_inflight_response_cannot_overwrite_new_prompt ... ok
+test output_validation_and_unselected_prompt_references ... ok
+test chain_waits_and_pending_never_repeats_successes ... ok
+test retryable_failures_are_bounded_by_call_budget ... ok
+test input_and_prompt_invalidation_preserves_history ... ok
+test partial_failure_keeps_other_row_chain ... ok
+test restart_recovers_running_without_repeating_success ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+   Doc-tests datolens_enrichment
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

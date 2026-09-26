@@ -2,6 +2,7 @@ node_modules/
 dist/
 target/
 .DS_Store
+__pycache__/
 .env*
 !.env.example
 *.log
@@ -9,3 +10,4 @@ artifacts/
 fixtures/generated/
 docs/THREADS.json
 vendor/duckdb/libduckdb.dylib
+native/credential-helper/bin/

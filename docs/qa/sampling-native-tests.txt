@@ -1,0 +1,107 @@
+   Compiling datolens-data v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-data)
+    Finished `test` profile [unoptimized] target(s) in 13.90s
+     Running unittests src/lib.rs (src-tauri/target/debug/deps/datolens_data-ba242db39068e3a9)
+
+running 6 tests
+test workspace::tests::even_existing_snapshot_paths_are_inaccessible_to_user_sql ... ok
+test workspace::tests::timed_out_query_is_joined_and_publishes_nothing ... ok
+test workspace::tests::sheets_and_derived_values_can_be_joined_without_carrying_formulas ... ok
+test workspace::tests::query_cannot_read_files_mutate_config_or_execute_extra_statements ... ok
+test workspace::tests::failure_and_empty_results_preserve_inputs ... ok
+test workspace::tests::joins_are_durable_independent_datasets_with_exact_ids ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.12s
+
+     Running tests/analysis.rs (src-tauri/target/debug/deps/analysis-52098b677c4d94c3)
+
+running 4 tests
+test statistics_are_exact_selected_row_aggregates_not_histogram_estimates ... ok
+test result_cast_keeps_original_validation_and_auto_value ... ok
+test numeric_cast_preserves_large_integer_ids_and_rejects_lossy_mixed_numbers ... ok
+test cast_preview_filter_export_persistence_and_auto_restore_originals ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
+
+     Running tests/csv_replay.rs (src-tauri/target/debug/deps/csv_replay-baaed064a0eb1c92)
+
+running 2 tests
+test inferred_dialect_quotes_newlines_and_quoted_identifiers_are_replayed_losslessly ... ok
+test late_date_disambiguation_is_kept_after_the_first_sniff_window ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running tests/data.rs (src-tauri/target/debug/deps/data-29fcda82460f7b91)
+
+running 19 tests
+test csv_types_precision_global_sort_and_stable_ids ... ok
+test invalid_batches_do_not_destroy_saved_rows_and_stale_sources_are_rejected ... ok
+test crossfilters_table_count_and_all_distributions_agree ... ok
+test million_row_benchmark ... ignored, Run explicitly with --ignored --nocapture; writes a local 1M-row fixture
+test failed_source_and_local_write_keep_previous_saved_view ... ok
+test native_lists_null_and_duplicate_elements ... ok
+test malformed_project_is_not_silently_restored_and_export_never_overwrites_source ... ok
+test negative_histogram_ranges_and_project_definition_mirror ... ok
+test csv_out_of_bigint_tokens_and_mixed_decimals_survive_export_reopen ... ok
+test legacy_project_is_migrated_without_losing_definitions_or_results ... ok
+test durable_results_follow_identity_and_export_roundtrip ... ok
+test reference_text_date_list_and_escaping_semantics ... ok
+test read_only_source_saves_locally_and_preserves_legacy ... ok
+test csv_precision_upgrade_preserves_rows_results_view_and_recovers_json_migration ... ok
+test sidecar_restores_view_with_a_fresh_cache_and_preserves_source ... ok
+test xlsx_sheets_types_and_empty_header_names ... ok
+test newer_local_save_restores_and_returns_to_source_when_writable ... ok
+test xlsx_sheet_sidecars_are_independent_and_safe ... ok
+test csv_late_text_outlier_is_preserved_after_default_sniff_window ... ok
+
+test result: ok. 18 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 2.10s
+
+     Running tests/derived.rs (src-tauri/target/debug/deps/derived-44a02e66fe18612a)
+
+running 8 tests
+test preview_is_bounded_local_filtered_and_does_not_create_any_column_or_project ... ok
+test rejects_sql_statements_subqueries_external_access_aggregates_and_volatile_calls ... ok
+test rejects_stale_confirmation_expression_schema_and_source_changes ... ok
+test casts_respect_derived_dependencies_and_rollback_incompatible_changes ... ok
+test reopening_revalidates_formulas_and_rejects_cycles_or_tampered_sql ... ok
+test supports_text_dates_boolean_casts_and_isolates_invalid_rows ... ok
+test dependency_results_are_live_and_schema_restores_before_formulas ... ok
+test create_projects_all_rows_and_survives_export_and_fresh_cache_reopen ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.22s
+
+     Running tests/plots.rs (src-tauri/target/debug/deps/plots-3057b60ce6fdea5e)
+
+running 6 tests
+test grouping_filters_and_native_statistics ... ok
+test empty_and_constant_regression_are_null ... ok
+test limits_points_and_global_regression ... ok
+test dates_precision_aliases_and_totals ... ok
+test pivot_totals_keep_all_dimension_eligibility_and_recompute_median ... ok
+test quantile_ties_width_missing_and_constants ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/sampling.rs (src-tauri/target/debug/deps/sampling-4c2c1c6f9fa5b6eb)
+
+running 4 tests
+test small_and_empty_datasets_and_empty_selections_have_valid_counts ... ok
+test sample_cache_refreshes_after_cast_and_cell_updates_and_survives_view_save ... ok
+test sample_is_stable_representative_and_never_limits_table_or_export ... ok
+test auto_full_manual_resize_and_requested_statistics_use_the_correct_population ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.43s
+
+     Running tests/sav.rs (src-tauri/target/debug/deps/sav-c79fd390462d0dba)
+
+running 2 tests
+test real_sav_opens_and_queries_without_changing_source ... ignored, Set DATOLENS_REAL_SAV_PATH to a local SPSS file and run explicitly
+test sav_streaming_labels_filters_persistence_and_export ... ok
+
+test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+   Doc-tests datolens_data
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

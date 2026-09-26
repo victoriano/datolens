@@ -1,0 +1,23 @@
+Draft — not submitted. Confirm against the final sandboxed build.
+
+Datolens explores local CSV, XLSX, Parquet and SPSS SAV files on macOS.
+No account or API key is required for its primary functionality.
+
+Review steps:
+1. Download the public synthetic dataset at
+   https://datolens.victoriano.me/samples/housing-demo.csv
+2. Open it using Open file or the + button. Expected: 1,200 rows, 7 columns.
+3. In Variables, filter city to Madrid. Expected: 300 selected rows.
+4. Clear the filter. Open Charts, select city for X and price_eur for Y.
+   Choose mean aggregation. Expected: one bar per city.
+5. Export a chart using the macOS save dialog.
+6. Quit and reopen. Verify source access and restored state in App Sandbox.
+
+Optional AI features use the user's own provider key, stored in macOS Keychain.
+Do not include a live developer API key in review notes. If Apple needs to test
+these features, arrange a scoped test credential through the appropriate secure
+review mechanism after confirming the final provider configuration.
+
+The dataset is generated, contains no real property listings and no personal
+information. The screenshots were captured in the real desktop app using that
+fixture. Final review screenshots must match the submitted sandboxed build.

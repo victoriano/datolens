@@ -1,0 +1,166 @@
+/* Desktop shell presentation. Feature styles and data behavior remain owned by
+   their modules; this layer supplies the shared macOS visual language. */
+.dl-native-shell .dl-explorer {
+  --dl-surface: #fff;
+  --dl-muted: #f0efee;
+  --dl-hover: #e5e4e3;
+  --dl-line: #dcdad8;
+  --dl-text: #292827;
+  --dl-subtle: #777572;
+  --dl-accent: #3478f6;
+  --dl-selected: #dceaff;
+  --mac-toolbar: #f4f3f2;
+  --mac-sidebar: #eeedeb;
+  --mac-control: #fff;
+  --mac-stripe: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.dl-native-shell summary { cursor: pointer; }
+.dl-native-shell .dl-app-header {
+  height: 48px;
+  min-height: 48px;
+  padding: 0 12px;
+  gap: 6px;
+  background: var(--mac-toolbar);
+  border-bottom: 1px solid var(--dl-line);
+}
+.dl-native-mac .dl-app-header { padding-left: 92px; }
+.dl-native-shell .dl-settings-button { padding:0; border:0; background:transparent; color:var(--dl-subtle); }
+.dl-native-shell .dl-file-title { display: flex; align-items: center; gap: 2px; min-width: 0; font-size: 14px; font-weight: 600; letter-spacing: -.15px; }
+.dl-native-shell .dl-file-title button { font: inherit; padding: 4px; min-width: 0; }
+.dl-native-shell .dl-file-reveal { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 26px; height: 28px; }
+.dl-native-shell .dl-file-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
+.dl-native-shell .dl-file-title button:focus-visible { outline: 2px solid var(--dl-accent); outline-offset: -2px; }
+.dl-native-shell .dl-document-icon {
+  display: block;
+  font-size: 0;
+  width: 12px;
+  height: 15px;
+  border: 1px solid #999895;
+  border-radius: 2px;
+  background: linear-gradient(#d0cecb, #d0cecb) 3px 5px / 6px 1px no-repeat,
+    linear-gradient(#d0cecb, #d0cecb) 3px 8px / 6px 1px no-repeat, #fff;
+}
+.dl-native-shell .dl-save-state { font-size: 11px; }
+.dl-open-progress { flex-shrink:0; display:grid; gap:6px; padding:10px 18px; background:var(--mac-toolbar,var(--dl-muted)); border-bottom:1px solid var(--dl-line); }
+.dl-open-progress-head { display:flex; justify-content:space-between; gap:16px; min-width:0; font-size:12px; }
+.dl-open-progress-head span { color:var(--dl-subtle); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.dl-open-progress progress { width:100%; height:5px; accent-color:var(--dl-accent); }
+.dl-open-progress small { color:var(--dl-subtle); font-size:11px; }
+.dl-native-shell .dl-header-actions { gap: 14px; }
+.dl-native-shell .dl-header-actions > button,
+.dl-native-shell .dl-popover > summary,
+.dl-native-shell .dl-pagination button {
+  background: var(--mac-control);
+  border: 1px solid #00000020;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px #0000000a;
+  padding: 3px 10px;
+  font-size: 12px;
+}
+.dl-native-shell .dl-workspace-toolbar {
+  min-height: 38px;
+  height: 38px;
+  padding: 0 14px;
+  gap: 8px;
+  background: var(--mac-toolbar);
+  border-bottom: 1px solid #c8c6c3;
+}
+.dl-native-shell .dl-view-tabs, .dl-native-shell .dl-table-actions { gap: 8px; }
+.dl-native-shell .dl-view-tabs > button { font-size: 12px; padding: 3px 9px; }
+.dl-native-shell .dl-view-tabs > button[aria-pressed=true] {
+  background: #deddda;
+  box-shadow: inset 0 0 0 1px #00000006;
+}
+.dl-native-shell .dl-view-tabs > strong { font-size: 12px; font-weight: 600; }
+.dl-native-shell .dl-count { font-size: 11px; color: var(--dl-subtle); margin-left: 4px; }
+.dl-native-shell .dl-table-actions > button { font-size: 12px; padding: 3px 9px; }
+.dl-native-shell .dl-variables { background: var(--mac-sidebar); }
+.dl-native-shell .dl-panel-heading { padding-top: 14px; padding-bottom: 9px; }
+.dl-native-shell .dl-panel-heading strong { color: #66635f; font-size: 11px; }
+.dl-native-shell .dl-variable { border-top-color: #0000000c; padding-top: 10px; padding-bottom: 12px; }
+.dl-native-shell .dl-variable header strong { font-size: 11px; }
+.dl-native-shell .dl-variable header .dl-type { color: #85817c; }
+.dl-native-shell input:not([type=checkbox]), .dl-native-shell select {
+  border-color: #00000024;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 2px #00000004;
+}
+.dl-native-shell .dl-variable-search {
+  background-color: #00000006 !important;
+  border-color: #0000000c !important;
+  border-radius: 7px !important;
+  padding: 5px 9px !important;
+  font-size: 12px;
+}
+.dl-native-shell input::placeholder { color: #96938f; opacity: 1; }
+.dl-native-shell .dl-variable-sort select { border: 0; box-shadow: none; }
+.dl-native-shell .dl-chart-legend { padding-top: 9px; padding-bottom: 9px; }
+.dl-native-shell .dl-category-label { color: #66635f; }
+.dl-native-shell .dl-bar-foreground { border-radius: 2px; }
+.dl-native-shell .dl-show-hidden { min-height: 30px; font-size: 11px; }
+.dl-native-shell .dl-table { font-size: 12px; }
+.dl-native-shell .dl-table th {
+  height: 28px;
+  background: #f0efee;
+  border-bottom-color: #cccac7;
+  border-right-color: #d9d7d4;
+}
+.dl-native-shell .dl-header-cell > button:not(.dl-hide-column) { font-size: 11px; font-weight: 600; }
+.dl-native-shell .dl-table td {
+  height: 27px;
+  padding: 3px 10px;
+  border-bottom: 0;
+  border-right-color: #00000006;
+}
+.dl-native-shell .dl-table tbody tr:nth-child(even) td { background: var(--mac-stripe); }
+.dl-native-shell .dl-table tbody tr:hover td { background: #eaf0f8; }
+.dl-native-shell .dl-table tbody tr.is-row-selected td,
+.dl-native-shell .dl-table tbody tr td.is-cell-selected { background: var(--dl-selected); }
+.dl-native-shell .dl-table .is-number {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.dl-native-shell .dl-table .dl-row-index { color: #92908c; background: #f7f6f5; font-size: 10px; }
+.dl-native-shell .dl-table th.dl-row-index { background: #f0efee; }
+.dl-native-shell .dl-table-footer {
+  min-height: 30px;
+  height: 30px;
+  padding: 3px 12px;
+  background: var(--mac-toolbar);
+  font-size: 11px;
+}
+.dl-native-shell .dl-pagination button { padding: 1px 7px; min-width: 25px; }
+.dl-native-shell .dl-column-menu, .dl-native-shell .dl-export-menu {
+  background: #f9f8f7;
+  border-color: #bdbab6;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px #00000026, 0 1px 3px #00000014;
+  padding: 5px;
+}
+.dl-native-shell .dl-export-menu button:hover:not(:disabled) { background: var(--dl-accent); color: #fff; }
+.dl-native-shell .dl-filter-bar { min-height: 34px; padding: 4px 14px; background: #faf9f8; }
+.dl-native-shell .dl-enrichment-slot { background: var(--mac-toolbar); }
+.dl-native-shell .enrichment-panel {
+  --accent: var(--dl-accent);
+  --border: var(--dl-line);
+  --muted: var(--dl-subtle);
+  --text: var(--dl-text);
+  --panel: var(--mac-toolbar);
+  --surface: var(--mac-control);
+}
+.dl-native-shell .dl-sheet-dialog { border-radius: 12px; background: var(--mac-toolbar); }
+.dl-native-shell .dl-empty h1 { font-size: 26px; font-weight: 600; letter-spacing: -.7px; }
+.dl-native-shell button:active:not(:disabled), .dl-native-shell summary:active { filter: brightness(.94); }
+@media (max-width: 1100px) {
+  .dl-native-shell .dl-save-state { display: none; }
+  .dl-native-shell .dl-enrichment-slot { top: 94px; }
+}
+@media (prefers-contrast: more) {
+  .dl-native-shell .dl-explorer { --dl-line: #999; --dl-subtle: #555; }
+  .dl-native-shell .dl-table td { border-bottom: 1px solid var(--dl-line); }
+}

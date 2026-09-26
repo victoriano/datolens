@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0 beta",
+  "url": "/downloads/Datolens-0.1.0-2-apple-silicon.zip",
+  "sizeLabel": "25.1 MB",
+  "notarized": true,
+  "appStoreUrl": null,
+  "bytes": 26283944,
+  "sha256": "ef359e6dd4046cf6fcb1cfdbf15a5d9d179d8bbe245339db45b12362ad3d3f5d",
+  "build": "2",
+  "format": "ZIP"
+}

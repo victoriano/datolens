@@ -1,0 +1,7 @@
+...Installed verified app: /var/folders/9c/x8r9j82s2cz7x82nzbzdwldh0000gn/T/datolens-bundle-test-0cpl_gne/installed/Datolens.app
+Previous app retained: /var/folders/9c/x8r9j82s2cz7x82nzbzdwldh0000gn/T/datolens-bundle-test-0cpl_gne/staged/PreviousDatolens.app
+.
+----------------------------------------------------------------------
+Ran 4 tests in 0.406s
+
+OK

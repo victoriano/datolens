@@ -15,7 +15,7 @@
 import type { Bin } from '../../contracts/desktop-api';
 type CategoryBin = Bin & { value: string | null };
 
-export type CategorySortMode = 'everything' | 'selection' | 'uplift' | 'tfidf';
+export type CategorySortMode = 'everything' | 'selection' | 'uplift' | 'tfidf' | 'manual';
 
 export const CATEGORY_SORT_MODES: {
   value: CategorySortMode;
@@ -35,6 +35,7 @@ export const CATEGORY_SORT_MODES: {
 interface SortOptions {
   /** Analyzed row count, used as the document total for idf. */
   analyzedRows: number;
+  order?: string[];
 }
 
 function score(bin: CategoryBin, mode: CategorySortMode, analyzedRows: number): number {
@@ -62,11 +63,17 @@ function score(bin: CategoryBin, mode: CategorySortMode, analyzedRows: number): 
 export function sortCategoryBins(
   bins: CategoryBin[],
   mode: CategorySortMode,
-  { analyzedRows }: SortOptions,
+  { analyzedRows, order }: SortOptions,
 ): CategoryBin[] {
   const nulls = bins.filter((bin) => bin.value === null);
   const values = bins.filter((bin) => bin.value !== null);
+  const ranks = new Map(order?.map((value, index) => [value, index]));
   values.sort((a, b) => {
+    if (mode === 'manual') {
+      const rankA = ranks.get(a.value!) ?? Number.MAX_SAFE_INTEGER;
+      const rankB = ranks.get(b.value!) ?? Number.MAX_SAFE_INTEGER;
+      if (rankA !== rankB) return rankA - rankB;
+    }
     const diff = score(b, mode, analyzedRows) - score(a, mode, analyzedRows);
     // Stable tie-break on background so equal scores keep a deterministic order.
     return diff !== 0 ? diff : b.background - a.background;

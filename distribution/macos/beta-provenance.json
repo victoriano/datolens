@@ -1,0 +1,17 @@
+{
+  "createdAt": "2026-09-23T17:51:21.439586+00:00",
+  "bundleId": "com.victoriano.datolens",
+  "binarySha256": "2e3f999f5df4c8635213f268d0d2a797cef89e53dee9f5feb9c439b761c86947",
+  "binaryMtime": 1790184755.347952,
+  "signing": "Datolens Local Development Signing",
+  "notarized": false,
+  "release": {
+    "version": "0.1.0 beta",
+    "url": "/downloads/Datolens-0.1.0-beta.20260923-apple-silicon.dmg",
+    "sizeLabel": "62.9 MB",
+    "notarized": false,
+    "appStoreUrl": null,
+    "bytes": 65935154,
+    "sha256": "1426b5cf94159bcab1440d693432b2d6c4882a966e6fe854236386573e87c9a6"
+  }
+}

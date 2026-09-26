@@ -1,0 +1,38 @@
+   Compiling datolens v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri)
+warning: linker stderr: ld: duplicate -rpath '@executable_path/../Frameworks' ignored
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `datolens` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 6.30s
+     Running unittests src/lib.rs (src-tauri/target/debug/deps/datolens_lib-62a8ce05d8a25b1a)
+
+running 25 tests
+test file_access::tests::internal_sources_do_not_request_or_store_bookmarks ... ok
+test analysis::tests::jev_classification_uses_closed_choices_and_checks_every_answer ... ok
+test external_links::tests::only_web_links_can_reach_the_external_browser ... ok
+test analysis::tests::classification_requires_complete_unique_authorized_columns ... ok
+test analysis::tests::filters_reject_unknown_columns_wrong_types_and_empty_predicates ... ok
+test file_access::tests::failed_persistence_releases_scope_and_does_not_cache_a_grant ... ok
+test file_access::tests::picker_capture_survives_restart_and_stale_bookmarks_are_renewed ... ok
+test file_access::tests::sessions_and_worksheets_share_one_scope_until_last_user_finishes ... ok
+test file_access::tests::moved_source_keeps_the_old_tab_alias_and_renews_the_saved_grant ... ok
+test file_export::tests::failed_generation_leaves_no_destination_or_temporary_siblings ... ok
+test remote_sources::tests::download_names_cannot_escape_the_generated_directory ... ok
+test file_export::tests::destination_created_during_generation_is_never_replaced ... ok
+test file_export::tests::publishes_a_complete_file_and_removes_staging ... ok
+test file_export::tests::refuses_existing_files_and_dangling_symlinks_before_generating ... ok
+test remote_sources::tests::url_validation_and_http_errors_do_not_expose_url_credentials ... ok
+test remote_sources::tests::oversized_stream_without_length_removes_partial_download ... ok
+test file_export::tests::volume_staging_never_creates_a_placeholder_at_the_selected_name ... ok
+test enrichment_preview::tests::automatic_preview_only_selects_three_matching_rows_and_rejects_unknown_inputs ... ok
+test remote_sources::tests::downloads_csv_natively_preserves_integer_identity_and_reopens_locally ... ok
+test workspace_planner::tests::planner_context_sends_schema_without_paths_rows_or_dataset_ids ... ok
+test service::tests::most_recent_source_updates_when_reopening_cached_dataset ... ok
+test file_export::tests::filtered_projected_csv_and_parquet_roundtrip_without_changing_the_source ... ok
+test remote_sources::tests::parquet_without_range_support_downloads_and_opens_a_local_snapshot ... ok
+test workspace_commands::tests::result_is_registered_persistent_and_invalid_requests_leave_sources_untouched ... ok
+test service::tests::native_data_scheduler_persistence_export_roundtrip ... ok
+
+test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.82s
+

@@ -24,8 +24,6 @@ export interface BrushingSpecOptions {
   brushColor: string;
   axisLabelColor: string;
   axisLineColor: string;
-  /** Fill for the brush range value labels above the chart. */
-  rangeLabelColor: string;
 }
 
 export function buildBrushingSpec(options: BrushingSpecOptions): Spec {
@@ -520,56 +518,6 @@ export function buildBrushingSpec(options: BrushingSpecOptions): Spec {
                 x2: { signal: 'brush[1] + 2' },
                 height: { signal: 'height' },
                 cursor: { signal: 'interactive ? "ew-resize" : "default"' },
-              },
-            },
-          },
-          {
-            type: 'text',
-            name: 'leftRange',
-            encode: {
-              enter: {
-                fontWeight: { value: 'bold' },
-                fill: { value: options.rangeLabelColor },
-              },
-              update: {
-                x: { signal: 'brush[0]' },
-                y: { value: 0, offset: -4 },
-                align: { signal: 'brush[0] > width / 2 ? "right" : "left"' },
-                text: {
-                  signal: `internalFilterRange
-                    ? ${
-                      isDate
-                        ? 'utcFormat(internalFilterRange[0], "%b %d, %Y")'
-                        : "(abs(internalFilterRange[0]) < 10 ? format(internalFilterRange[0], '.2') : format(internalFilterRange[0], ',d'))"
-                    }
-                    : ''`,
-                },
-                opacity: { value: 0.9 },
-              },
-            },
-          },
-          {
-            type: 'text',
-            name: 'rightRange',
-            encode: {
-              enter: {
-                fontWeight: { value: 'bold' },
-                fill: { value: options.rangeLabelColor },
-              },
-              update: {
-                x: { signal: 'brush[1]' },
-                y: { value: 0, offset: -4 },
-                align: { signal: 'brush[1] > width / 2 ? "right" : "left"' },
-                text: {
-                  signal: `internalFilterRange && brush[1] - brush[0] > 40
-                    ? ${
-                      isDate
-                        ? 'utcFormat(internalFilterRange[1], "%b %d, %Y")'
-                        : "(abs(internalFilterRange[1]) < 10 ? format(internalFilterRange[1], '.2') : format(internalFilterRange[1], ',d'))"
-                    }
-                    : ''`,
-                },
-                opacity: { value: 0.9 },
               },
             },
           },

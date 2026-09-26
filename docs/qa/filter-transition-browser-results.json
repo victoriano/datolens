@@ -1,0 +1,44 @@
+{
+  "environment": "IAB Chromium; development React; generated 246-column fixture, delayed native API simulation (220 ms/batch). Not a native FPS benchmark.",
+  "result": {
+    "status": "PASS",
+    "variables": 246,
+    "checkedFrames": 304,
+    "placeholderFrames": 0,
+    "canvasReplacements": 0,
+    "chartShrinks": 0,
+    "statisticsRemovals": 0,
+    "filterKinds": [
+      "categorical",
+      "numeric",
+      "date",
+      "text"
+    ],
+    "emptySelection": "PASS",
+    "rapidChanges": "PASS",
+    "queryFailure": "PASS",
+    "revisionInvalidation": "PASS",
+    "nativeMaxConcurrency": 1,
+    "requests": 32,
+    "errors": []
+  },
+  "scrollRegression": {
+    "status": "PASS",
+    "fixtureColumns": 4911,
+    "mode": "explore",
+    "warmRequests": 0,
+    "placeholderFrames": 0,
+    "changedSampleHeight": 0,
+    "maxMountedCards": 15,
+    "idleRenders": 0,
+    "idleRequests": 0,
+    "nativeMaxConcurrency": 1,
+    "queriedColumns": 80,
+    "duplicateColumnQueries": 0,
+    "lastVariableReached": true,
+    "warmFrames": 302,
+    "frameP95Ms": 17.7,
+    "reactCommitP95Ms": 18.6,
+    "errors": []
+  }
+}

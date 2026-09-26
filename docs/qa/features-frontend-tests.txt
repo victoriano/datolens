@@ -1,0 +1,44 @@
+bun test v1.2.8 (adab0f64)
+
+src/ui/preferences.test.js:
+(pass) appearance preferences > first launch follows a supported system language; corrupt storage recovers [2.55ms]
+(pass) appearance preferences > explicit choices survive a conflicting OS language and appearance [0.15ms]
+(pass) appearance preferences > stores only language/appearance, updates without storage, and does not require a dataset [0.52ms]
+(pass) localization boundaries > translates controls while preserving filenames, precise identifiers and braces in values [1.70ms]
+(pass) localization boundaries > every English translation preserves all interpolation fields [5.85ms]
+
+src/features/explorer/model.test.js:
+(pass) stable selection and exact clipboard data > reverse rectangular drag snapshots row and column IDs [1.59ms]
+(pass) stable selection and exact clipboard data > anchor on an unloaded page cannot accidentally span a new page
+(pass) stable selection and exact clipboard data > copy preserves 64-bit identifiers and quotes tabs/newlines/nulls
+(pass) stable selection and exact clipboard data > composite IDs do not collide when IDs contain delimiters [0.10ms]
+(pass) persisted views > reconciles schema changes, order, hidden IDs and invalid widths [0.27ms]
+(pass) persisted views > unknown view version restores defaults [0.01ms]
+(pass) persisted views > priority drag reorders without mutating saved view [0.04ms]
+(pass) full workspace and variable reordering > old views receive presentation defaults; saved presentation survives schema reconciliation [0.10ms]
+(pass) full workspace and variable reordering > drops across pinned boundary move visibly and preserve hidden variables [0.67ms]
+(pass) full workspace and variable reordering > wide files request every distribution without exceeding native limits, and abandon superseded work [0.71ms]
+(pass) full workspace and variable reordering > dropping a formerly last pinned card lands in the visible preview position [0.13ms]
+(pass) category sorting preserves null bucket and supports uplift [0.09ms]
+
+src/features/explorer/analysis-model.test.ts:
+(pass) classification only changes the selected variables and preserves panel preferences [0.06ms]
+(pass) pinned variables stay first and hidden/search preferences compose with groups [0.34ms]
+(pass) AI filters replace only affected columns and preserve unrelated filters
+(pass) dropping across thematic groups adopts the target group without changing analytical role [0.17ms]
+
+src/features/plots/model.test.js:
+(pass) all twenty chart definitions compile and run with native-shaped data [116.59ms]
+(pass) date formats render in band and continuous axes without numeric-format errors [19.59ms]
+(pass) bin clicks include the last boundary and handle quantile ties [0.35ms]
+(pass) date bucket clicks keep UTC boundaries in Europe/Madrid [0.16ms]
+(pass) query sends structured aggregates only and keeps filters [0.20ms]
+(pass) calendar gaps are explicit and decomposition preserves additive identity [1.13ms]
+(pass) seasonal gaps have no point marks and tooltips use the component value [8.07ms]
+(pass) CSV retains exact integer strings, quotes and multiline values
+(pass) image composition keeps the complete axis viewport and escapes titles [2.69ms]
+
+ 30 pass
+ 0 fail
+ 1546 expect() calls
+Ran 30 tests across 4 files. [457.00ms]

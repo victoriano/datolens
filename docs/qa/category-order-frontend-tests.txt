@@ -1,0 +1,48 @@
+bun test v1.2.8 (adab0f64)
+
+src/features/explorer/category-colors.test.ts:
+(pass) category colors > offers distinct valid palettes while classic keeps existing assignments [5.87ms]
+(pass) category colors > reconciles palette settings by column ID and survives a JSON view [2.25ms]
+(pass) category colors > uses a finite distinct palette keyed by raw values [0.09ms]
+(pass) category colors > spreads sequential category IDs over the full palette while staying deterministic [2.99ms]
+(pass) category colors > assigns palette slots by background frequency with deterministic ties and explicit overrides [4.71ms]
+(pass) category colors > cycles the palette for more ranked values than available colors [1.32ms]
+(pass) category colors > normalizes only hex RGB forms [0.95ms]
+(pass) category colors > reconciles saved raw-value overrides without stale columns or inherited keys [0.14ms]
+(pass) category colors > sets and resets choices immutably, then survives JSON view restoration [0.13ms]
+(pass) category colors > preserves special and empty raw keys as own properties through set, reset, and JSON [1.13ms]
+
+src/features/explorer/model.test.js:
+(pass) stable selection and exact clipboard data > reverse rectangular drag snapshots row and column IDs [1.11ms]
+(pass) stable selection and exact clipboard data > anchor on an unloaded page cannot accidentally span a new page
+(pass) stable selection and exact clipboard data > copy preserves 64-bit identifiers and quotes tabs/newlines/nulls
+(pass) stable selection and exact clipboard data > composite IDs do not collide when IDs contain delimiters
+(pass) persisted views > reconciles schema changes, order, hidden IDs and invalid widths [0.25ms]
+(pass) persisted views > unknown view version restores defaults [0.02ms]
+(pass) persisted views > variable display name and description survive a saved view without changing column IDs
+(pass) persisted views > editing variable text leaves an unclassified analytical role untouched
+(pass) persisted views > priority drag reorders without mutating saved view
+(pass) full workspace and variable reordering > old views receive presentation defaults; saved presentation survives schema reconciliation [0.23ms]
+(pass) full workspace and variable reordering > drops across pinned boundary move visibly and preserve hidden variables [0.14ms]
+(pass) full workspace and variable reordering > wide files request every distribution without exceeding native limits, and abandon superseded work [3.48ms]
+(pass) full workspace and variable reordering > dropping a formerly last pinned card lands in the visible preview position [0.11ms]
+(pass) category sorting preserves null bucket and supports uplift [0.08ms]
+
+src/features/explorer/table-category-colors.test.tsx:
+(pass) categorical table colors > keeps the default table plain even when saved overrides exist [4.33ms]
+(pass) categorical table colors > colors raw values consistently, including booleans and individual list entries [1.11ms]
+(pass) categorical table colors > display colors do not alter clipboard data or SPSS codes [0.02ms]
+(pass) categorical table colors > uses the chosen palette for unassigned values while explicit colors win [0.62ms]
+(pass) categorical table colors > uses the same frequency rank as the chart for uncustomized table values [0.35ms]
+
+src/features/explorer/category-order.test.ts:
+(pass) manual category order > persists by raw ID, retains new categories, and keeps null last across selections [0.26ms]
+(pass) manual category order > keeps unseen saved categories without duplicating values or conflating null with strings [0.07ms]
+(pass) semantic scopes and review > excludes SPSS missing, empty and protected colors; never silently treats a subset as a full ordinal scale [1.34ms]
+(pass) semantic scopes and review > rejects late revisions, partial scales, invented values and duplicate assignments [0.86ms]
+(pass) semantic scopes and review > applies only reviewed changes to the latest view without overwriting protected edits [0.10ms]
+
+ 34 pass
+ 0 fail
+ 350 expect() calls
+Ran 34 tests across 4 files. [593.00ms]

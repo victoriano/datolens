@@ -70,3 +70,75 @@ Fuente: [docs/QA.md](../QA.md), leído al finalizar este recibo. Son resultados 
 - Los bloqueos de teclado durante `busy` están revisados en código; no se afirma prueba manual nativa durante una consulta pendiente, ni prueba nativa independiente de reintento de hoja XLSX.
 - No se obtuvo nueva evidencia de arrastre Finder: una llamada CUA `getApp` tardó 641 s y devolvió solo ventana/menús. Se devolvió el control al coordinador sin clicks, sin modificar datos, claves ni preferencias. El arrastre real continúa pendiente.
 - El bundle final incluye estos cambios y la corrección de precisión CSV del módulo de datos. No hay builds ni cambios del explorador pendientes; no se reaplica el parche ni se amplía el alcance.
+
+## Ampliación posterior: Explorar y sidecars
+
+La nueva vista en cuadrícula, reordenación con puntero y autoguardado junto al
+archivo están documentados y probados en [crossfilters-workspace.md](crossfilters-workspace.md).
+El recibo anterior describe la entrega inicial; la ampliación conserva su contrato
+con preferencias opcionales y sus correcciones de carga/reintento.
+
+La previsualización posterior del arrastre (tarjeta flotante, hueco y animación)
+tiene su verificación y límites en [drag-preview.md](drag-preview.md).
+
+## Edición precisa de rangos en el histograma
+
+- Los campos de mínimo y máximo bajo cada histograma se han retirado. Los valores sobre el intervalo son botones accesibles: al pulsarlos se muestra el valor completo para editarlo y Enter lo aplica; Escape cancela.
+- Se admiten decimales precisos y filtros con un solo límite. Un valor inválido o que invierte el intervalo no se aplica.
+- `bun run check` pasó. En el fixture del navegador, se creó un filtro por arrastre y se editó el mínimo a `250000.375`; el filtro conservó exactamente ese valor y el recuento cambió. Verificación nativa de este ajuste pendiente.
+
+## Variables significativas (2026-09-23)
+
+- Recuperado el ranking de Datoflow: distancia de variación total entre la distribución de las filas filtradas y la distribución completa, ordenada de mayor a menor y con umbral `> 0,005`. Es una medida descriptiva de diferencia, no una prueba de significación estadística.
+- Aparece solo si el filtro deja una selección propia. El panel muestra diez variables y permite ampliar hasta treinta. Las barras se escalan respecto a la mayor puntuación visible; al pulsar una variable, se revela su tarjeta y se resalta temporalmente.
+- «Mostrar» filtra el ranking por función y grupo temático de forma independiente del filtro del panel principal. Se pueden elegir varios grupos a la vez.
+- El cálculo usa las distribuciones nativas ya solicitadas para los crossfilters, sin cargar filas adicionales en JavaScript. Los nulos numéricos se incluyen; las categorías omitidas por el límite de 256 se agrupan como resto. Las listas de varios valores se normalizan por incidencias y se excluyen si vienen truncadas porque el resto no se conoce.
+- Verificación: `bun test src/features/explorer/significant-variables.test.ts src/features/explorer/model.test.js` (**16 pass**), `bun run build` (**PASS**) y `bun tauri build --debug --bundles app` (**PASS**, bundle en `src-tauri/target/debug/bundle/macos/Datolens.app`). En el fixture de navegador, filtrar Ciudad=Madrid produjo 60/240 filas y mostró Ciudad, Empresa y otras variables en orden descendente; el menú de funciones ocultó solo el ranking y pulsar Facturación desplazó su tarjeta al área visible.
+- QA nativa del bundle debug: CSV temporal de 6 filas con `city`, `price`, `area`; al filtrar `city=Madrid`, la tabla mostró **3/6** y el ranking **city 50 %**, **price 50 %**, sin `area` (distribución idéntica). Pulsar `price` desplazó y resaltó su tarjeta. Se reabrió el archivo anterior Idealista, recuperando su vista Gráficos y **94.815/94.815** filas; después se cerró la instancia de prueba y se borraron el CSV temporal y su sidecar.
+
+## Atajos de filtros estadísticos (2026-09-23)
+
+- Los encabezados P25, Mediana y P75 son botones de filtro: aplican respectivamente [Mín, P25], [P25, P75] y [P75, Máx], con los límites de todas las filas como referencia fija, igual que en Datoflow. Se admiten variables numéricas y fechas; la media y los extremos siguen siendo valores informativos.
+- El filtro se integra con los crossfilters existentes, aparece en la barra de filtros, actualiza tabla e histogramas y marca el atajo activo. Cuando hay selección, se muestran las estadísticas generales en gris y las de la selección debajo. Si falta un límite o un entero excede la precisión segura de JavaScript, el botón no genera un rango redondeado.
+- `bun test src/features/explorer/statistic-filters.test.ts`: **3 pass**. `bun run check` y `bun run build`: **PASS**. En el fixture del navegador, P25 de Facturación dejó 60/240 filas, Mediana cambió el mismo filtro a 120/240, y P75 de Fundación combinado con el filtro numérico dejó 32/240; la barra mostró ambos rangos. Verificación nativa de este ajuste pendiente mientras integración recompila la app.
+
+## Menú de variables significativas (2026-09-23)
+
+- Corregido el ancho del menú «Mostrar»: nombres de grupos largos ya no lo ensanchan fuera del borde izquierdo del panel. Las etiquetas se abrevian visualmente, conservan el nombre completo en el tooltip y dejan las casillas y los recuentos visibles.
+- `bun run check` y `bun run build`: **PASS**. En el fixture de navegador con filtro Ciudad=Madrid, el menú midió 280 px, quedó entre x=23 y x=303 en una ventana de 1280 px y no tuvo desbordamiento horizontal; seleccionar «Feature» actualizó el filtro. Pendiente comprobar esta corrección en un bundle nativo reconstruido.
+
+## Plegado del ranking de variables (2026-09-23)
+
+- «Variables significativas» tiene ahora un botón accesible para plegar y desplegar el ranking. El buscador principal queda separado 10 px del bloque en ambos estados.
+- Verificación con fixture de navegador: tras filtrar Ciudad=Madrid, el botón pasó de expandido a plegado, ocultó los resultados y mantuvo visible el buscador con una separación medida de 10 px. `bun run check`, las 3 pruebas de ranking y `bun run build` pasaron.
+- Pendiente comprobar la disposición en un bundle nativo reconstruido.
+
+## Panel de variables al cerrar datasets (2026-09-23)
+
+- El contenedor del área de trabajo se identifica con `dataset.id`. Al activar otro dataset, React desmonta el área anterior completa antes de montar su panel de variables y su tabla o gráfico.
+- `bun run check` y `bun run build`: **PASS**.
+- QA en la app macOS reconstruida: se abrió `victorianoi_followings.csv` junto a `matt_berman_openclaw_repliers.csv`, se mostró su panel de 14 variables, se cambió a Gráficos y se cerró la pestaña activa. Quedó una sola pestaña y un solo panel, con 11 variables del dataset restante. Se repitió con `idealista_dataset.csv` en Gráficos (41 variables); al cerrarlo quedó solo el panel de 11 variables. Al cerrar la última pestaña apareció el estado vacío sin panel de variables. Se reabrió Idealista: un solo panel de 41 variables y su gráfico guardado, con 94.815 filas.
+- El estado corrupto anterior de la captura no se reprodujo antes del cambio, por lo que esta validación cubre la secuencia de cierre y el resultado visible, no una reproducción determinista del fallo previo.
+
+## Crossfiltros categóricos compactos (2026-09-24)
+
+- Ajustes incluye `Pulso · compacto` por defecto y `Detalle` para la disposición anterior. Pulso incrusta la categoría en la barra, comparte un eje inferior y usa filas más densas. La elección se guarda como preferencia local de interfaz.
+- La lista abre 8→16→32… categorías y se contrae por los mismos niveles. La búsqueda sigue mostrando todas las coincidencias.
+- `bun run check`, `bun run build` y pruebas de preferencias/representación: **PASS**. En el fixture de navegador se verificaron 8→16→30 (límite del fixture) →16→8, el cambio de modo con persistencia tras recarga, y el filtro `Norte Studio` con resultado 40/240.
+- `./scripts/build-macos.sh`: **PASS**; bundle debug firmado en `src-tauri/target/debug/bundle/macos/Datolens.app`. La sesión nativa ya abierta sigue ejecutando su proceso anterior; queda pendiente comprobar el diseño en el nuevo proceso sin interrumpir esa sesión.
+
+## Selector de tipo de dato compacto (2026-09-24)
+
+- El selector de las tarjetas muestra un icono simple por tipo y un menú de filas con icono, nombre y marca de selección. «Auto (detectado)» aparece cuando hay una conversión y permite recuperar el tipo original. Se conservan los seis tipos soportados por Datolens.
+- `bun run check`, `bun run build` y `./scripts/build-macos.sh`: **PASS**; bundle debug reconstruido y firmado. Inspección visual en el fixture aislado `docs/qa/scroll-regression.html?mode=explore`: menú de seis filas, tipo efectivo marcado y sin recorte. El proceso nativo abierto comenzó antes de la reconstrucción y sigue mostrando el menú anterior; queda pendiente abrir el bundle nuevo tras cerrar esa sesión, sin interrumpirla ni alterar sus datasets.
+
+## Modo relativo al aplicar filtros (2026-09-24)
+
+- Aplicar o modificar un filtro desde el explorador o los gráficos activa `%` en el panel de variables. Quitar filtros conserva el estado actual del control; el modo sigue siendo editable manualmente.
+- `bun run check`, `bun run build` y `bun run app:build`: **PASS**; bundle debug firmado. El proceso nativo abierto comenzó antes de esta compilación y conserva la versión anterior. Queda pendiente comprobar el gesto en un proceso iniciado con el nuevo bundle.
+
+## Densidad de tarjetas en Explore (2026-09-25)
+
+- La cuadrícula virtual de Explore usa tarjetas de al menos 310 px, contando el relleno y la separación al decidir cuántas columnas caben. En el tamaño de referencia de 1440 px muestra cuatro tarjetas de unos 341 px por fila en vez de tres tarjetas anchas.
+- `bun run check` y `bun test src/features/explorer/variable-window.test.ts`: **PASS** (4 pruebas). En el fixture de navegador se observaron cuatro columnas, encabezados y controles visibles sin recorte. `./scripts/build-macos.sh`: **PASS**; bundle debug firmado y verificado en `src-tauri/target/debug/bundle/macos/Datolens.app`.
+- QA nativa posterior: `/Applications/Datolens.app` recién instalada y abierta con `NYC 311 Calls - 1.2M.csv` (1.123.454 filas, 59 variables). En Explore se observaron cuatro tarjetas por fila para `agency`, `complaint_type`, `descriptor` y `agency_name`, con gráficos, controles y porcentajes visibles. La captura original mostraba tres tarjetas en ese tamaño.

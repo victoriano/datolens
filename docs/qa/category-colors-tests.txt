@@ -1,0 +1,42 @@
+bun test v1.2.8 (adab0f64)
+
+src/ui/preferences.test.js:
+(pass) appearance preferences > first launch follows a supported system language; corrupt storage recovers [2.83ms]
+(pass) appearance preferences > migrates old preferences with coloring off and accepts only an explicit boolean true
+(pass) appearance preferences > explicit choices survive a conflicting OS language and appearance [0.51ms]
+(pass) appearance preferences > stores preferences, preserves coloring across updates, works without storage, and does not require a dataset [0.30ms]
+(pass) localization boundaries > translates controls while preserving filenames, precise identifiers and braces in values [1.92ms]
+(pass) localization boundaries > every English translation preserves all interpolation fields [3.65ms]
+
+src/features/explorer/category-colors.test.ts:
+(pass) category colors > uses a finite distinct palette keyed by raw values [0.73ms]
+(pass) category colors > normalizes only hex RGB forms
+(pass) category colors > reconciles saved raw-value overrides without stale columns or inherited keys [1.14ms]
+(pass) category colors > sets and resets choices immutably, then survives JSON view restoration [0.87ms]
+(pass) category colors > preserves special and empty raw keys as own properties through set, reset, and JSON [0.21ms]
+
+src/features/explorer/model.test.js:
+(pass) stable selection and exact clipboard data > reverse rectangular drag snapshots row and column IDs [0.35ms]
+(pass) stable selection and exact clipboard data > anchor on an unloaded page cannot accidentally span a new page
+(pass) stable selection and exact clipboard data > copy preserves 64-bit identifiers and quotes tabs/newlines/nulls [0.06ms]
+(pass) stable selection and exact clipboard data > composite IDs do not collide when IDs contain delimiters
+(pass) persisted views > reconciles schema changes, order, hidden IDs and invalid widths [0.16ms]
+(pass) persisted views > unknown view version restores defaults [0.02ms]
+(pass) persisted views > variable display name and description survive a saved view without changing column IDs [0.11ms]
+(pass) persisted views > editing variable text leaves an unclassified analytical role untouched [0.03ms]
+(pass) persisted views > priority drag reorders without mutating saved view [0.04ms]
+(pass) full workspace and variable reordering > old views receive presentation defaults; saved presentation survives schema reconciliation [0.08ms]
+(pass) full workspace and variable reordering > drops across pinned boundary move visibly and preserve hidden variables [0.05ms]
+(pass) full workspace and variable reordering > wide files request every distribution without exceeding native limits, and abandon superseded work [2.74ms]
+(pass) full workspace and variable reordering > dropping a formerly last pinned card lands in the visible preview position [0.09ms]
+(pass) category sorting preserves null bucket and supports uplift [0.01ms]
+
+src/features/explorer/table-category-colors.test.tsx:
+(pass) categorical table colors > keeps the default table plain even when saved overrides exist [4.60ms]
+(pass) categorical table colors > colors raw values consistently, including booleans and individual list entries [1.15ms]
+(pass) categorical table colors > display colors do not alter clipboard data or SPSS codes
+
+ 28 pass
+ 0 fail
+ 1793 expect() calls
+Ran 28 tests across 4 files. [520.00ms]

@@ -1,0 +1,13 @@
+{
+  "productName": "Datolens Store QA",
+  "identifier": "com.victoriano.datolens.storeqa",
+  "build": {
+    "beforeBuildCommand": "python3 scripts/build-cli.py && python3 scripts/build-credential-helper.py && bunx vite build --outDir artifacts/distribution/store-qa-frontend",
+    "frontendDist": "../artifacts/distribution/store-qa-frontend"
+  },
+  "bundle": {"macOS": {
+    "signingIdentity": "Datolens Local Development Signing",
+    "hardenedRuntime": false,
+    "entitlements": "../distribution/macos/SandboxQA.entitlements"
+  }}
+}

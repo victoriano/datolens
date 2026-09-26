@@ -1,0 +1,14 @@
+{
+  "installedBundle": "/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/target/debug/bundle/macos/Datolens.app",
+  "executableSha256": "66b63bb42e99743c4637dc88590b43fef69ee8d6637f8c88c0248d5e463a82ff",
+  "previousBundle": "/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/target/category-colors-backup/Datolens.app",
+  "qaBundle": "/tmp/datolens-chart-qa-target/debug/bundle/macos/Datolens Colors QA.app",
+  "nativeColors": {
+    "Status": {
+      "Active": "#16a34a",
+      "Rare category": "#123456"
+    }
+  },
+  "nativeFilters": [],
+  "activation": "Installed on disk; existing process 14614 retained to preserve unsaved analysis draft."
+}

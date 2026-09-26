@@ -1,5 +1,15 @@
 # Datos — recibo de verificación integrada
 
+## Importación SPSS SAV (23 de septiembre de 2026)
+
+- `.sav` se acepta en el selector y se importa por lotes de 2.048 filas en Rust a DuckDB local, dentro de una transacción. El archivo original se lee sin modificarlo.
+- Se conservan códigos, valores numéricos continuos, fechas, nulos, nombres y etiquetas de variables/respuestas. Las columnas codificadas se filtran por código; la tabla y las distribuciones muestran `código · etiqueta`. Los valores perdidos definidos por el usuario en SPSS se conservan como códigos y metadatos visibles; los agregados actuales los cuentan como categorías, mientras que los perdidos del sistema son nulos.
+- Prueba sintética: importación, acentos, ponderación, fecha, código perdido, filtro, exportación CSV, restauración de etiquetas/vista y bytes de fuente sin cambios. Suite de datos: 29 pruebas aprobadas; el benchmark y la prueba que requiere una ruta `.sav` externa quedan ignorados en la ejecución por defecto.
+- Prueba con un `.sav` real de microdatos CIS (`66091222.sav`): 15.242 filas, 155 variables, 148 con etiquetas de valores; apertura en 2,4 s con caché del sistema sin vaciar. Página, distribución y filtro por código aprobados; bytes originales idénticos antes y después.
+- Bundle de QA `Datolens SAV QA.app`: selector nativo, apertura y tabla confirmados; 15.242 de 15.242 filas, 155 columnas y respuestas etiquetadas visibles. El bundle principal `Datolens.app` se reconstruyó y firmó después.
+
+Limitación observada: algunas etiquetas del propio archivo contienen los bytes `E2 3F AC` donde se esperaría `€`, de modo que se muestran como `â?¬`. Esos bytes ya están en el `.sav` original; los valores numéricos y códigos no se ven afectados.
+
 Recibo completado por integración el 22 de septiembre de 2026 a partir de las
 pruebas observadas. Motor en `src-tauri/crates/datolens-data/`.
 
@@ -71,3 +81,11 @@ modificación deliberada fuera de esas muestras que conserve tamaño y mtime.
 CSV no ofrece páginas antes de terminar inferencia/importación inicial; XLSX
 materializa una hoja en memoria nativa. El perfil semántico de texto/listas usa
 hasta 10.000 filas, pero los filtros y conteos se aplican al dataset entero.
+
+## Ampliación posterior: estado junto al archivo original
+
+El JSON de proyecto se guarda ahora junto a la fuente, con migración desde el
+almacén previo y separación segura por hoja XLSX. Bases de datos y resultados
+conservan sus rutas. Una carpeta de origen sin escritura utiliza una copia local
+de recuperación con aviso visible. Detalles y 18 pruebas de datos PASS en
+[crossfilters-workspace.md](crossfilters-workspace.md).

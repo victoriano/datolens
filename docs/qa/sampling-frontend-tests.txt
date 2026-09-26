@@ -1,0 +1,73 @@
+bun test v1.2.8 (adab0f64)
+
+src/ui/preferences.test.js:
+(pass) appearance preferences > first launch follows a supported system language; corrupt storage recovers [3.04ms]
+(pass) appearance preferences > explicit choices survive a conflicting OS language and appearance [0.25ms]
+(pass) appearance preferences > stores only language/appearance, updates without storage, and does not require a dataset [0.84ms]
+(pass) localization boundaries > translates controls while preserving filenames, precise identifiers and braces in values [2.58ms]
+(pass) localization boundaries > every English translation preserves all interpolation fields [11.30ms]
+
+src/features/workspace/model.test.ts:
+(pass) each worksheet has a distinct stable tab; reopening does not duplicate tabs [1.93ms]
+(pass) join example quotes real column IDs including punctuation [0.68ms]
+
+src/features/explorer/sampling.test.ts:
+(pass) sampling preferences survive view reconciliation; malformed values fall back to auto [2.59ms]
+(pass) queued obsolete calls are skipped and a failure does not poison the next query [0.96ms]
+(pass) wide panel publishes batches promptly, requests only visible statistics and keeps one sample [0.91ms]
+
+src/features/explorer/statistic-format.test.ts:
+(pass) DuckDB date statistics keep their UTC day in Madrid winter and summer [36.39ms]
+(pass) explicit timestamp offsets are preserved when displaying statistics in UTC [2.39ms]
+(pass) missing and invalid date statistics retain their fallback display [0.09ms]
+(pass) DuckDB mean timestamps with hour-only offsets use localized UTC dates [3.91ms]
+
+src/features/explorer/model.test.js:
+(pass) stable selection and exact clipboard data > reverse rectangular drag snapshots row and column IDs [0.59ms]
+(pass) stable selection and exact clipboard data > anchor on an unloaded page cannot accidentally span a new page
+(pass) stable selection and exact clipboard data > copy preserves 64-bit identifiers and quotes tabs/newlines/nulls
+(pass) stable selection and exact clipboard data > composite IDs do not collide when IDs contain delimiters
+(pass) persisted views > reconciles schema changes, order, hidden IDs and invalid widths [0.50ms]
+(pass) persisted views > unknown view version restores defaults
+(pass) persisted views > variable display name and description survive a saved view without changing column IDs [0.38ms]
+(pass) persisted views > editing variable text leaves an unclassified analytical role untouched [0.26ms]
+(pass) persisted views > priority drag reorders without mutating saved view [0.07ms]
+(pass) full workspace and variable reordering > old views receive presentation defaults; saved presentation survives schema reconciliation [0.11ms]
+(pass) full workspace and variable reordering > drops across pinned boundary move visibly and preserve hidden variables [0.40ms]
+(pass) full workspace and variable reordering > wide files request every distribution without exceeding native limits, and abandon superseded work [0.79ms]
+(pass) full workspace and variable reordering > dropping a formerly last pinned card lands in the visible preview position [0.13ms]
+(pass) category sorting preserves null bucket and supports uplift
+
+src/features/explorer/significant-variables.test.ts:
+(pass) significant variables > ranks the largest selection versus whole-dataset difference first [0.58ms]
+(pass) significant variables > includes omitted categorical values as one residual bucket [0.06ms]
+(pass) significant variables > normalizes multi-valued incidences and avoids incomplete rankings [0.09ms]
+
+src/features/explorer/analysis-model.test.ts:
+(pass) classification only changes the selected variables and preserves panel preferences [0.61ms]
+(pass) classification and regrouping retain manual variable text [0.11ms]
+(pass) pinned variables stay first and hidden/search preferences compose with groups [0.16ms]
+(pass) AI filters replace only affected columns and preserve unrelated filters [0.03ms]
+(pass) dropping across thematic groups adopts the target group without changing analytical role [0.24ms]
+
+src/features/explorer/statistic-filters.test.ts:
+(pass) quantile controls use fixed unfiltered quarters and replace the range for this column [0.27ms]
+(pass) date statistics from DuckDB become UTC inclusive filter endpoints [0.76ms]
+(pass) missing or unsafe statistics cannot create a rounded filter [0.10ms]
+
+src/features/plots/model.test.js:
+(pass) all twenty chart definitions compile and run with native-shaped data [300.13ms]
+(pass) date formats render in band and continuous axes without numeric-format errors [60.93ms]
+(pass) numeric bin axes abbreviate by default and honor a manual format without changing filter bounds [76.51ms]
+(pass) bin clicks include the last boundary and handle quantile ties [0.64ms]
+(pass) date bucket clicks keep UTC boundaries in Europe/Madrid
+(pass) query sends structured aggregates only and keeps filters [0.68ms]
+(pass) calendar gaps are explicit and decomposition preserves additive identity [2.69ms]
+(pass) seasonal gaps have no point marks and tooltips use the component value [14.65ms]
+(pass) CSV retains exact integer strings, quotes and multiline values [0.24ms]
+(pass) image composition keeps the complete axis viewport and escapes titles [10.07ms]
+
+ 49 pass
+ 0 fail
+ 1721 expect() calls
+Ran 49 tests across 9 files. [1121.00ms]

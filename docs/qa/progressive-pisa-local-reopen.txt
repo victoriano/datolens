@@ -1,0 +1,7 @@
+{"columns":4911,"ms":816,"rows":191254,"stage":"open"}
+{"analyzed":1000,"bins":[2,256],"columns":["COUNTRY","SCHOOLID"],"deferred":null,"ms":34,"selected":1000,"stage":"first_2"}
+{"analyzed":1000,"bins":[256,36],"columns":["STIDSTD","SUBNATIO"],"deferred":null,"ms":7,"selected":1000,"stage":"next_2"}
+{"analyzed":1000,"bins":[9,2],"columns":["ST01Q02","ST01Q03"],"deferred":null,"ms":9,"selected":1000,"stage":"next_2"}
+{"analyzed":1000,"bins":[33,33],"columns":["PV9CPRO","PV10CPRO"],"deferred":null,"ms":16,"selected":1000,"stage":"far_columns"}
+{"analyzed":1000,"bins":[2,256],"columns":["COUNTRY","SCHOOLID"],"deferred":null,"ms":7,"selected":1000,"stage":"cached_first_2"}
+{"analyzed":1000,"bins":[2,256],"columns":["COUNTRY","SCHOOLID"],"deferred":null,"ms":7,"selected":80,"stage":"filtered_first_2"}

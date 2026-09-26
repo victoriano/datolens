@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "variables": 246,
+  "stages": {
+    "B": {
+      "VariableChart:c0": 1,
+      "Histogram:c0": 1
+    },
+    "C": {
+      "VariableChart:c2": 1,
+      "CategoryBars:c2": 1,
+      "CategoryBar:c2:Category 1": 1
+    },
+    "D": {},
+    "E": {}
+  },
+  "histogramCanvasReplacements": 0,
+  "categoryNodeReplacements": 0,
+  "latestCallbacks": "PASS",
+  "multiSelection": "PASS",
+  "categorySortAndExpand": "PASS",
+  "numericBoundEditing": "PASS",
+  "plots": {
+    "status": "PASS",
+    "pendingFrames": 19,
+    "changedFacetRenders": {
+      "Canvas:First": 1
+    },
+    "unchangedFacetPaints": 0,
+    "canvasReplacements": 0,
+    "vegaViewReplacements": 0,
+    "valuesUpdated": true,
+    "equalResults": "PASS",
+    "svgExport": "PASS",
+    "retainedErrorAndRecovery": "PASS",
+    "autoSize": "PASS"
+  },
+  "errors": []
+}

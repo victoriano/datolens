@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use crate::advanced_types::*;
 use serde_json::Value;
 use std::collections::BTreeMap;
 
@@ -16,6 +17,9 @@ pub struct Definition {
     pub output_kind: String,
     pub depends_on: Vec<String>,
     pub revision: u64,
+    // Preserve the pre-options definition encoding used by existing cell fingerprints.
+    #[serde(default, skip_serializing_if = "EnrichmentOptions::is_default")]
+    pub options: EnrichmentOptions,
 }
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(rename_all = "camelCase")]
@@ -37,9 +41,11 @@ pub struct Cell {
     pub error: Option<String>,
     pub attempts: u32,
     pub applied: bool,
+    #[serde(default)]
+    pub evidence: Option<ProviderOutput>,
 }
 impl Cell {
-    pub fn new(key: CellKey) -> Self { Self { key, state: CellState::Pending, generation: 0, definition_revision: 0, fingerprint: String::new(), input_snapshot: BTreeMap::new(), value: None, error: None, attempts: 0, applied: false } }
+    pub fn new(key: CellKey) -> Self { Self { key, state: CellState::Pending, generation: 0, definition_revision: 0, fingerprint: String::new(), input_snapshot: BTreeMap::new(), value: None, error: None, attempts: 0, applied: false, evidence: None } }
 }
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "lowercase")]
@@ -88,5 +94,14 @@ pub trait CredentialStore: Send + Sync { fn key(&self, provider: &str) -> Result
 #[derive(Clone, Debug)]
 pub struct ProviderRequest { pub definition: Definition, pub row_id: String, pub prompt: String, pub inputs: BTreeMap<String, Value> }
 pub trait Provider: Send + Sync {
+    fn suggest_column(&self, _request:&ColumnSuggestRequest, _credentials:&dyn CredentialStore)->Result<ColumnProposal> {
+        Err("Este proveedor no configura columnas mediante chat".into())
+    }
     fn generate(&self, request: &ProviderRequest, credentials: &dyn CredentialStore) -> Result<Value>;
+    fn generate_detailed(&self, request: &ProviderRequest, credentials: &dyn CredentialStore) -> Result<ProviderOutput> {
+        self.generate(request,credentials).map(|value|ProviderOutput::plain(value,&request.definition))
+    }
+    fn suggest(&self, _request:&SuggestRequest, _credentials:&dyn CredentialStore)->Result<EnrichmentProposal> {
+        Err("Este proveedor no configura enriquecimientos mediante chat".into())
+    }
 }

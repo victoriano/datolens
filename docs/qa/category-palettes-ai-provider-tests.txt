@@ -1,0 +1,56 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling mio v1.2.3
+   Compiling socket2 v0.6.5
+   Compiling tokio v1.53.1
+   Compiling quote v1.0.47
+   Compiling syn v3.0.6
+   Compiling synstructure v0.14.0
+   Compiling zerovec-derive v0.11.6
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.3
+   Compiling zerofrom v0.1.8
+   Compiling displaydoc v0.2.7
+   Compiling yoke v0.8.3
+   Compiling serde_core v1.0.229
+   Compiling zerovec v0.11.8
+   Compiling zerotrie v0.2.5
+   Compiling tinystr v0.8.4
+   Compiling potential_utf v0.1.6
+   Compiling icu_collections v2.3.0
+   Compiling icu_locale_core v2.3.0
+   Compiling zerocopy v0.8.57
+   Compiling icu_provider v2.3.1
+   Compiling icu_properties v2.3.0
+   Compiling icu_normalizer v2.3.0
+   Compiling ahash v0.8.12
+   Compiling idna_adapter v1.2.2
+   Compiling serde v1.0.229
+   Compiling hyper v1.11.1
+   Compiling rustls v0.23.45
+   Compiling idna v1.1.0
+   Compiling serde_derive v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling bitflags v2.13.2
+   Compiling hyper-util v0.1.20
+   Compiling tower v0.5.3
+   Compiling tokio-rustls v0.26.5
+   Compiling url v2.5.8
+   Compiling hashbrown v0.14.5
+   Compiling serde_urlencoded v0.7.1
+   Compiling hashlink v0.9.1
+   Compiling hyper-rustls v0.27.10
+   Compiling tower-http v0.6.11
+   Compiling rusqlite v0.32.1
+   Compiling reqwest v0.12.28
+   Compiling datolens-enrichment v0.1.0 (/Users/victoriano/Documents/Codex/2026-09-22/si-quisi-ramos-crear-un-software/datolens/src-tauri/crates/datolens-enrichment)
+    Finished `test` profile [unoptimized] target(s) in 18.52s
+     Running unittests src/lib.rs (/tmp/datolens-chart-qa-target/debug/deps/datolens_enrichment-d29ccd51ca594bc6)
+
+running 4 tests
+test provider::response_tests::grounded_json_requires_one_complete_final_block ... ok
+test provider::response_tests::structured_request_uses_response_format_mime_enum ... ok
+test provider::response_tests::provider_error_details_are_bounded_and_exclude_other_fields ... ok
+test provider::response_tests::grounded_request_keeps_search_without_structured_format ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
